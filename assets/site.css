@@ -1,1 +1,55 @@
 :root{color-scheme:dark;--bg:#070809;--panel:#101216;--text:#ebe8e7;--muted:#989ca4;--silver:#d0d3dc;--line:#5b627055;--accent:#b4bac7;font-family:"Noto Sans TC",system-ui,sans-serif}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#070809;color:var(--text)}body:before{content:"";pointer-events:none;position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,#ffffff03 4px 5px);z-index:9}a{color:inherit;text-decoration:none}button{font:inherit}header{height:88px;position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(22px,5vw,84px);border-bottom:1px solid var(--line);background:#090a0bdc;backdrop-filter:blur(20px)}.wordmark{font-family:Georgia,serif;font-size:26px;letter-spacing:.32em}.wordmark span{display:block;font:10px system-ui;letter-spacing:.24em;color:#999fa8;margin-top:5px}.nav{display:flex;align-items:center;gap:clamp(12px,3vw,36px)}.nav a{font-size:11px;letter-spacing:.18em;color:#b6b8c0}.nav a:hover,.nav a[aria-current=page]{color:white}.hero{min-height:730px;position:relative;overflow:hidden;display:flex;align-items:center;padding:80px clamp(24px,8vw,140px);background:radial-gradient(ellipse at 70% 44%,#42465250,transparent 36%),linear-gradient(100deg,#070809 10%,#12141b 80%)}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#070809 1%,#07080900 76%),linear-gradient(0deg,#070809 0%,transparent 45%);pointer-events:none}.city{position:absolute;bottom:0;right:0;width:min(87vw,1200px);height:79%;opacity:.64;filter:contrast(1.2)}.city svg{width:100%;height:100%}.king{position:absolute;right:10%;top:11%;width:38%;max-width:430px;opacity:.85;filter:drop-shadow(0 0 30px #c9d0e544)}.king svg{width:100%;height:auto}.hero-copy{position:relative;z-index:2;max-width:600px}.eyebrow{color:#b8bdc9;letter-spacing:.5em;font-size:12px;text-transform:uppercase}.hero h1{font:normal clamp(80px,12vw,164px)/.95 Georgia,serif;letter-spacing:.1em;margin:24px 0 9px;text-shadow:0 0 50px #a7a9bd50}.cn{font:400 clamp(23px,3vw,38px) "Noto Serif TC",serif;letter-spacing:.36em}.line{width:100px;height:1px;background:linear-gradient(90deg,#d5dae6,#747b8700);margin:34px 0}.motto{font-size:16px;letter-spacing:.2em;line-height:2}.subtitle{color:#9fa4b1;font:italic 14px Georgia,serif;letter-spacing:.08em;margin-top:12px}.btn{display:inline-block;margin-top:34px;border:1px solid #8b929d;padding:14px 24px;letter-spacing:.22em;font-size:11px;background:#11141d8a;transition:.2s}.btn:hover{background:#d2d4dd;color:#0b0c10}.section{max-width:1200px;margin:auto;padding:110px 28px}.section-title{font:normal clamp(42px,6vw,76px) Georgia,serif;letter-spacing:.08em;margin:12px 0}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:35px}.kicker{font-size:11px;color:#aab0bf;letter-spacing:.4em}.lead{max-width:740px;color:#bdc0c7;font-size:17px;line-height:2.15;letter-spacing:.07em}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.tile{border:1px solid var(--line);padding:42px 30px;min-height:310px;background:linear-gradient(155deg,#191b23,#0d0e11 66%);position:relative;overflow:hidden}.tile:after{content:attr(data-no);position:absolute;right:15px;bottom:-25px;font:110px Georgia;color:#ffffff08}.tile h3{font:normal 26px "Noto Serif TC",serif;letter-spacing:.12em}.tile .en{letter-spacing:.2em;font-size:10px;color:#9097a3}.tile p{line-height:2;color:#aaaeb8;font-size:14px}.steps{display:grid;grid-template-columns:repeat(5,1fr);border-block:1px solid var(--line)}.step{padding:34px 19px;border-right:1px solid var(--line)}.step:last-child{border:0}.step small{color:#a5adb9;letter-spacing:.1em}.step h3{font-size:24px;font-weight:400;letter-spacing:.15em}.step p{font-size:13px;line-height:1.8;color:#9ea3af}.banner{text-align:center;padding:85px 24px;border-block:1px solid var(--line);background:radial-gradient(ellipse at center,#25293670,transparent 60%)}.banner h2{font:normal clamp(26px,4vw,47px) "Noto Serif TC",serif;letter-spacing:.2em}.banner p{color:#a1a5b0;line-height:2;letter-spacing:.13em}footer{border-top:1px solid var(--line);padding:35px clamp(24px,5vw,84px);display:flex;justify-content:space-between;gap:16px;color:#777e8b;font-size:11px;letter-spacing:.2em}.inner-hero{padding:100px 28px 65px;text-align:center;background:radial-gradient(ellipse at center,#292b3550,transparent 65%);border-bottom:1px solid var(--line)}.inner-hero h1{font:normal clamp(52px,8vw,95px) Georgia,serif;letter-spacing:.15em;margin:12px 0}.inner-hero p{font-size:13px;letter-spacing:.17em;color:#a9adb8;line-height:2}.member-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.member-card{min-height:420px;background:linear-gradient(140deg,#252833,#101116 60%);border:1px solid #454958;display:flex;flex-direction:column;justify-content:end;padding:35px;position:relative;overflow:hidden}.member-card:before{content:"";position:absolute;width:230px;height:320px;border-radius:50%;border:1px solid #72798925;left:50%;top:5%;transform:translateX(-50%);box-shadow:0 0 0 25px #c4ccd006,0 0 0 60px #c4ccd006}.member-card>*{position:relative}.member-card .num{font:52px Georgia,serif;color:#c3c8d646}.member-card h3{font:24px Georgia,serif;letter-spacing:.12em}.member-card p{color:#939aa6;line-height:1.8;font-size:13px}.empty{color:#a5aab5;line-height:2;border-left:2px solid #a5acbe;padding:15px 24px;margin-top:28px}.rules{columns:2;column-gap:65px}.rules p{break-inside:avoid;line-height:2;color:#b8bbc5;margin-bottom:24px}.rules strong{color:#f0eef2}.note{font-size:12px;color:#8d94a1;line-height:1.8}@media(max-width:760px){header{height:auto;min-height:76px;flex-wrap:wrap;gap:16px;padding:20px}.nav{gap:14px;flex-wrap:wrap}.nav a{font-size:10px}.hero{min-height:660px;padding:80px 23px}.city{width:130%;height:65%;opacity:.35}.king{right:-9%;top:17%;width:64%;opacity:.55}.hero-copy{margin-top:80px}.grid,.member-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.step{border-bottom:1px solid var(--line)}.rules{columns:1}.section{padding:75px 23px}.section-head{display:block}footer{flex-direction:column}}
+
+
+/* VEIL responsive hero masthead v2 */
+.hero{
+  min-height:clamp(700px,calc(100svh - 88px),920px);
+  padding:clamp(65px,6vw,100px) clamp(24px,5vw,90px);
+}
+.hero-copy{max-width:none;width:min(73vw,1080px);margin-top:0}
+.hero h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(155px,20vw,340px);
+  font-weight:400;
+  line-height:.86;
+  letter-spacing:-.058em;
+  white-space:nowrap;
+  margin:clamp(26px,3.5vw,56px) 0 clamp(18px,2.8vw,40px);
+}
+.hero .cn{font-size:clamp(28px,3.2vw,50px);letter-spacing:.36em}
+.hero .eyebrow{font-size:clamp(10px,.85vw,13px)}
+.hero .motto{font-size:clamp(16px,1.25vw,21px)}
+.hero .city{opacity:.48}
+.hero .king{right:4%;top:13%;width:30%;opacity:.42}
+@media (min-width:1600px){
+  .hero h1{font-size:clamp(310px,20vw,370px)}
+  .hero-copy{width:min(74vw,1250px)}
+}
+@media (min-width:761px) and (max-width:1100px){
+  .hero{min-height:720px;padding:72px 5vw}
+  .hero-copy{width:76vw}
+  .hero h1{font-size:clamp(155px,19.3vw,215px);letter-spacing:-.055em}
+  .hero .cn{font-size:clamp(27px,3.2vw,37px)}
+  .hero .king{width:36%;right:0;top:18%;opacity:.32}
+  .hero .city{width:103%;opacity:.38}
+}
+@media (max-width:760px){
+  .hero{min-height:680px;padding:84px 22px 68px;align-items:center}
+  .hero-copy{width:100%;max-width:100%;margin-top:36px}
+  .hero h1{
+    font-size:clamp(83px,22vw,162px);
+    letter-spacing:-.065em;
+    line-height:.91;
+    margin:30px 0 23px;
+  }
+  .hero .cn{font-size:clamp(22px,5.5vw,36px);letter-spacing:.25em}
+  .hero .eyebrow{font-size:10px;letter-spacing:.23em;line-height:1.7}
+  .hero .motto{font-size:15px;letter-spacing:.08em}
+  .hero .subtitle{font-size:12px;line-height:1.7}
+  .hero .city{right:-28%;width:148%;height:62%;opacity:.29}
+  .hero .king{right:-14%;top:19%;width:62%;opacity:.27}
+}
+@media (max-width:360px){
+  .hero h1{font-size:clamp(70px,21vw,83px)}
+  .hero .cn{font-size:20px;letter-spacing:.16em}
+}
