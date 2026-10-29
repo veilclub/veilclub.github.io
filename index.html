@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Veilclub — 官方網站籌備中。">
+<meta name="theme-color" content="#101319">
+<title>VEILCLUB | Official Site</title>
+<style>
+:root { color-scheme:dark; font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif; background:#101319; color:#f0ebe5; }
+*{box-sizing:border-box} body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 82% 16%,#273041 0%,transparent 50%),#101319}
+main{max-width:1040px;margin:auto;padding:30px 28px 60px;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff23;padding-bottom:22px}
+.brand{font-size:16px;letter-spacing:.27em;font-weight:650}.tag{font-size:11px;letter-spacing:.16em;color:#b6b1ae}
+.hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding:110px 0 90px}
+.kicker{color:#c6ad8a;letter-spacing:.27em;font-size:12px;text-transform:uppercase}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:.09em;font-size:clamp(46px,10vw,118px);margin:22px 0}
+.line{height:1px;background:linear-gradient(90deg,#c7a47c,transparent);max-width:450px}
+p{color:#c3c0c0;font-size:16px;line-height:1.9;max-width:510px;margin-top:29px}
+footer{border-top:1px solid #ffffff23;padding-top:24px;color:#8f929b;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;letter-spacing:.1em}
+@media(max-width:600px){.hero{padding:100px 0 110px}.tag{display:none}}
+</style>
+</head>
+<body>
+<main>
+<header><div class="brand">VEILCLUB</div><div class="tag">OFFICIAL WEBSITE</div></header>
+<section class="hero">
+<div class="kicker">A new chapter is coming</div>
+<h1>VEILCLUB</h1>
+<div class="line"></div>
+<p>一處新的故事，正在成形。<br>官方網站籌備中，營運資訊將於正式公布後更新。</p>
+</section>
+<footer><span>VEILCLUB</span><span>© <span id="year"></span> VEILCLUB</span></footer>
+</main>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
