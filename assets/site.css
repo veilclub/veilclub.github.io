@@ -92,3 +92,31 @@ body>header,body>main,body>footer{position:relative;z-index:1}
 .step:last-child{grid-column:1/-1;border-bottom:0}
 }
 @media(max-width:420px){.steps{grid-template-columns:1fr}.step,.step:nth-child(2n){grid-column:auto;border-right:0}.step:last-child{grid-column:auto}}
+
+/* VEIL king layering refinement v4 */
+/* The uploaded Taipei skyline remains unchanged and fixed. */
+.hero{isolation:isolate}
+.hero .king{
+  position:absolute;
+  z-index:2;
+  right:clamp(9%,13vw,19%);
+  top:19%;
+  width:clamp(245px,24vw,390px);
+  max-width:40%;
+  opacity:.66;
+  filter:brightness(.80);
+  pointer-events:none;
+}
+.hero-copy{position:relative;z-index:3}
+.hero .king > svg{display:none}
+.hero .king-art{display:block;position:relative;inset:auto;width:100%;height:auto;object-fit:contain}
+@media(min-width:1600px){
+ .hero .king{right:16%;width:clamp(330px,23vw,420px)}
+}
+@media(min-width:761px) and (max-width:1100px){
+ .hero .king{right:5%;top:23%;width:30vw;max-width:35%;opacity:.53}
+}
+@media(max-width:760px){
+ .hero .king{right:-5%;top:19%;width:min(48vw,260px);max-width:50%;opacity:.32;filter:brightness(.72)}
+ .hero-copy{z-index:3}
+}
