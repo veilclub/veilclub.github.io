@@ -73,3 +73,22 @@ body>header,body>main,body>footer{position:relative;z-index:1}
 /* Uploaded final image assets: suppress temporary SVG chess illustration. */
 .hero .king > svg{display:none}
 .hero .king-art{display:block;position:relative;width:100%;height:auto;object-fit:contain;inset:auto}
+
+/* VEIL Ritual readability v1 */
+.section:has(> .steps){position:relative;isolation:isolate}
+.section:has(> .steps)::before{content:"";position:absolute;inset:30px 0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(5,6,9,.77),rgba(7,8,12,.67) 55%,rgba(5,6,9,.79));border:1px solid rgba(210,218,230,.07);box-shadow:0 15px 70px rgba(0,0,0,.25)}
+.section:has(> .steps) .section-head{position:relative}
+.section:has(> .steps) .section-head::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:110px;background:#c9d0de}
+.steps{background:rgba(5,7,10,.77);border:1px solid rgba(210,218,230,.22);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.step{min-width:0;padding:34px clamp(15px,2vw,27px);border-right:1px solid rgba(210,218,230,.16)}
+.step small{display:block;color:#c9cbd3;font-size:11px;font-weight:600;letter-spacing:.13em;line-height:1.5}
+.step h3{color:#f5f3f5;font-size:clamp(22px,2vw,29px);font-weight:500;text-shadow:0 1px 10px #000}
+.step p{color:#e0e1e6;font-size:14px;line-height:1.85}
+@media(max-width:760px){
+.section:has(> .steps)::before{inset:10px 0}
+.steps{grid-template-columns:1fr 1fr}
+.step{padding:24px 20px;border-bottom:1px solid rgba(210,218,230,.18)}
+.step:nth-child(2n){border-right:0}
+.step:last-child{grid-column:1/-1;border-bottom:0}
+}
+@media(max-width:420px){.steps{grid-template-columns:1fr}.step,.step:nth-child(2n){grid-column:auto;border-right:0}.step:last-child{grid-column:auto}}
