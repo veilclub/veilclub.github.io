@@ -28,10 +28,26 @@ footer{border-top:1px solid #ffffff23;padding-top:24px;color:#8f929b;display:fle
 <div class="kicker">A new chapter is coming</div>
 <h1>VEILCLUB</h1>
 <div class="line"></div>
-<p>一處新的故事，正在成形。<br>官方網站籌備中，營運資訊將於正式公布後更新。</p>
+<p>一處新的故事，正在成形。<br><span id="site-message">官方網站籌備中，營運資訊將於正式公布後更新。</span></p>
 </section>
 <footer><span>VEILCLUB</span><span>© <span id="year"></span> VEILCLUB</span></footer>
 </main>
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<script>
+/* Read-only public site configuration; no private data or secret keys. */
+(async () => {
+  try {
+    const response = await fetch('https://ilkkjooemtqkquvkdtgk.supabase.co/rest/v1/rpc/get_public_site_config', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'apikey':'sb_publishable_dRGH791flnK_eVRVcuFwLQ_-WL3Bjh1' }
+    });
+    if (!response.ok) return;
+    const config = await response.json();
+    if (config && typeof config.public_message === 'string') {
+      document.getElementById('site-message').textContent = config.public_message;
+    }
+  } catch (_) { /* Use the visible static fallback if offline. */ }
+})();
+</script>
 </body>
 </html>
