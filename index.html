@@ -1,53 +1,11 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Veilclub — 官方網站籌備中。">
-<meta name="theme-color" content="#101319">
-<title>VEILCLUB | Official Site</title>
-<style>
-:root { color-scheme:dark; font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif; background:#101319; color:#f0ebe5; }
-*{box-sizing:border-box} body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 82% 16%,#273041 0%,transparent 50%),#101319}
-main{max-width:1040px;margin:auto;padding:30px 28px 60px;min-height:100vh;display:flex;flex-direction:column}
-header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff23;padding-bottom:22px}
-.brand{font-size:16px;letter-spacing:.27em;font-weight:650}.tag{font-size:11px;letter-spacing:.16em;color:#b6b1ae}
-.hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding:110px 0 90px}
-.kicker{color:#c6ad8a;letter-spacing:.27em;font-size:12px;text-transform:uppercase}
-h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:.09em;font-size:clamp(46px,10vw,118px);margin:22px 0}
-.line{height:1px;background:linear-gradient(90deg,#c7a47c,transparent);max-width:450px}
-p{color:#c3c0c0;font-size:16px;line-height:1.9;max-width:510px;margin-top:29px}
-footer{border-top:1px solid #ffffff23;padding-top:24px;color:#8f929b;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;letter-spacing:.1em}
-@media(max-width:600px){.hero{padding:100px 0 110px}.tag{display:none}}
-</style>
-</head>
-<body>
-<main>
-<header><div class="brand">VEILCLUB</div><div class="tag">OFFICIAL WEBSITE</div></header>
-<section class="hero">
-<div class="kicker">A new chapter is coming</div>
-<h1>VEILCLUB</h1>
-<div class="line"></div>
-<p>一處新的故事，正在成形。<br><span id="site-message">官方網站籌備中，營運資訊將於正式公布後更新。</span></p>
-</section>
-<footer><span>VEILCLUB</span><span>© <span id="year"></span> VEILCLUB</span></footer>
-</main>
-<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-<script>
-/* Read-only public site configuration; no private data or secret keys. */
-(async () => {
-  try {
-    const response = await fetch('https://ilkkjooemtqkquvkdtgk.supabase.co/rest/v1/rpc/get_public_site_config', {
-      method: 'POST',
-      headers: { 'Content-Type':'application/json', 'apikey':'sb_publishable_dRGH791flnK_eVRVcuFwLQ_-WL3Bjh1' }
-    });
-    if (!response.ok) return;
-    const config = await response.json();
-    if (config && typeof config.public_message === 'string') {
-      document.getElementById('site-message').textContent = config.public_message;
-    }
-  } catch (_) { /* Use the visible static fallback if offline. */ }
-})();
-</script>
-</body>
-</html>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="VEIL｜薄幕俱樂部。FF14 男性角色沉浸式 RP 會館。"><title>VEIL｜薄幕俱樂部</title><link rel="stylesheet" href="assets/site.css"></head><body>
+<header><a class="wordmark" href="index.html">VEIL<span>薄 幕 俱 樂 部</span></a><nav class="nav" aria-label="主選單"><a href="index.html" aria-current="page">HOME</a><a href="about.html">ABOUT</a><a href="members.html">GENTLEMEN</a><a href="guide.html">EXPERIENCE</a><a href="rules.html">ETIQUETTE</a></nav></header>
+<main><section class="hero">
+<div class="city" aria-hidden="true"><svg viewBox="0 0 1100 650" preserveAspectRatio="xMidYMax slice"><defs><pattern id="windows" width="24" height="30" patternUnits="userSpaceOnUse"><rect x="6" y="5" width="3" height="8" fill="#c8cfdd" opacity=".72"/><rect x="15" y="5" width="3" height="8" fill="#c8cfdd" opacity=".36"/></pattern><linearGradient id="build" x2="0" y2="1"><stop stop-color="#505560"/><stop offset="1" stop-color="#08090e"/></linearGradient></defs><g fill="url(#build)" stroke="#a3aabc" stroke-opacity=".2"><path d="M0 650V360h66V232h90v418z"/><path d="M117 650V182h95v468z"/><path d="M185 650V295h125v355z"/><path d="M290 650V98h88v552z"/><path d="M355 650V245h150v405z"/><path d="M485 650V144h98v506z"/><path d="M565 650V263h155v387z"/><path d="M699 650V80h81v570z"/><path d="M755 650V217h130v433z"/><path d="M872 650V142h110v508z"/><path d="M969 650V281h131v369z"/></g><g fill="url(#windows)" opacity=".8"><path d="M0 650V360h66V232h90v418z M117 650V182h95v468z M185 650V295h125v355z M290 650V98h88v552z M355 650V245h150v405z M485 650V144h98v506z M565 650V263h155v387z M699 650V80h81v570z M755 650V217h130v433z M872 650V142h110v508z M969 650V281h131v369z"/></g><path d="M0 590L1100 375M0 635L1100 475" stroke="#c3c8d2" opacity=".18" stroke-width="4"/></svg></div>
+<div class="king" aria-hidden="true"><svg viewBox="0 0 400 580"><defs><linearGradient id="metal"><stop stop-color="#15171c"/><stop offset=".22" stop-color="#dce2ee"/><stop offset=".41" stop-color="#343843"/><stop offset=".67" stop-color="#aab2c2"/><stop offset="1" stop-color="#0e1015"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="12"/></filter></defs><path d="M170 70L185 24h30l15 46-16 37h-30zM180 117h40l48 55-19 56H151l-19-56zM151 228h98l-30 194h-38zM165 422h70l40 38H125zM124 460h152l22 48H102zM95 508h210v28H95z" fill="url(#metal)" stroke="#c8ccd6" stroke-opacity=".6" stroke-width="3"/><circle cx="200" cy="119" r="21" fill="url(#metal)" stroke="#d3d6e4"/><path d="M199 5v63M166 37h67" stroke="#e1e4ed" stroke-width="9"/><path d="M78 296q123-110 241-20M65 330q132-105 275-10" fill="none" stroke="#d4d9e3" stroke-width="8" opacity=".77"/><path d="M66 332l-12-28 25-12 8 21 20 3-8 24M325 326l-12-28 25-12 8 21 20 3-8 24" fill="url(#metal)"/><ellipse cx="200" cy="531" rx="150" ry="23" fill="#aeb5c9" opacity=".16" filter="url(#glow)"/></svg></div>
+<div class="hero-copy"><div class="eyebrow">A Gentleman’s House · Final Fantasy XIV RP</div><h1>VEIL</h1><div class="cn">薄幕俱樂部</div><div class="line"></div><div class="motto">薄幕之後，故事才真正開始。</div><div class="subtitle">Behind the veil, nothing is quite what it seems.</div><a class="btn" href="about.html">ENTER THE VEIL &nbsp; ↗</a></div></section>
+<section class="section"><div class="section-head"><div><div class="kicker">01 / THE HOUSE</div><h2 class="section-title">Beyond the Veil</h2></div></div><p class="lead">VEIL 是以現代紳士會館為概念的男性角色 RP 空間。在公開形象與真實內在之間，每個人都保留著尚未揭曉的一面。無須熟悉繁複世界觀，從一次交談開始，讓人物、關係與故事慢慢累積。</p></section>
+<section class="section"><div class="section-head"><div><div class="kicker">02 / EXPERIENCE</div><h2 class="section-title">Three Ways to Meet</h2></div></div><div class="grid"><article class="tile" data-no="01"><div class="en">FREE CONVERSATION</div><h3>自由交流</h3><p>走進吧台，與紳士們自然交談。不需預約、不必先懂 RP。</p></article><article class="tile" data-no="02"><div class="en">PERSONAL APPOINTMENT</div><h3>正式點名</h3><p>指定想認識的紳士，依角色個性及雙方同意的方向展開一對一互動。</p></article><article class="tile" data-no="03"><div class="en">IMMERSIVE ROLEPLAY</div><h3>沉浸劇情</h3><p>透過角色祕密、關係與限定事件，發展可以延續的故事。</p></article></div></section>
+<section class="banner"><div class="kicker">GENTLEMEN OF VEIL</div><h2>每一位紳士，都有自己的故事。</h2><p>獨立人物名錄籌備中。每位成員將擁有自己的稱號、性格與專屬介紹。</p><a class="btn" href="members.html">VIEW THE GENTLEMEN &nbsp; ↗</a></section>
+<section class="section"><div class="section-head"><div><div class="kicker">03 / YOUR VISIT</div><h2 class="section-title">The Ritual</h2></div></div><div class="steps"><div class="step"><small>01 / ARRIVAL</small><h3>入幕</h3><p>迎賓與介紹</p></div><div class="step"><small>02 / SELECTION</small><h3>選席</h3><p>選擇互動方式</p></div><div class="step"><small>03 / CONVERSATION</small><h3>交談</h3><p>展開角色互動</p></div><div class="step"><small>04 / REMEMBRANCE</small><h3>留痕</h3><p>自願留下故事線索</p></div><div class="step"><small>05 / DEPARTURE</small><h3>退幕</h3><p>道別與故事延續</p></div></div></section></main>
+<footer><span>VEIL · 薄幕俱樂部</span><span>FFXIV ROLEPLAY · FAN-MADE VENUE</span><span>© VEIL</span></footer></body></html>
