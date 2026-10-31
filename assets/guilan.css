@@ -1,0 +1,32 @@
+/* VEIL / 晷藍 — portrait reserved; keep original prose untouched */
+.roster-card--guilan{grid-column:1/-1;grid-template-columns:minmax(0,36%) minmax(0,64%);min-height:370px;border-color:#686078;background:linear-gradient(130deg,#201e2a 0%,#0b0a10 75%)}
+.roster-card--guilan:hover{border-color:#afa4c9}
+.roster-card--guilan .roster-card__photo{min-height:370px}
+.roster-card--guilan .roster-card__name{margin-top:22px}
+.roster-card--guilan .roster-card__no{color:#bfb3d2}
+.roster-card--guilan .roster-card__name span{color:#b9acd3}
+.roster-card--guilan .roster-card__detail p{max-width:680px}
+.roster-card--guilan .roster-card__tags span{border-color:#a493b65e;color:#e0d8e9}
+.guilan-portrait-placeholder{position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;width:100%;height:100%;min-height:100%;overflow:hidden;background:radial-gradient(ellipse at 50% 38%,#55506e7d,transparent 48%),linear-gradient(145deg,#22202f 0%,#0a0b12 85%);isolation:isolate}
+.guilan-portrait-placeholder:before{content:"";position:absolute;inset:12%;border:1px solid #b4a2ce40;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);pointer-events:none}
+.guilan-portrait-placeholder:after{content:"";position:absolute;left:-30%;top:49%;width:160%;height:1px;background:linear-gradient(90deg,transparent,#b6a5d14a,transparent);transform:rotate(-24deg);pointer-events:none}
+.guilan-portrait-placeholder__reticle{width:120px;height:120px;border:2px solid #c6b9d499;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 0 0 17px #b5a2d10b,0 0 0 35px #b5a2d108}
+.guilan-portrait-placeholder__reticle:before,.guilan-portrait-placeholder__reticle:after{content:"";position:absolute;background:#b9add19c}
+.guilan-portrait-placeholder__reticle:before{width:1px;height:135%;top:-17%;left:50%}
+.guilan-portrait-placeholder__reticle:after{height:1px;width:135%;top:50%;left:-17%}
+.guilan-portrait-placeholder__reticle span{width:42px;height:42px;border:1px solid #e1d8e7b0;border-radius:50%;background:#b6a5d11a}
+.guilan-portrait-placeholder__label{position:relative;font:italic 12px Georgia,serif;letter-spacing:.24em;color:#d7c9de;text-align:center;z-index:1}
+.guilan-portrait-placeholder__status{position:relative;font-size:10px;letter-spacing:.35em;color:#9d93b0;z-index:1}
+.profile-page--guilan{--character-red:#82719b;--character-rose:#c2b2d2;--character-dark:#191321}
+.profile-page--guilan .character-cover{border-color:#686078;background:linear-gradient(115deg,#252031,#130e1b 58%,#08090d)}
+.profile-page--guilan .character-cover__main h1{font-size:clamp(76px,9vw,145px);text-shadow:4px 4px 0 #3d2b51}
+.profile-page--guilan .character-cover__en{color:#b9aace;font-size:14px;letter-spacing:.25em}
+.profile-page--guilan .character-cover__main blockquote{border-left-color:#9d8ab9}
+.profile-page--guilan .character-cover__facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.profile-page--guilan .character-cover__facts strong{line-height:1.6}
+.profile-page--guilan .profile-side__line{background:#aa9bc5}
+.profile-page--guilan .chapter-heading{border-left-color:#aa95c4}
+.profile-page--guilan .chapter-heading span{color:#bba7d2}
+.profile-page--guilan .profile-chapter--quote .guilan-quote{font:normal clamp(20px,2.4vw,29px)/2 "Noto Serif TC",serif;color:#f3e6f5;border-left:2px solid #aa95c4;padding-left:22px}
+@media(max-width:900px){.roster-card--guilan{grid-template-columns:40% 60%}.profile-page--guilan .character-cover__facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.roster-card--guilan{display:flex;flex-direction:column}.roster-card--guilan .roster-card__photo{height:300px;min-height:300px}.roster-card--guilan .roster-card__name{flex-wrap:wrap;gap:8px}.roster-card--guilan .roster-card__name h3{font-size:clamp(42px,12vw,62px)}.roster-card--guilan .roster-card__name span{padding-bottom:3px}.profile-page--guilan .character-cover__photo{height:clamp(380px,100vw,540px)}.profile-page--guilan .character-cover__facts{grid-template-columns:1fr 1fr}.profile-page--guilan .character-cover__main h1{font-size:clamp(70px,22vw,120px)}.guilan-portrait-placeholder__reticle{width:95px;height:95px}}
