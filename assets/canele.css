@@ -1,0 +1,33 @@
+/* Canele / VEIL: champagne and muted burgundy, portrait reserved */
+.roster-card--canele{grid-column:1/-1;grid-template-columns:minmax(0,36%) minmax(0,64%);min-height:370px;border-color:#8d7965;background:linear-gradient(125deg,#2b2125,#0d0b12 75%)}
+.roster-card--canele:hover{border-color:#d9c1a4}
+.roster-card--canele .roster-card__photo{min-height:370px}
+.roster-card--canele .roster-card__detail p{max-width:680px}
+.roster-card--canele .roster-card__no{color:#d0b8a1}
+.roster-card--canele .roster-card__name{margin-top:25px;flex-wrap:wrap}
+.roster-card--canele .roster-card__name h3{font-family:Georgia,serif;letter-spacing:.03em}
+.roster-card--canele .roster-card__name span{color:#d3b99c}
+.roster-card--canele .roster-card__tags span{border-color:#bfa17e77;color:#ead9c7}
+.canele-photo-blank{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;height:100%;min-height:100%;width:100%;background:radial-gradient(ellipse at 53% 38%,#86705a55,transparent 52%),linear-gradient(145deg,#2d242b,#111019 72%,#08090e)}
+.canele-photo-blank:before{content:"";position:absolute;inset:11%;border:1px solid #c9b08e48;pointer-events:none}
+.canele-photo-blank:after{content:"";position:absolute;top:13%;width:70%;aspect-ratio:1;border:1px solid #ccad8528;transform:rotate(45deg);pointer-events:none}
+.canele-frame{position:relative;display:grid;place-items:center;width:135px;height:135px;border:1px solid #cab08b9e;transform:rotate(45deg);box-shadow:0 0 0 24px #e2c39e08}
+.canele-frame span{transform:rotate(-45deg);font:100px Georgia,serif;color:#d2b58eaa}
+.canele-pending-name{z-index:1;color:#e5d4c3;font:italic 17px Georgia,serif;letter-spacing:.24em;margin-top:35px}
+.canele-pending{z-index:1;color:#b0a093;font-size:10px;letter-spacing:.3em}
+.profile-page--canele{--character-red:#a28263;--character-rose:#d6ba9e;--character-dark:#2b1c1c}
+.profile-page--canele .character-cover{border-color:#826f60;background:linear-gradient(115deg,#2f232b,#120f18 60%,#07090d)}
+.profile-page--canele .character-cover__main h1{font-family:Georgia,serif;font-size:clamp(67px,10vw,145px);letter-spacing:.03em;text-shadow:4px 4px 0 #624634}
+.profile-page--canele .character-cover__en{color:#d1b69a;font-size:16px;letter-spacing:.2em}
+.profile-page--canele .character-cover__main blockquote{border-left-color:#b99d7b}
+.profile-page--canele .character-cover__facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.profile-page--canele .character-cover__facts strong{line-height:1.5}
+.profile-page--canele .character-cover__top{flex-wrap:wrap}
+.profile-page--canele .status-indicator{border-color:#a88d71;color:#e1c5a6}
+.profile-page--canele .profile-side__line{background:#b99d7b}
+.profile-page--canele .chapter-heading{border-left-color:#b99d7b}
+.profile-page--canele .chapter-heading span{color:#d6b99b}
+.profile-page--canele .canele-interaction-label{color:#e4cba9;font-weight:500;letter-spacing:.09em;border-bottom:1px solid #a28d7766;padding-bottom:15px;margin-bottom:25px}
+.profile-page--canele .canele-highlight-quote{color:#f3e5d5;font:normal clamp(19px,2.4vw,29px)/2 "Noto Serif TC",serif;border-left:2px solid #b99d7b;padding-left:22px}
+@media(max-width:900px){.roster-card--canele{grid-template-columns:40% 60%}}
+@media(max-width:650px){.roster-card--canele{display:flex;flex-direction:column}.roster-card--canele .roster-card__photo{height:310px;min-height:310px}.roster-card--canele .roster-card__name h3{font-size:clamp(52px,13vw,70px)}.profile-page--canele .character-cover__photo{height:clamp(390px,100vw,560px)}.profile-page--canele .character-cover__main h1{font-size:clamp(68px,20vw,120px)}.profile-page--canele .character-cover__facts{grid-template-columns:1fr 1fr}.canele-frame{width:110px;height:110px}.canele-frame span{font-size:70px}}
