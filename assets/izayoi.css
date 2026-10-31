@@ -1,0 +1,36 @@
+/* 十六夜航：幕後總監，不佔用指名名冊序號；獨立人物頁仍沿用 VEIL 原有風格 */
+.roster-card--director{grid-column:1/-1;grid-template-columns:minmax(0,36%) minmax(0,64%);min-height:370px;border-color:#625d71;background:linear-gradient(125deg,#171620,#101018 72%)}
+.roster-card--director:hover{border-color:#c7b4ca}
+.roster-card--director .roster-card__photo{min-height:370px}
+.roster-card--director .roster-card__name{margin-top:22px}
+.roster-card--director .roster-card__detail p{max-width:640px}
+.roster-card--director .roster-card__no{color:#c2b3c3;letter-spacing:.08em;overflow-wrap:anywhere}
+.roster-card--director .roster-card__tags span{border-color:#a1a0b65e;color:#d7d5e5}
+.director-visual{position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:23px;min-height:100%;overflow:hidden;background:radial-gradient(ellipse at 50% 34%,#55506a99,transparent 48%),linear-gradient(135deg,#222334 0%,#080910 90%)}
+.director-visual:before{content:"";position:absolute;width:420px;height:420px;left:50%;top:45%;transform:translate(-50%,-50%);border:1px solid #aeb3c245;border-radius:50%;box-shadow:0 0 0 29px #a5aec00c,0 0 0 63px #a5aec007}
+.director-visual:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(160deg,transparent 20%,#d3c6d710 47%,transparent 53%)}
+.director-visual__symbol{position:relative;color:#e6dbe7;font:400 clamp(24px,3vw,42px) Georgia,serif;letter-spacing:.25em;text-shadow:0 0 27px #d3b9d866}
+.director-visual__name{position:relative;color:#d7cbd8;font:italic 18px Georgia,serif;letter-spacing:.28em}
+.director-visual__pending{position:relative;color:#a6a3b9;font-size:10px;letter-spacing:.3em}
+.profile-page--director{--character-red:#9081a7;--character-rose:#c0b0cd;--character-dark:#14121e}
+.profile-page--director .character-cover{border-color:#6b647e;background:linear-gradient(110deg,#1c1a26,#12101a 54%,#07090c)}
+.profile-page--director .character-cover__main h1{font-size:clamp(56px,8vw,114px);letter-spacing:.1em;text-shadow:4px 4px 0 #403549}
+.profile-page--director .character-cover__en{color:#c2b3d0}
+.profile-page--director .character-cover__main blockquote{border-left-color:#9185b0}
+.profile-page--director .profile-side__line{background:#a79bb9}
+.profile-page--director .chapter-heading{border-left-color:#9b8caf}
+.profile-page--director .chapter-heading span{color:#c1a9d2}
+.profile-page--director .profile-keywords span{border-color:#998caa;color:#e8ddec;background:#40344d33}
+.profile-page--director .profile-service-tags span{background:#554e6e}
+.profile-page--director .character-cover__facts{grid-template-columns:repeat(3,minmax(0,1fr))}
+.profile-page--director .character-cover__top{flex-wrap:wrap}
+.profile-page--director .character-cover__top span:first-child{overflow-wrap:anywhere}
+.profile-page--director .character-cover__main{padding:34px 0}
+.profile-page--director .character-cover__photo{min-height:600px}
+.profile-page--director .director-visual__symbol{font-size:clamp(28px,4vw,60px)}
+.profile-page--director .director-visual__name{font-size:clamp(17px,2vw,23px)}
+.profile-page--director .director-visual__pending{font-size:11px}
+.profile-page--director .profile-epigraph{padding:18px 22px;border-left:2px solid #aa9ab7;color:#e3d9e8;font:400 clamp(16px,2vw,21px)/2 "Noto Serif TC",serif}
+.profile-page--director .profile-final-quote{color:#ebdce9;font:400 clamp(18px,2.2vw,25px)/2 "Noto Serif TC",serif}
+@media(max-width:900px){.roster-card--director{grid-template-columns:40% 60%}.profile-page--director .character-cover__photo{min-height:500px}}
+@media(max-width:650px){.roster-card--director{display:flex;flex-direction:column}.roster-card--director .roster-card__photo{height:300px;min-height:300px}.roster-card--director .roster-card__name{flex-wrap:wrap;gap:8px}.roster-card--director .roster-card__name h3{font-size:clamp(35px,10vw,55px)}.roster-card--director .roster-card__name span{padding-bottom:2px}.profile-page--director .character-cover__photo{height:clamp(350px,100vw,520px);min-height:350px}.profile-page--director .character-cover__main h1{font-size:clamp(52px,14vw,80px)}.profile-page--director .character-cover__facts{grid-template-columns:1fr 1fr}.profile-page--director .character-cover__top{font-size:9px}}
