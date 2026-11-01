@@ -1,0 +1,44 @@
+/* Shared VEIL header, styled to match AZUREFLAME's logo / divider / brand-name masthead. */
+header .veil-header-brand{
+ display:inline-flex;align-items:center;gap:clamp(13px,1.35vw,22px);
+ flex:none;max-width:100%;white-space:nowrap;min-width:0;
+}
+header .veil-header-brand__logo{display:flex;align-items:center;flex:none}
+header .veil-header-brand__logo img{
+ display:block;width:105px;height:auto;max-width:none;
+ filter:brightness(.92);
+}
+header .veil-header-brand__divider{
+ flex:none;width:1px;height:28px;
+ background:linear-gradient(180deg,transparent,#d2d7e2,transparent);
+}
+header .veil-header-brand__name{
+ display:block;font-family:Georgia,"Noto Serif TC",serif;
+ font-size:14px;letter-spacing:.19em;color:#e3e5eb;
+ line-height:1.5;
+}
+header .veil-header-brand__name b{
+ font-family:"Noto Serif TC",serif;font-size:13px;font-weight:500;
+ letter-spacing:.19em;margin-left:9px;
+}
+@media(max-width:1120px){
+ header{gap:18px}
+ header .veil-header-brand__logo img{width:93px}
+ header .veil-header-brand{gap:14px}
+ header .veil-header-brand__name{font-size:12px}
+ header .veil-header-brand__name b{font-size:12px;margin-left:5px}
+ .nav{gap:clamp(10px,1.6vw,18px)}
+}
+@media(max-width:760px){
+ header .veil-header-brand__logo img{width:90px}
+ header .veil-header-brand__divider{height:25px}
+ header .veil-header-brand__name{font-size:12px}
+ header .veil-header-brand__name b{font-size:11px}
+}
+@media(max-width:390px){
+ header .veil-header-brand{gap:10px}
+ header .veil-header-brand__logo img{width:75px}
+ header .veil-header-brand__divider{height:22px}
+ header .veil-header-brand__name{font-size:11px;letter-spacing:.12em}
+ header .veil-header-brand__name b{font-size:10px;letter-spacing:.08em;margin-left:4px}
+}
