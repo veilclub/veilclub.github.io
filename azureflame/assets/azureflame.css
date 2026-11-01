@@ -1,0 +1,45 @@
+:root{color-scheme:dark;--night:#050913;--azure:#79b4ff;--azure-strong:#2d85ff;--ice:#e3f1ff;--silver:#d6e0ef;--muted:#a2b6d4;font-family:'Noto Sans TC',system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:var(--night);color:var(--ice)}a{color:inherit;text-decoration:none}button{font:inherit}body::after{content:'';pointer-events:none;position:fixed;inset:0;z-index:20;opacity:.38;background:repeating-linear-gradient(0deg,transparent 0 3px,#71a4ff09 4px 5px)}
+.az-city{position:fixed;inset:0;z-index:0;pointer-events:none;background:url('tokyo-night.webp') 50% 50%/cover no-repeat;filter:brightness(.76);}
+.az-page{position:relative;z-index:1}
+.az-header{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:13px clamp(22px,3.2vw,55px);border-bottom:1px solid #a4d3ff2b;background:#030817d9;backdrop-filter:blur(11px)}
+.az-brand{display:flex;align-items:center;gap:22px;white-space:nowrap;font-family:Georgia,serif}
+.az-brand img{display:block;width:105px;height:auto;filter:brightness(.92)}
+.az-brand .divider{width:1px;height:28px;background:linear-gradient(180deg,transparent,#c4d9f4,transparent)}
+.az-brand .subname{font-size:14px;letter-spacing:.19em;color:#d9e9ff}
+.az-brand .subname b{font-weight:500;letter-spacing:.22em;margin-left:9px}
+.az-nav{display:flex;align-items:center;gap:clamp(16px,3.15vw,56px)}
+.az-nav a{color:#d0d9e9;font-family:Georgia,serif;letter-spacing:.17em;font-size:12px;padding:12px 0;position:relative}
+.az-nav a:after{content:'';position:absolute;inset:auto 15% 0;height:2px;background:linear-gradient(90deg,transparent,#57a7ff,transparent);box-shadow:0 0 13px #57a7ff;transform:scaleX(0);transition:transform .25s}
+.az-nav a:hover:after,.az-nav a[aria-current=page]:after{transform:scaleX(1)}
+.az-hero{position:relative;min-height:max(660px,calc(100svh - 82px));display:flex;align-items:center;justify-content:center;isolation:isolate;text-align:center;padding:62px 24px 88px}
+.az-hero:before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 48% 52% at 50% 43%,#010612e8 0%,#03122ac6 42%,#06142b47 85%,transparent 100%),linear-gradient(180deg,#020712a8 0%,transparent 38%,#02071230 70%,#020712bb 100%);pointer-events:none}
+.az-hero-copy{width:100%;max-width:1050px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.az-h1{font:normal 1px/1 Georgia,serif;padding:0;margin:0;width:min(950px,91vw)}
+.az-logo{display:block;width:100%;height:auto;filter:drop-shadow(0 9px 16px rgba(0,4,15,.86))}
+.az-subtitle-row{display:flex;gap:14px;align-items:center;justify-content:center;width:100%;margin-top:0}
+.az-subtitle-row .hair{width:clamp(54px,10vw,160px);height:1px;background:linear-gradient(90deg,transparent,#c1d1ee)}
+.az-subtitle-row .hair:last-child{transform:rotate(180deg)}
+.az-subtitle-row .star{font-size:17px;color:#dceaff;text-shadow:0 0 12px #69abff}
+.az-cn{font:400 clamp(30px,4.2vw,62px)/1.35 'Noto Serif CJK TC','Noto Serif TC',serif;letter-spacing:.52em;text-indent:.52em;text-shadow:0 2px 14px #010817;white-space:nowrap}
+.az-motto{margin:18px 0 0;color:#dce3f1;font:italic 22px/1.7 Georgia,'Times New Roman',serif;letter-spacing:.24em;text-shadow:0 2px 9px #000;}
+.az-cta{display:inline-flex;align-items:center;justify-content:center;gap:28px;margin-top:30px;min-height:55px;padding:12px clamp(28px,4vw,56px);min-width:340px;max-width:100%;background:linear-gradient(125deg,#00071cd9,#09244ad9 54%,#000a22e6);border:1px solid #8dc1ff;outline:1px solid #22488a;outline-offset:4px;clip-path:polygon(8% 0,92% 0,100% 50%,92% 100%,8% 100%,0 50%);color:#f2f8ff;font:italic 22px Georgia,serif;box-shadow:inset 0 -3px 12px #2d75e13d;text-shadow:0 0 14px #84adf0;transition:filter .22s,transform .22s}
+.az-cta:hover{filter:brightness(1.22);transform:translateY(-2px)}
+.az-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);width:25px;height:25px;border-right:1px solid #e7f2ff;border-bottom:1px solid #e7f2ff;rotate:45deg;opacity:.82}
+.az-section{max-width:1100px;margin:0 auto;padding:85px 28px 95px;background:linear-gradient(180deg,#050b18e8,#081126e8);border-inline:1px solid #91bbf11e;backdrop-filter:blur(12px)}
+.az-section h2{font:normal clamp(34px,5vw,70px) Georgia,serif;letter-spacing:.12em;margin:8px 0 23px}
+.az-section .kicker{font-size:11px;letter-spacing:.34em;color:#86beff}
+.az-section p{font:16px/2.25 'Noto Sans TC',sans-serif;letter-spacing:.09em;color:#d1d9e7;max-width:780px}
+.az-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:35px}
+.az-panel{min-height:180px;padding:30px;border:1px solid #8ebdff3b;background:linear-gradient(155deg,#0e2345d1,#030a19eb);display:flex;flex-direction:column;justify-content:center}
+.az-panel small{color:#77a9ea;letter-spacing:.23em}.az-panel strong{font-size:18px;font-weight:400;letter-spacing:.15em;margin-top:16px}
+.az-footer{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;padding:27px 4vw;background:#030713f2;border-top:1px solid #95bbfa30;font-size:11px;letter-spacing:.16em;color:#a9bad2}
+.az-cube-link{position:fixed;z-index:100;right:clamp(18px,4vw,55px);bottom:30px;display:flex;align-items:center;gap:12px;border:1px solid #9ec6f38c;border-radius:3px;padding:11px 16px;color:#eff6ff;background:#07152cd9;box-shadow:0 8px 38px #000a,0 0 17px #1c63d62b;backdrop-filter:blur(13px);font-size:11px;letter-spacing:.12em;transition:background .2s}
+.az-cube-link:hover{background:#173962ec}
+.az-cube-link svg{width:19px;height:19px}
+a:focus-visible{outline:2px solid #9ed0ff;outline-offset:5px}
+@media(max-width:960px){.az-header{flex-wrap:wrap;justify-content:center;gap:5px;padding-block:16px}.az-nav{gap:clamp(12px,4vw,38px)}.az-hero{min-height:calc(100svh - 128px)}.az-city{background-position:56% center}.az-h1{width:95vw}}
+@media(max-width:600px){.az-header{align-items:start;padding:15px 12px;gap:15px}.az-brand{gap:10px}.az-brand img{width:78px}.az-brand .subname{font-size:11px;letter-spacing:.07em}.az-brand .subname b{letter-spacing:.08em;margin-left:2px}.az-nav{width:100%;justify-content:center;gap:clamp(9px,3vw,25px);flex-wrap:wrap}.az-nav a{font-size:10px;letter-spacing:.1em;padding:3px 0}.az-hero{min-height:calc(100svh - 95px);padding:50px 10px 85px}.az-hero:before{background:radial-gradient(ellipse 75% 55% at 50% 45%,#010612ea,#06102ba5 60%,#03132e3b),linear-gradient(180deg,#010614a6,transparent 30%,#010614a3)}.az-city{background-position:54% center;filter:brightness(.64)}.az-h1{width:100%}.az-subtitle-row{gap:5px}.az-subtitle-row .hair{width:32px}.az-cn{font-size:clamp(26px,7.5vw,40px)}.az-motto{font-size:clamp(12px,3.1vw,16px);letter-spacing:.1em;margin-top:13px}.az-cta{min-width:0;width:78%;font-size:17px;min-height:48px;margin-top:28px}.az-section{padding:66px 24px}.az-grid{grid-template-columns:1fr}.az-panel{min-height:125px}.az-cube-link{right:15px;bottom:19px;padding:10px 12px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+@media(min-width:601px) and (max-width:960px){.az-header{flex-direction:column;gap:9px}.az-hero{min-height:calc(100svh - 132px)}}
