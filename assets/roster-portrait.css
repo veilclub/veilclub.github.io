@@ -1,0 +1,65 @@
+/* VEIL archive portrait system v2 — one long vertical format for every member.
+   Consistent grid and information hierarchy. Image crop and character colour are independent. */
+.gentlemen-index .roster-content{max-width:1170px;padding:78px clamp(18px,4vw,42px) 120px}
+.gentlemen-index .roster-heading{margin-bottom:36px}
+.gentlemen-index .roster-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(18px,3vw,32px);row-gap:clamp(36px,5vw,62px);align-items:stretch}
+.gentlemen-index .roster-cards>.roster-card{--edge:#75636b;--tone:#c5a9b8;--panel-a:#1e1420;grid-column:auto!important;display:flex!important;flex-direction:column!important;grid-template-columns:none!important;width:100%;height:100%;min-height:0!important;border:1px solid var(--edge);background:linear-gradient(165deg,var(--panel-a),#090a0e 84%);overflow:hidden;isolation:isolate;transform:none}
+.gentlemen-index .roster-cards>.roster-card:hover{transform:translateY(-5px);border-color:var(--tone);box-shadow:0 17px 55px #0009}
+.gentlemen-index .roster-card--guilan{--edge:#6e617e!important;--tone:#c5b4df!important;--panel-a:#1e192b!important}
+.gentlemen-index .roster-card--canele{--edge:#8c7865!important;--tone:#e6cba9!important;--panel-a:#292127!important}
+.gentlemen-index .roster-card--director{--edge:#5f6075!important;--tone:#c0bed4!important;--panel-a:#191a27!important}
+.gentlemen-index .roster-cards>.roster-card .roster-card__photo{position:relative;display:block!important;flex:none;width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:2/3;overflow:hidden;background:radial-gradient(ellipse at 55% 35%,#4c334b,#100c15 63%,#09090f);border-bottom:1px solid var(--edge)}
+.gentlemen-index .roster-cards>.roster-card .roster-card__photo img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center 28%;filter:saturate(.93) contrast(1.03);transition:transform .55s ease}
+.gentlemen-index .roster-cards>.roster-card:hover .roster-card__photo img{transform:scale(1.018)}
+.gentlemen-index .roster-card__photo:after{z-index:2;opacity:.55;background:linear-gradient(0deg,#090a11bb,transparent 24%),linear-gradient(180deg,#07090c55,transparent 18%);pointer-events:none}
+.gentlemen-index .roster-cards>.roster-card .roster-card__detail{display:flex;flex:1;flex-direction:column;min-height:325px;padding:30px clamp(24px,3vw,36px) 25px!important}
+.gentlemen-index .roster-cards>.roster-card .roster-card__no{display:block;min-height:25px;color:var(--tone);line-height:1.65;font-size:10px;letter-spacing:.13em;overflow-wrap:anywhere}
+.gentlemen-index .roster-cards>.roster-card .roster-card__name{display:flex;flex-wrap:wrap;gap:7px 18px;align-items:baseline;margin:16px 0 0!important}
+.gentlemen-index .roster-cards>.roster-card .roster-card__name h3{font-size:clamp(39px,4vw,57px);line-height:1.3;letter-spacing:.09em}
+.gentlemen-index .roster-cards>.roster-card--canele .roster-card__name h3{font-size:clamp(38px,4vw,55px)}
+.gentlemen-index .roster-cards>.roster-card .roster-card__name span{font-size:12px;letter-spacing:.09em;line-height:1.5;padding:0!important;color:var(--tone)}
+.gentlemen-index .roster-cards>.roster-card .roster-card__detail p{max-width:none;line-height:1.9;margin:15px 0 24px;color:#cac3ca;font-size:14px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.gentlemen-index .roster-cards>.roster-card .roster-card__tags{margin-top:auto;padding-top:5px}
+.gentlemen-index .roster-cards>.roster-card .roster-card__tags span{font-size:11px;line-height:1.45;padding:7px 10px;border-color:color-mix(in srgb,var(--tone) 40%,transparent);color:var(--tone);background:#fff1}
+.gentlemen-index .roster-cards>.roster-card .roster-card__cta{margin-top:25px;padding:15px 0 8px;border-color:var(--tone);color:#e8e2e7;letter-spacing:.19em}
+.gentlemen-index .roster-cards>.roster-card .roster-card__cta span{color:var(--tone)}
+/* The supplied 945×820 director index image is landscape: show the entire original,
+   with a soft fill made from the SAME image, not a square crop or a stock placeholder. */
+.gentlemen-index .roster-card--director .director-card__photo{background:#101019!important}
+.gentlemen-index .roster-card--director .director-card__photo:before{content:"";position:absolute;inset:-25px;background:url("izayoi-kou-card.webp") center/cover no-repeat;filter:blur(30px) brightness(.45);transform:scale(1.08);opacity:.65}
+.gentlemen-index .roster-card--director .director-card__photo img{object-fit:contain!important;object-position:center center!important;filter:contrast(1.03)!important;z-index:1}
+.gentlemen-index .roster-card--director .director-card__photo:after{z-index:2}
+/* Published portraits never inherit placeholder sizing rules. Unpublished portraits
+   occupy exactly the same 2:3 area with their brand placeholders. */
+.gentlemen-index .roster-card__photo>.veil-photo-placeholder{position:absolute;inset:0;min-height:0;width:100%;height:100%}
+.gentlemen-index .veil-photo-placeholder__symbol{width:clamp(95px,12vw,150px);height:clamp(95px,12vw,150px)}
+.gentlemen-index .roster-card__photo.photo-pending .roster-card__photo-fallback{display:flex}
+/* Individual biographies keep their distinct colours, yet use matching photo treatment. */
+.profile-page .character-cover__photo{overflow:hidden}
+.profile-page .character-cover__photo img{object-fit:cover;object-position:center 23%;max-width:100%}
+.profile-page--director .character-cover__photo img{object-position:center 24%}
+.profile-page .character-cover__text{min-width:0}
+@media(min-width:1450px){
+ .gentlemen-index .roster-content{max-width:1240px}
+}
+@media(max-width:760px){
+ .gentlemen-index .roster-content{padding:52px 18px 86px}
+ .gentlemen-index .roster-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+ .gentlemen-index .roster-cards>.roster-card .roster-card__detail{min-height:275px;padding:20px 17px 19px!important}
+ .gentlemen-index .roster-cards>.roster-card .roster-card__name h3{font-size:clamp(27px,5.8vw,40px)}
+ .gentlemen-index .roster-cards>.roster-card .roster-card__no{font-size:9px}
+ .gentlemen-index .roster-cards>.roster-card .roster-card__detail p{font-size:12px;-webkit-line-clamp:4}
+ .gentlemen-index .roster-cards>.roster-card .roster-card__tags span{font-size:10px}
+ .gentlemen-index .roster-cards>.roster-card .roster-card__cta{font-size:9px;letter-spacing:.1em}
+}
+@media(max-width:540px){
+ .gentlemen-index .roster-cards{grid-template-columns:minmax(0,1fr);gap:26px}
+ .gentlemen-index .roster-cards>.roster-card{max-width:490px;margin-inline:auto}
+ .gentlemen-index .roster-cards>.roster-card .roster-card__detail{min-height:0;padding:27px 26px 23px!important}
+ .gentlemen-index .roster-cards>.roster-card .roster-card__name h3{font-size:clamp(37px,10vw,53px)}
+ .gentlemen-index .roster-cards>.roster-card .roster-card__detail p{font-size:14px}
+ .gentlemen-index .roster-cards>.roster-card .roster-card__cta{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+ .gentlemen-index .roster-cards>.roster-card,.gentlemen-index .roster-cards>.roster-card .roster-card__photo img{transition:none}
+}
