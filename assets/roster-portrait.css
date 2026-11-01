@@ -63,3 +63,13 @@
 @media(prefers-reduced-motion:reduce){
  .gentlemen-index .roster-cards>.roster-card,.gentlemen-index .roster-cards>.roster-card .roster-card__photo img{transition:none}
 }
+
+/* VEIL / IZAYOI vertical-photo fix v3: use uploaded portrait, not old landscape card. */
+.gentlemen-index .roster-card--director .director-card__photo:before{display:none!important}
+.gentlemen-index .roster-card--director .director-card__photo img{
+ object-fit:cover!important;
+ object-position:center 18%!important;
+ filter:saturate(.97) contrast(1.03)!important;
+ transform:none;
+}
+.gentlemen-index .roster-card--director:hover .director-card__photo img{transform:scale(1.015)}
