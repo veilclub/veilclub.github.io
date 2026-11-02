@@ -1,0 +1,74 @@
+/* VEIL / SILVER CUT — homepage Chinese brand art.
+   Referencing Azureflame's editorial spacing, but built from VEIL's own
+   silver / graphite / cold-blue graphic vocabulary. */
+.hero-copy .veil-cn-art{
+ --veil-chrome:#e9edf5;
+ position:relative;display:inline-grid;grid-template-columns:auto auto auto;
+ align-items:center;gap:clamp(13px,2.2vw,32px);
+ margin:5px 0 0;padding:clamp(8px,1vw,16px) clamp(9px,1.4vw,20px);
+ isolation:isolate;max-width:100%;
+}
+.hero-copy .veil-cn-art:before{
+ content:"";position:absolute;z-index:-1;inset:10% 8% 6%;
+ background:linear-gradient(117deg,transparent 0 12%,#293142b8 12% 24%,#141b29c4 44%,#2c354a7a 75%,transparent 97%);
+ clip-path:polygon(5% 0,100% 0,95% 100%,0 100%);
+ transform:skewX(-7deg);
+}
+.hero-copy .veil-cn-art:after{
+ content:"";position:absolute;z-index:-1;left:23%;bottom:3px;width:64%;height:3px;
+ background:linear-gradient(90deg,transparent,#6b7b95,#e0e6ef,#7f93b1,transparent);
+ transform:skewX(-16deg) rotate(-1deg);
+ box-shadow:0 3px 0 #151e2c;
+}
+.hero-copy .veil-cn-art__rule{
+ display:block;width:clamp(38px,8vw,130px);height:2px;position:relative;
+ background:linear-gradient(90deg,transparent,#78879f 35%,#dae2f0 92%);
+ transform:skewX(-18deg);
+}
+.hero-copy .veil-cn-art__rule:after{
+ content:"";position:absolute;right:0;top:-6px;width:12px;height:12px;
+ border-right:2px solid #d3dce9;border-top:2px solid #d3dce9;
+ transform:rotate(45deg) scale(.6);
+}
+.hero-copy .veil-cn-art__rule--right{
+ transform:rotate(180deg) skewX(-18deg);
+}
+.hero-copy .veil-cn-art__word{
+ display:block;position:relative;white-space:nowrap;
+ font-family:"Noto Sans TC","Noto Sans CJK TC","Microsoft JhengHei",system-ui,sans-serif;
+ font-weight:900;font-style:italic;
+ font-size:clamp(37px,5.2vw,77px);
+ line-height:1.25;letter-spacing:.24em;text-indent:.24em;
+ transform:skewX(-6deg) rotate(-1.7deg);
+ background:linear-gradient(170deg,#fff 3%,#d4dbe9 21%,#78869d 52%,#f0f3f8 64%,#a2aec1 78%,#e4eaf4 100%);
+ -webkit-background-clip:text;background-clip:text;color:transparent;
+ -webkit-text-stroke:.65px #e5eaf3;
+ filter:drop-shadow(4px 5px 0 #171d29) drop-shadow(0 0 13px #96a6c444);
+}
+.hero-copy .veil-cn-art__word:after{
+ content:"";position:absolute;left:6%;top:-9px;width:40%;height:3px;
+ background:#d2dbe9;transform:skew(-40deg) rotate(-1deg);
+ box-shadow:13px 5px 0 -1px #556882;
+}
+.hero-copy .veil-cn-art__cut{
+ position:absolute;right:clamp(3px,1vw,15px);top:5px;
+ font:800 clamp(9px,1.2vw,13px)/1 Georgia,serif;
+ letter-spacing:.16em;color:#c5d0e2;
+ transform:rotate(-8deg);
+}
+.hero-copy .veil-cn-art__cut:before{
+ content:"";display:inline-block;width:clamp(12px,1.5vw,25px);height:2px;
+ margin:0 9px 3px 0;background:#c9d5e8;transform:skewX(-30deg);
+}
+@media(max-width:760px){
+ .hero-copy .veil-cn-art{gap:clamp(8px,2.6vw,16px);padding:8px 3px 11px}
+ .hero-copy .veil-cn-art__rule{width:clamp(18px,7vw,45px)}
+ .hero-copy .veil-cn-art__word{font-size:clamp(36px,9vw,57px);letter-spacing:.19em;text-indent:.19em}
+ .hero-copy .veil-cn-art__cut{right:0;top:0;font-size:9px}
+}
+@media(max-width:390px){
+ .hero-copy .veil-cn-art{gap:8px}
+ .hero-copy .veil-cn-art__rule{width:18px}
+ .hero-copy .veil-cn-art__word{font-size:clamp(31px,9.4vw,36px)}
+}
+@media(prefers-reduced-motion:reduce){.hero-copy .veil-cn-art__word{filter:none;text-shadow:3px 4px #171d29}}
