@@ -23,6 +23,10 @@
       return dest.origin===location.origin && dest.pathname==='/members.html' && (!a.target || a.target==='_self');
     }catch(e){return false}
   }
+  if(onRoster&&new URLSearchParams(location.search).get('archiveOpen')==='1'){
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('archive-arrived')},{once:true});
+    else document.body.classList.add('archive-arrived');
+  }
   // All internal profile and secondary-page navigation remains immediate.
   if(!fromHome||onRoster||reduced)return;
   document.addEventListener('click',function(ev){
