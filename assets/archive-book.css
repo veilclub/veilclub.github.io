@@ -5,7 +5,7 @@
 .gentlemen-index>header{position:sticky!important;top:0;z-index:120!important;min-height:76px;height:auto;isolation:isolate;background:linear-gradient(115deg,rgba(10,13,20,.96),rgba(23,29,41,.82))!important;border-bottom:1px solid #a2afc45e;box-shadow:0 10px 30px rgba(0,0,0,.32);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
 .gentlemen-index>header:after{content:"";position:absolute;bottom:-3px;right:3%;width:13%;height:2px;background:linear-gradient(90deg,transparent,#b9c4d8,transparent);pointer-events:none}
 .gentlemen-index main.archive-world{position:relative;isolation:isolate;max-width:1600px;margin:0 auto;padding:clamp(26px,4.5vw,72px) clamp(16px,4vw,64px) 65px}
-.gentlemen-index .archive-book{position:relative;isolation:isolate;max-width:1380px;margin:0 auto;padding:0 clamp(23px,4.6vw,70px) 20px;background:linear-gradient(90deg,#0c1019 0%,#1c2534 3.3%,#151e2b 5%,#1a2331 38%,#151d2b 51%,#161e2b 100%);border:1px solid #818fa8;box-shadow:-16px 20px 0 -8px #080a10,-20px 22px 0 -8px #70809455,15px 24px 65px #000b,inset 0 0 0 8px #080c13,inset 0 0 0 9px #909db14d;clip-path:polygon(0 0,96.5% 0,100% 27px,100% 100%,0 100%);overflow:visible}
+.gentlemen-index .archive-book{position:relative;isolation:isolate;max-width:1380px;margin:0 auto;padding:0 clamp(23px,4.6vw,70px) 20px;background:linear-gradient(90deg,#0c1019 0%,#1c2534 3.3%,#151e2b 5%,#1a2331 38%,#151d2b 51%,#161e2b 100%);border:1px solid #818fa8;box-shadow:-16px 20px 0 -8px #080a10,-20px 22px 0 -8px #70809455,15px 24px 65px #000b,inset 0 0 0 8px #080c13,inset 0 0 0 9px #909db14d;overflow:visible}
 .gentlemen-index .archive-book__shell{position:absolute;inset:0;pointer-events:none;z-index:0}
 .gentlemen-index .archive-book__shell:before{content:"";position:absolute;left:-12px;top:22px;bottom:22px;width:20px;background:linear-gradient(90deg,#05070b,#596a82 38%,#111724 58%,#697a94 73%,#070a12);border:1px solid #7e8ca3;box-shadow:-11px 9px 0 #05070c;transform:skewY(-1deg)}
 .gentlemen-index .archive-book__shell:after{content:"";position:absolute;left:14px;right:16px;top:16px;bottom:16px;border:1px solid #8c9ab04c;clip-path:polygon(0 0,96% 0,100% 30px,100% 100%,0 100%);pointer-events:none}
@@ -45,7 +45,7 @@
 @media(max-width:760px){
  .gentlemen-index>header{padding:14px clamp(15px,4vw,24px)!important}
  .gentlemen-index main.archive-world{padding:24px 13px 48px}
- .gentlemen-index .archive-book{padding:0 24px 12px;clip-path:polygon(0 0,93% 0,100% 20px,100% 100%,0 100%);box-shadow:-9px 12px 0 -4px #070a12,8px 15px 32px #000c,inset 0 0 0 5px #090d16,inset 0 0 0 6px #8a98ad47}
+ .gentlemen-index .archive-book{padding:0 24px 12px;box-shadow:-9px 12px 0 -4px #070a12,8px 15px 32px #000c,inset 0 0 0 5px #090d16,inset 0 0 0 6px #8a98ad47}
  .gentlemen-index .archive-book__index{right:-7px;top:58px}
  .gentlemen-index .archive-book__index span{width:9px;height:45px}
  .gentlemen-index .archive-book__micro{padding-top:25px;font-size:8px;letter-spacing:.1em}
