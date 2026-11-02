@@ -1,9 +1,19 @@
-/* VEIL / THE ARCHIVE v9. The sheet visibly expands above the stationary folder. */
+/* VEIL / THE ARCHIVE v10. The full printed directory grows with the FLIP sheet. */
 .veil-archive-exit{position:fixed;inset:0;z-index:2147483645;background:#090b10;opacity:0;pointer-events:auto;transition:opacity 250ms ease}
 .veil-archive-exit.is-on{opacity:1}
 html.archive-intro .gentlemen-index .archive-book{visibility:hidden}
 /* The hidden real album must not hide the separate animated FLIP sheet. */
 html.archive-intro .gentlemen-index .archive-book.veil-archive-intro__document{visibility:visible!important}
+/* Keep all copied typography, photos and layout visible while scaling.
+   The original album alone stays pre-hidden until the handoff. */
+html.archive-intro .gentlemen-index .archive-book.veil-archive-intro__document .archive-book__content > *{
+  opacity:1!important;
+  transform:none!important;
+  animation:none!important;
+}
+html.archive-intro .gentlemen-index .archive-book.veil-archive-intro__document .roster-hero{
+  animation:none!important;
+}
 html.archive-intro .gentlemen-index .archive-book__content>*{opacity:0}
 html.archive-intro .gentlemen-index .veil-fixed-city{opacity:.24!important}
 html.archive-reveal-pending .gentlemen-index .archive-book__content>*{opacity:0;transform:translateY(12px)}
@@ -34,3 +44,15 @@ html.archive-reveal-pending .gentlemen-index .roster-hero{animation:none!importa
 .veil-archive-intro__skip:hover{background:#2a364b;border-color:#d1dae8;color:#fff}
 @media(max-width:760px){.veil-archive-intro__skip{font-size:10px;padding:10px 13px}}
 @media(prefers-reduced-motion:reduce){.veil-archive-exit,.veil-archive-intro{display:none}}
+
+/* Printed content must be clipped at the visible page-height, not allowed
+   to spill down the viewport while its parent is FLIP-scaled. */
+.gentlemen-index .archive-book.veil-archive-intro__document .archive-book__content{
+  max-height:100%;
+  overflow:hidden;
+  animation:none!important;
+}
+.gentlemen-index .archive-book.veil-archive-intro__document .roster-hero,
+.gentlemen-index .archive-book.veil-archive-intro__document .roster-content{
+  animation:none!important;
+}
