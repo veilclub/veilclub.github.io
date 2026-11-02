@@ -1,4 +1,4 @@
-/* VEIL / THE ARCHIVE v7. The finished document is styled by archive-book.css. */
+/* VEIL / THE ARCHIVE v8. The sheet visibly expands above the stationary folder. */
 .veil-archive-exit{position:fixed;inset:0;z-index:2147483645;background:#090b10;opacity:0;pointer-events:auto;transition:opacity 250ms ease}
 .veil-archive-exit.is-on{opacity:1}
 html.archive-intro .gentlemen-index .archive-book{visibility:hidden}
@@ -23,7 +23,7 @@ html.archive-reveal-pending .gentlemen-index .roster-hero{animation:none!importa
 .veil-archive-intro__pocket strong{font:normal clamp(14px,1.6vw,21px)/1.3 Georgia,serif;letter-spacing:.2em;color:#e4e8f1}
 .veil-archive-intro__pocket span{font:9px/1.5 Georgia,serif;letter-spacing:.17em;color:#aab8cb}
 .gentlemen-index .archive-book.veil-archive-intro__document{
- position:fixed;z-index:1;display:block;max-width:none;margin:0;
+ position:fixed;z-index:4;display:block;max-width:none;margin:0;opacity:0;
  box-sizing:border-box;transform-origin:top left;
  visibility:visible;will-change:transform,opacity;pointer-events:none;
 }
