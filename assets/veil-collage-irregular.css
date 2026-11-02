@@ -290,3 +290,63 @@
 }
 @media(hover:none){.veil-collage .vc-grid>.tile:hover{filter:none}}
 @media(prefers-reduced-motion:reduce){.veil-collage .vc-grid>.tile{transition:none}}
+
+/* HOME ONLY / CITY REVEAL v1
+   Keep the front-facing cards and headline readable. Soften only rear
+   collage boards; do not change the original skyline image or masthead. */
+.veil-home.veil-collage .vc-section::before{
+  background:linear-gradient(126deg,
+    rgba(101,120,144,.58) 0%,
+    rgba(63,82,107,.54) 15%,
+    rgba(24,38,57,.49) 34%,
+    rgba(43,60,83,.53) 66%,
+    rgba(12,20,32,.60) 100%);
+  border-color:rgba(176,189,206,.20);
+  box-shadow:0 16px 36px rgba(0,0,0,.18);
+}
+.veil-home.veil-collage .vc-section:nth-of-type(even)::before{
+  background:linear-gradient(110deg,
+    rgba(14,22,37,.56) 0%,
+    rgba(49,67,92,.46) 22%,
+    rgba(106,123,145,.43) 52%,
+    rgba(44,60,82,.49) 53%,
+    rgba(18,28,43,.58) 100%);
+}
+.veil-home.veil-collage .vc-section::after{
+  opacity:.28;
+}
+.veil-home.veil-collage .vc-section .vc-shard{
+  opacity:.32;
+  filter:saturate(.86);
+}
+.veil-home.veil-collage .vc-section:nth-of-type(even) .vc-shard{
+  opacity:.24;
+}
+.veil-home.veil-collage .vc-shard::before,
+.veil-home.veil-collage .vc-shard::after{opacity:.65}
+.veil-home.veil-collage .vc-grid::before{
+  background:linear-gradient(112deg,
+    rgba(177,192,210,.42) 0%,
+    rgba(100,121,145,.37) 27%,
+    rgba(20,34,57,.43) 27.3%,
+    rgba(83,106,134,.40) 53%,
+    rgba(26,38,58,.53) 66%,
+    rgba(135,155,178,.38) 100%);
+}
+.veil-home.veil-collage .vc-grid::after{opacity:.48}
+.veil-home.veil-collage .vc-flow .steps::before{opacity:.42}
+.veil-home.veil-collage .vc-banner::before{
+  background:linear-gradient(117deg,
+    rgba(198,208,222,.57) 0%,
+    rgba(131,150,176,.43) 14%,
+    rgba(52,72,96,.51) 15%,
+    rgba(25,38,57,.66) 66%,
+    rgba(92,112,139,.48) 100%);
+}
+.veil-home.veil-collage .vc-banner::after{opacity:.64}
+@media(max-width:760px){
+  .veil-home.veil-collage .vc-section::after{opacity:.22}
+  .veil-home.veil-collage .vc-section .vc-shard{opacity:.23}
+  .veil-home.veil-collage .vc-section:nth-of-type(even) .vc-shard{opacity:.18}
+  .veil-home.veil-collage .vc-grid::after{opacity:.38}
+}
