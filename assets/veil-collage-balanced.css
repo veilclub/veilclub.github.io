@@ -1,0 +1,189 @@
+/* VEIL / SILVER RIOT v3 — CONTROLLED CHAOS
+   Existing jagged silhouettes stay; background shards recede, reading cards
+   gain clear hierarchy. All rules scoped to VEIL non-member collage pages.
+   The underlying city background, primary wordmarks and archive are untouched. */
+
+.veil-collage .vc-section{margin:12px auto 18px}
+.veil-collage .vc-section::before{
+  background:linear-gradient(127deg,rgba(47,63,83,.66),rgba(24,35,51,.70) 43%,rgba(14,22,34,.68));
+  box-shadow:0 10px 28px rgba(0,0,0,.18)
+}
+.veil-collage .vc-section:nth-of-type(even)::before{
+  background:linear-gradient(115deg,rgba(24,35,51,.69),rgba(52,68,88,.62) 48%,rgba(13,23,38,.69))
+}
+.veil-collage .vc-section::after,.veil-collage .vc-section:nth-of-type(even)::after{
+  opacity:.18;filter:saturate(.72)
+}
+.veil-collage .vc-section .vc-shard,
+.veil-collage .vc-section:nth-of-type(even) .vc-shard{
+  opacity:.17;filter:saturate(.68)
+}
+/* The original city image is visible behind HOME only, not through text. */
+.veil-home.veil-collage .vc-section::before{
+  background:linear-gradient(127deg,rgba(54,70,89,.53),rgba(25,39,56,.48) 50%,rgba(13,24,39,.56))
+}
+.veil-home.veil-collage .vc-section:nth-of-type(even)::before{
+  background:linear-gradient(110deg,rgba(22,32,47,.54),rgba(62,79,101,.44) 52%,rgba(15,26,42,.54))
+}
+.veil-home.veil-collage .vc-section .vc-shard,
+.veil-home.veil-collage .vc-section:nth-of-type(even) .vc-shard{opacity:.12}
+.veil-home.veil-collage .vc-section::after{opacity:.14}
+
+/* Three distinct silhouettes remain; the noisy backing boards are muted. */
+.veil-collage .vc-grid{
+  gap:clamp(13px,1.6vw,22px);padding:16px 3px 25px;align-items:stretch
+}
+.veil-collage .vc-grid::before{opacity:.26;transform:rotate(-1.1deg);filter:saturate(.72)}
+.veil-collage .vc-grid::after{opacity:.14}
+.veil-collage .vc-grid>.tile{
+  margin:0;min-height:300px;
+  padding:clamp(32px,3vw,45px) clamp(29px,2.7vw,39px) 44px;
+  background:linear-gradient(145deg,rgba(58,77,103,.97),rgba(21,33,52,.97) 48%,rgba(10,19,33,.99));
+  transform:translateY(-5px) rotate(-.65deg);filter:none
+}
+.veil-collage .vc-grid>.tile:nth-child(2){
+  margin:0;min-height:308px;
+  padding:clamp(35px,3.1vw,46px) clamp(29px,2.7vw,39px) 44px;
+  background:linear-gradient(143deg,rgba(30,46,68,.98),rgba(67,85,111,.96) 48%,rgba(15,29,46,.99));
+  transform:translateY(9px) rotate(.65deg)
+}
+.veil-collage .vc-grid>.tile:nth-child(3){
+  margin:0;min-height:300px;
+  padding:clamp(35px,3.1vw,46px) clamp(29px,2.7vw,39px) 44px;
+  background:linear-gradient(148deg,rgba(54,72,95,.97),rgba(24,40,63,.98) 47%,rgba(12,23,39,.99));
+  transform:translateY(0) rotate(-.7deg)
+}
+.veil-collage .vc-grid>.tile::before{
+  height:17%;top:11px;opacity:.27;transform:rotate(-9deg)
+}
+.veil-collage .vc-grid>.tile::after{opacity:.55}
+.veil-collage .vc-grid>.tile .en{transform:skewX(-5deg) rotate(-1deg);box-shadow:none}
+.veil-collage .vc-grid>.tile:nth-child(2) .en{transform:skewX(-5deg) rotate(1deg)}
+.veil-collage .vc-grid>.tile:nth-child(3) .en{transform:skewX(-5deg) rotate(-1.5deg)}
+.veil-collage .vc-grid>.tile h3{margin-top:24px}
+.veil-collage .vc-grid>.tile:hover{transform:translateY(-9px) rotate(-.65deg)}
+.veil-collage .vc-grid>.tile:nth-child(2):hover{transform:translateY(5px) rotate(.65deg)}
+.veil-collage .vc-grid>.tile:nth-child(3):hover{transform:translateY(-4px) rotate(-.7deg)}
+
+/* Five manga cuts keep distinct shapes but no longer collide. */
+.veil-collage .vc-flow .steps{
+  gap:11px;padding:17px 2px 27px;align-items:stretch
+}
+.veil-collage .vc-flow .steps::before{
+  opacity:.18;height:16%;top:46%;filter:saturate(.67)
+}
+.veil-collage .vc-flow .step{
+  min-height:218px;margin:0;
+  padding:32px clamp(16px,1.7vw,25px) 33px;
+  background:linear-gradient(152deg,rgba(63,82,108,.97),rgba(25,42,66,.98) 48%,rgba(12,24,40,.99));
+  transform:translateY(-3px) rotate(-.65deg)
+}
+.veil-collage .vc-flow .step:nth-child(2){
+  margin:0;min-height:218px;
+  padding:35px clamp(16px,1.7vw,25px) 33px;
+  transform:translateY(7px) rotate(.8deg);
+  background:linear-gradient(138deg,rgba(29,45,67,.98),rgba(62,83,109,.97),rgba(18,30,49,.99))
+}
+.veil-collage .vc-flow .step:nth-child(3){
+  margin:0;min-height:218px;
+  padding:33px clamp(16px,1.7vw,25px) 33px;
+  transform:translateY(-8px) rotate(-1deg)
+}
+.veil-collage .vc-flow .step:nth-child(4){
+  margin:0;min-height:218px;transform:translateY(9px) rotate(.6deg);
+  background:linear-gradient(155deg,rgba(32,48,72,.98),rgba(55,74,100,.97),rgba(16,29,46,.99))
+}
+.veil-collage .vc-flow .step:nth-child(5){
+  margin:0;min-height:218px;transform:translateY(0) rotate(-.55deg)
+}
+.veil-collage .vc-flow .note{margin-top:24px}
+
+/* Long-form pages retain the house graphic vocabulary, but with cleaner reading. */
+.veil-about .vc-manifesto .vc-shard{opacity:.12}
+.veil-rules .vc-code .vc-shard{opacity:.10}
+.veil-home .vc-banner::after{opacity:.42}
+.veil-home .vc-banner::before{filter:saturate(.80)}
+
+@media(max-width:1100px){
+  .veil-collage .vc-grid{gap:11px}
+  .veil-collage .vc-grid>.tile,
+  .veil-collage .vc-grid>.tile:nth-child(2),
+  .veil-collage .vc-grid>.tile:nth-child(3){
+    min-height:285px;padding:32px 23px 37px
+  }
+  .veil-collage .vc-flow .steps{gap:9px}
+  .veil-collage .vc-flow .step:nth-child(n){
+    margin:0;min-height:205px;padding:29px 19px
+  }
+}
+@media(max-width:760px){
+  .veil-collage .vc-section{
+    margin:11px auto 25px;padding-top:43px;padding-bottom:49px
+  }
+  .veil-collage .vc-section::after{opacity:.12}
+  .veil-collage .vc-section .vc-shard,
+  .veil-collage .vc-section:nth-of-type(even) .vc-shard{opacity:.09}
+  .veil-home.veil-collage .vc-section .vc-shard{opacity:.08}
+  .veil-collage .vc-grid{
+    grid-template-columns:1fr;gap:18px;padding:12px 3px 22px
+  }
+  .veil-collage .vc-grid::before{opacity:.12;inset:-12px -2%}
+  .veil-collage .vc-grid::after{opacity:.10}
+  .veil-collage .vc-grid>.tile:nth-child(n){
+    min-height:210px;margin:0;width:98%;padding:35px 31px
+  }
+  .veil-collage .vc-grid>.tile:nth-child(1){
+    transform:translateX(-2px) rotate(-.55deg)
+  }
+  .veil-collage .vc-grid>.tile:nth-child(2){
+    margin-left:auto;transform:translateX(1px) rotate(.65deg)
+  }
+  .veil-collage .vc-grid>.tile:nth-child(3){
+    transform:translateX(-1px) rotate(-.65deg)
+  }
+  .veil-collage .vc-grid>.tile h3{margin:19px 0 11px}
+  .veil-collage .vc-grid>.tile::before{opacity:.21;height:18%}
+  .veil-collage .vc-flow .steps{
+    grid-template-columns:1.08fr .92fr;
+    gap:14px 10px;padding:12px 0 20px
+  }
+  .veil-collage .vc-flow .steps::before{opacity:.12;height:12%;top:42%}
+  .veil-collage .vc-flow .step:nth-child(n){
+    min-height:188px;width:100%;margin:0;
+    padding:32px 19px 29px;transform:rotate(-.45deg)
+  }
+  .veil-collage .vc-flow .step:nth-child(2){transform:rotate(.55deg)}
+  .veil-collage .vc-flow .step:nth-child(3){transform:rotate(-.8deg)}
+  .veil-collage .vc-flow .step:nth-child(4){transform:rotate(.7deg)}
+  .veil-collage .vc-flow .step:nth-child(5){
+    grid-column:1/-1;min-height:175px;
+    width:100%;padding:32px 31px;transform:rotate(-.55deg)
+  }
+  .veil-collage .vc-flow .step h3{margin:13px 0 9px}
+  .veil-home .vc-banner{margin:21px auto 28px}
+}
+@media(max-width:420px){
+  .veil-collage .vc-grid{gap:16px}
+  .veil-collage .vc-grid>.tile:nth-child(n){
+    min-height:220px;padding:34px 29px
+  }
+  .veil-collage .vc-flow .steps{
+    grid-template-columns:1.08fr .92fr;gap:12px 7px
+  }
+  .veil-collage .vc-flow .step:nth-child(n){
+    padding:28px 17px 30px;min-height:195px;grid-column:auto
+  }
+  .veil-collage .vc-flow .step:nth-child(2),
+  .veil-collage .vc-flow .step:nth-child(4){padding-left:18px}
+  .veil-collage .vc-flow .step:nth-child(5){
+    grid-column:1/-1;min-height:165px;padding:32px 30px
+  }
+}
+@media(hover:none){
+  .veil-collage .vc-grid>.tile:hover,
+  .veil-collage .vc-grid>.tile:nth-child(2):hover,
+  .veil-collage .vc-grid>.tile:nth-child(3):hover{filter:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .veil-collage .vc-grid>.tile{transition:none}
+}
