@@ -1,4 +1,4 @@
-/* VEIL / THE ARCHIVE v4 — play on every homepage-to-roster navigation. */
+/* VEIL / THE ARCHIVE v5 — dock to the actual member album geometry. */
 (function(){
   'use strict';
   var page=location.pathname.replace(/\/+$/,'/');
@@ -66,18 +66,33 @@
     }
     var skip=stage.querySelector('.veil-archive-transition__skip');
     skip.addEventListener('click',navigate);
-    function fitZoom(){
-      var rect=stage.querySelector('.veil-archive-transition__case').getBoundingClientRect();
-      var ratio=Math.max(innerWidth/(rect.width*.85),innerHeight/(rect.height*.85))*1.08;
-      stage.style.setProperty('--archive-zoom',Math.max(2.6,ratio).toFixed(2));
+    // Match the *actual* album rectangle in members.html, including its
+    // floating header and responsive .archive-world margins.
+    function dockGeometry(){
+      var vw=window.innerWidth, vh=window.innerHeight;
+      var header=document.querySelector('body>header');
+      var headerHeight=header?header.getBoundingClientRect().height:(vw<=760?76:88);
+      var mainWidth=Math.min(vw,1600);
+      var horizontalPadding=vw<=760?13:Math.min(64,Math.max(16,vw*.04));
+      var topPadding=vw<=760?24:Math.min(72,Math.max(26,vw*.045));
+      var bookWidth=Math.min(1380,mainWidth-2*horizontalPadding);
+      var bookLeft=(vw-bookWidth)/2;
+      var bookTop=headerHeight+topPadding;
+      var bookHeight=Math.max(550,vh-bookTop+155);
+      stage.style.setProperty('--archive-dock-left',bookLeft+'px');
+      stage.style.setProperty('--archive-dock-top',bookTop+'px');
+      stage.style.setProperty('--archive-dock-width',bookWidth+'px');
+      stage.style.setProperty('--archive-dock-height',bookHeight+'px');
     }
-    fitZoom();
+    dockGeometry();
+    window.addEventListener('resize',dockGeometry,{passive:true});
     requestAnimationFrame(function(){requestAnimationFrame(function(){stage.classList.add('is-entering')})});
-    setTimeout(function(){stage.classList.add('is-opening')},550);
-    setTimeout(function(){stage.classList.add('is-zooming')},1430);
-    setTimeout(function(){stage.classList.add('is-holding')},2580);
-    setTimeout(navigate,3200);
-    setTimeout(navigate,4600); // fallback
+    setTimeout(function(){stage.classList.add('is-opening')},560);
+    // This is a precise docking movement, NOT full-screen scale().
+    setTimeout(function(){stage.classList.add('is-docking')},1440);
+    setTimeout(function(){stage.classList.add('is-holding')},2790);
+    setTimeout(navigate,3550);
+    setTimeout(navigate,4800); // fallback
   },false);
   // A direct load of the directory shows the permanent dossier instantly.
 })();
