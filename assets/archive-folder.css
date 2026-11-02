@@ -54,3 +54,97 @@
 .veil-archive-transition__skip:hover{background:#2a364b;color:white;border-color:#d1dae8}
 .veil-archive-transition.is-zooming .veil-archive-transition__caption{opacity:0}
 @media(max-width:760px){.veil-archive-transition__skip{font-size:10px;padding:10px 13px}}
+
+/* v5 precise album docking: the top border, left spine and right edge settle
+   on the member page's real .archive-book rectangle. No face-filling zoom. */
+.veil-archive-transition__case{
+ position:absolute;left:50%;top:50%;
+ transform:translate(-50%,-50%) translateX(115vw) rotate(-10deg) scale(.87);
+ transition:transform .58s cubic-bezier(.16,.79,.19,1),filter .7s ease;
+}
+.veil-archive-transition.is-entering .veil-archive-transition__case{
+ transform:translate(-50%,-50%) rotate(0deg) scale(1);
+}
+.veil-archive-transition.is-docking .veil-archive-transition__case,
+.veil-archive-transition.is-holding .veil-archive-transition__case{
+ left:var(--archive-dock-left);
+ top:var(--archive-dock-top);
+ width:var(--archive-dock-width);
+ height:var(--archive-dock-height);
+ aspect-ratio:auto;
+ transform:none;
+ filter:none;
+ transition:
+  left 1.34s cubic-bezier(.26,.67,.15,1),
+  top 1.34s cubic-bezier(.26,.67,.15,1),
+  width 1.34s cubic-bezier(.26,.67,.15,1),
+  height 1.34s cubic-bezier(.26,.67,.15,1),
+  transform 1.34s cubic-bezier(.26,.67,.15,1);
+}
+.veil-archive-transition.is-docking .veil-archive-transition__folder{
+ perspective:none;
+}
+.veil-archive-transition.is-docking .veil-archive-transition__back{
+ border:1px solid #818fa8;
+ clip-path:none;
+ background:linear-gradient(90deg,#0c1019 0%,#1c2534 3.3%,#151e2b 5%,#1a2331 38%,#151d2b 51%,#161e2b 100%);
+ box-shadow:-16px 20px 0 -8px #080a10,inset 0 0 0 8px #080c13,inset 0 0 0 9px #909db14d;
+}
+.veil-archive-transition.is-docking .veil-archive-transition__cover{
+ opacity:0;transform:rotateY(-165deg);transition:opacity .47s ease,transform .8s ease;
+}
+.veil-archive-transition.is-docking .veil-archive-transition__paper{
+ inset:0;
+ border:0;
+ background:transparent;
+ box-shadow:none;
+ transform:none;
+ padding:29px clamp(23px,4.6vw,70px) 30px;
+ transition:inset .8s ease,padding .8s ease,background .55s ease;
+}
+.veil-archive-transition.is-docking .veil-archive-transition__paper:before{
+ inset:15px;
+ border:1px solid #8c9ab04c;
+}
+.veil-archive-transition.is-docking .veil-archive-transition__paper-top{
+ font-size:10px;letter-spacing:.22em;
+}
+.veil-archive-transition.is-docking .veil-archive-transition__stamp{
+ transform:none;
+}
+.veil-archive-transition.is-docking .veil-archive-transition__paper-main{
+ align-items:flex-start;
+ justify-content:flex-start;
+ flex:0;
+ margin-top:clamp(58px,7vw,100px);
+ text-align:left;
+ gap:18px;
+}
+.veil-archive-transition.is-docking .veil-archive-transition__paper-main strong{
+ font:normal clamp(50px,8vw,122px)/1.07 Georgia,serif;
+ letter-spacing:-.035em;
+ color:#eff1f6;
+}
+.veil-archive-transition.is-docking .veil-archive-transition__paper-main span{
+ font-size:clamp(14px,1.7vw,20px);color:#dce2ec;
+}
+.veil-archive-transition.is-docking .veil-archive-transition__paper-lines{
+ margin-top:34px;
+}
+.veil-archive-transition.is-docking .veil-archive-transition__spine{
+ left:-12px;top:22px;bottom:22px;width:20px;
+ background:linear-gradient(90deg,#05070b,#596a82 38%,#111724 58%,#697a94 73%,#070a12);
+}
+.veil-archive-transition.is-docking .veil-archive-transition__tab{opacity:0;transition:opacity .25s}
+.veil-archive-transition.is-docking .veil-archive-transition__caption{opacity:0}
+@media(max-width:760px){
+ .veil-archive-transition.is-docking .veil-archive-transition__paper{padding:24px 24px 18px}
+ .veil-archive-transition.is-docking .veil-archive-transition__paper-main{margin-top:35px}
+ .veil-archive-transition.is-docking .veil-archive-transition__paper-main strong{font-size:clamp(39px,11vw,70px)}
+ .veil-archive-transition.is-docking .veil-archive-transition__spine{width:14px;left:-9px}
+ .veil-archive-transition.is-docking .veil-archive-transition__paper-top small{font-size:8px}
+}
+@media(max-width:430px){
+ .veil-archive-transition.is-docking .veil-archive-transition__paper{padding:24px 18px 15px}
+ .veil-archive-transition.is-docking .veil-archive-transition__paper-main strong{font-size:clamp(36px,10vw,45px)}
+}
