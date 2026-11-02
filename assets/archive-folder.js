@@ -12,8 +12,7 @@
     if(!href||href[0]==='#'||a.hasAttribute('download')||a.hasAttribute('data-cube-switch'))return false;
     try{
       var url=new URL(href,location.href);
-      var destPath=url.pathname.replace(/\\/g,'/');
-      return url.origin===location.origin && /(?:^|\\/)members\\.html$/.test(destPath);
+      return url.origin===location.origin && url.pathname.split('/').pop()==='members.html';
     }catch(e){return false}
   }
   function reduceMotion(){
