@@ -1,19 +1,12 @@
-/* VEIL / THE ARCHIVE v3 — once per Taipei day, homepage entry only. */
+/* VEIL / THE ARCHIVE v4 — play on every homepage-to-roster navigation. */
 (function(){
   'use strict';
   var page=location.pathname.replace(/\/+$/,'/');
   var fromHome=(page==='/'||page==='/index.html');
   var onRoster=/\/members\.html$/.test(page);
   var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var key='veil.archive.dailyEntrance.v3';
   var active=false;
   var root=document.currentScript && document.currentScript.src ? new URL('./',document.currentScript.src).href : new URL('assets/',location.href).href;
-  function today(){
-    try{return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
-    catch(e){var d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
-  }
-  function wasSeen(){try{return localStorage.getItem(key)===today()}catch(e){return false}}
-  function markSeen(){try{localStorage.setItem(key,today())}catch(e){}}
   function isRosterLink(a){
     if(!a||!a.getAttribute||a.hasAttribute('download')||a.hasAttribute('data-cube-switch'))return false;
     var href=a.getAttribute('href');
@@ -33,10 +26,8 @@
     if(active||ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey)return;
     var a=ev.target&&ev.target.closest?ev.target.closest('a[href]'):null;
     if(!isRosterLink(a))return;
-    if(wasSeen())return;
     ev.preventDefault();
     active=true;
-    markSeen();
     var target=new URL(a.href,location.href);
     target.searchParams.set('archiveOpen','1');
     var stage=document.createElement('div');
