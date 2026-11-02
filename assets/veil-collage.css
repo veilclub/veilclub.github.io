@@ -1,0 +1,332 @@
+/* VEIL / SILVER RIOT | Graphic collage system v1.0
+ * Applied only to Home, About, Experience and Etiquette.
+ * Independent of MEMBER, profile pages and AZUREFLAME.
+ * No external fonts, animation libraries or background replacements.
+ */
+.veil-collage{
+  --vc-black:#090b10;--vc-night:#151b26;--vc-graphite:#303946;
+  --vc-steel:#64758c;--vc-silver:#aeb9c9;--vc-ice:#e6eaf1;
+  --vc-spark:#8faac8;--vc-edge:#b3c2d6;
+}
+.veil-collage main{position:relative;isolation:isolate;overflow-x:clip}
+.veil-collage > header{border-bottom:1px solid #aeb9c944}
+.veil-collage .vc-hero,.veil-collage .vc-section,.veil-collage .vc-banner{isolation:isolate}
+.veil-collage .vc-hero::before,.veil-collage .vc-hero::after,
+.veil-collage .vc-section::before,.veil-collage .vc-section::after,
+.veil-collage .vc-banner::before,.veil-collage .vc-banner::after{pointer-events:none}
+/* Section / title vocabulary — crisp text set against irregular printed stock. */
+.veil-collage .vc-kicker,
+.veil-collage .vc-section .kicker,
+.veil-collage .vc-banner .kicker{
+  width:fit-content;max-width:100%;position:relative;display:inline-block;
+  padding:9px 24px 8px 13px;isolation:isolate;
+  color:#111722;background:var(--vc-silver);
+  clip-path:polygon(0 0,100% 0,94% 100%,0 100%);
+  font:800 clamp(10px,1vw,12px)/1.4 system-ui,sans-serif;
+  letter-spacing:.21em;transform:skewX(-7deg) rotate(-1.1deg);
+}
+.veil-collage .vc-section .section-title{
+  width:fit-content;max-width:100%;position:relative;
+  margin:17px 0 29px;
+  color:#eef1f8;font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(38px,5.6vw,75px);line-height:1.12;
+  font-weight:600;letter-spacing:-.035em;
+  text-shadow:4px 5px 0 #202a3a,0 12px 30px #05070ac0;
+  transform:skewX(-4deg) rotate(-.9deg);
+  overflow-wrap:anywhere;text-wrap:balance;
+}
+.veil-collage .vc-section .section-head{border-bottom:0;position:relative;padding-bottom:15px;margin-bottom:24px}
+.veil-collage .vc-section .section-head::after{
+  content:"";position:absolute;left:0;bottom:0;width:min(70%,500px);height:4px;
+  background:linear-gradient(90deg,var(--vc-ice),var(--vc-steel) 70%,transparent);
+  transform:skewX(-35deg) rotate(-1deg);
+}
+/* Angled display panels preserve the site's underlying Taipei skyline. */
+.veil-collage .vc-section{
+  position:relative;max-width:1240px;
+  padding:clamp(66px,7vw,96px) clamp(25px,5vw,86px);
+  margin:clamp(26px,4vw,52px) auto;
+}
+.veil-collage .vc-section::before{
+  content:"";position:absolute;z-index:0;inset:15px 13px 12px 5px;
+  background:linear-gradient(118deg,#303d50e8 0%,#1d2736ef 17%,#121923ef 59%,#0d1119f0 100%);
+  border:1px solid #7e8da333;
+  clip-path:polygon(2.5% 0,99.3% 3.4%,95.2% 93%,5.4% 100%,0 30%);
+  box-shadow:0 24px 55px #0006;
+}
+.veil-collage .vc-section::after{
+  content:"";position:absolute;z-index:0;right:0;top:0;
+  width:clamp(120px,24%,320px);height:clamp(70px,19%,175px);
+  background:
+    radial-gradient(circle,#c7d6ed7a 0 1px,transparent 1.6px) 0 0/11px 10px,
+    radial-gradient(ellipse at 50% 45%,#91a7c84f,transparent 70%);
+  -webkit-mask-image:radial-gradient(ellipse at 57% 43%,#000 17%,transparent 73%);
+  mask-image:radial-gradient(ellipse at 57% 43%,#000 17%,transparent 73%);
+  transform:rotate(12deg);opacity:.8;
+}
+.veil-collage .vc-section>*,.veil-collage .vc-banner>*{position:relative;z-index:1}
+.veil-collage .vc-section:nth-of-type(even)::before{
+  background:linear-gradient(120deg,#101620f3,#253245f2 54%,#121a27f3);
+  clip-path:polygon(1% 3.4%,95% 0,100% 38%,94% 98%,2% 94%);
+}
+.veil-collage .vc-section:nth-of-type(even)::after{right:auto;left:1%;top:auto;bottom:0;transform:rotate(-14deg)}
+/* Layered graffiti elements are decoration only, not content. */
+.veil-collage .vc-splash{position:absolute;z-index:0;pointer-events:none;display:block;
+  width:clamp(120px,20vw,285px);height:clamp(70px,14vw,155px);
+  background:
+    radial-gradient(circle at 11% 63%,#d1dbe652 0 3px,transparent 4px),
+    radial-gradient(circle at 83% 16%,#d1dbe65c 0 2px,transparent 3px),
+    radial-gradient(circle at 45% 52%,#d1dbe666 0 1.7px,transparent 2.5px) 0 0/20px 18px,
+    linear-gradient(163deg,transparent 37%,#8899af55 38% 45%,transparent 46% 54%,#adbac977 55% 59%,transparent 60%);
+  -webkit-mask-image:radial-gradient(ellipse,#000 37%,transparent 75%);
+  mask-image:radial-gradient(ellipse,#000 37%,transparent 75%);
+  transform:rotate(-15deg);opacity:.8;
+}
+/* The strong page-specific editorial masthead. */
+.veil-collage .vc-hero{
+  min-height:clamp(390px,46vw,520px);position:relative;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:clamp(70px,7vw,108px) clamp(26px,9vw,145px);
+  text-align:left;border-bottom:0;background:none;
+}
+.veil-collage .vc-hero::before{
+  content:"";position:absolute;z-index:-1;
+  inset:clamp(28px,4vw,60px) 4.5% 19px -1.5%;
+  background:linear-gradient(104deg,#1b2637f5,#27364de8 46%,#10151ef3 78%);
+  clip-path:polygon(0 13%,79% 0,100% 28%,95% 96%,12% 100%,2% 74%);
+  box-shadow:18px 20px 45px #0008;
+}
+.veil-collage .vc-hero::after{
+  content:"";position:absolute;z-index:-1;right:-1.5%;top:15%;width:46%;height:73%;
+  background:linear-gradient(142deg,#a0b2cb89,#6e819d9e 43%,#202d40ac 44%,#29364999 80%,#9db0c05a);
+  clip-path:polygon(21% 0,100% 22%,80% 68%,99% 100%,0 82%,23% 54%);
+  transform:skewX(-8deg) rotate(-3deg);
+}
+.veil-collage .vc-hero .kicker{z-index:2;margin:0 0 23px}
+.veil-collage .vc-hero h1{
+  position:relative;z-index:2;max-width:900px;
+  margin:0 0 24px;color:#f3f4f8;
+  font:900 clamp(48px,8.2vw,116px)/.99 Georgia,'Times New Roman',serif;
+  letter-spacing:-.06em;text-wrap:balance;
+  transform:skewX(-6deg) rotate(-1deg);
+  text-shadow:5px 6px 0 #101826,10px 10px 0 #40506795,0 12px 30px #000e;
+}
+.veil-collage .vc-hero>p{
+  z-index:2;max-width:min(760px,88vw);
+  margin:0 0 0 clamp(3px,2vw,28px);padding:14px 23px;
+  color:#e4eaf3;border-left:4px solid #d4dde9;
+  background:linear-gradient(98deg,#080d17f0,#1e2939db);
+  clip-path:polygon(0 0,100% 0,97.4% 100%,0 100%);
+  font-size:clamp(13px,1.5vw,17px);line-height:1.8;letter-spacing:.12em;
+}
+.veil-collage .vc-hero .vc-splash{right:8%;bottom:0;z-index:1;transform:rotate(10deg)}
+.veil-collage .vc-hero__no{
+  position:absolute;z-index:1;right:clamp(24px,6.3vw,106px);bottom:clamp(15px,4vw,48px);
+  color:#d7e2f128;font:900 clamp(110px,17vw,270px)/.72 Georgia,serif;
+  letter-spacing:-.16em;pointer-events:none;transform:skewX(-12deg) rotate(-7deg);
+}
+.veil-about .vc-hero{--vc-hero-n:01}
+.veil-guide .vc-hero::after{background:linear-gradient(132deg,#7b8da7ad,#4a5c76 45%,#172133c4 46%,#899bb17a)}
+.veil-rules .vc-hero::after{background:linear-gradient(142deg,#b2bdcc9a,#52637b8c 40%,#172031bb 41%,#3a485ecf)}
+.veil-rules .vc-hero h1{letter-spacing:-.028em}
+/* Staggered sheets / cards. Each panel deliberately has its own diagonal. */
+.veil-collage .vc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,28px);align-items:start;padding-bottom:clamp(28px,4vw,55px)}
+.veil-collage .vc-grid>.tile{
+  min-width:0;min-height:292px;padding:clamp(26px,3vw,42px) clamp(20px,2.3vw,31px);
+  position:relative;isolation:isolate;overflow:hidden;
+  background:linear-gradient(148deg,#3c4d65e8 0%,#233044f7 24%,#121925f9 78%);
+  border:1px solid #a2b0c459;
+  clip-path:polygon(0 0,92% 0,100% 25px,99% 100%,8% 96%,0 100%);
+  box-shadow:12px 16px 0 -7px #020407;
+  transition:transform .22s ease,filter .22s ease;
+}
+.veil-collage .vc-grid>.tile:nth-child(2){margin-top:31px;background:linear-gradient(130deg,#121b29f8,#384861ea 42%,#121b27f8);clip-path:polygon(7% 0,100% 3%,100% 92%,90% 100%,0 100%,0 13%)}
+.veil-collage .vc-grid>.tile:nth-child(3){margin-top:61px;background:linear-gradient(155deg,#3f4c5d,#263247f4 25%,#0e1520);clip-path:polygon(0 6%,12% 0,98% 0,100% 96%,8% 100%,0 89%)}
+.veil-collage .vc-grid>.tile::before{
+  content:"";z-index:-1;pointer-events:none;position:absolute;top:15px;right:-32px;
+  width:72%;height:50px;background:linear-gradient(100deg,transparent,#c9d4e923,#d0dbec53,#54678320);
+  transform:rotate(-17deg);clip-path:polygon(3% 0,100% 0,92% 88%,0 100%);
+}
+.veil-collage .vc-grid>.tile::after{
+  content:attr(data-no);position:absolute;right:9px;bottom:-18px;
+  color:#e5eff516;font:900 clamp(80px,9vw,146px)/1 Georgia,serif;
+  letter-spacing:-.1em;transform:rotate(-9deg);pointer-events:none;
+}
+.veil-collage .vc-grid>.tile>*{position:relative;z-index:1}
+.veil-collage .vc-grid>.tile .en{
+  display:inline-block;padding:7px 8px;
+  background:#bcc9da;color:#152033;font:800 10px/1.3 system-ui,sans-serif;
+  letter-spacing:.07em;transform:skewX(-7deg);
+}
+.veil-collage .vc-grid>.tile h3{font-size:clamp(24px,2.4vw,33px);font-weight:700;color:#f2f5f8;letter-spacing:.09em;margin:30px 0 13px}
+.veil-collage .vc-grid>.tile p{max-width:29ch;color:#d3dbe5;font-size:14px;line-height:1.9;letter-spacing:.03em}
+.veil-collage .vc-grid>.tile:hover{transform:translateY(-6px) rotate(-.6deg);filter:brightness(1.13)}
+.veil-collage .vc-grid>.tile:nth-child(2):hover{transform:translateY(-6px) rotate(.5deg)}
+/* Manifesto copy, intentionally offset; reading order stays unchanged. */
+.veil-about .vc-manifesto::before{
+  background:linear-gradient(124deg,#2b394c 0%,#151c29ed 59%,#080d16f7);
+  clip-path:polygon(3% 0,97% 0,100% 33%,93% 98%,0 92%);
+}
+.veil-about .vc-manifesto .lead{
+  position:relative;max-width:820px;padding:24px 30px;
+  color:#e0e7f0;background:linear-gradient(103deg,#070b13e8,#202d40e5);
+  border-left:4px solid #d8e0ed;line-height:2.2;
+  clip-path:polygon(0 0,100% 0,97.4% 100%,0 100%);
+  font-size:clamp(15px,1.35vw,18px);
+}
+.veil-about .vc-manifesto .lead+.lead{margin:25px 0 0 auto;background:linear-gradient(102deg,#223046ee,#121924f4);border-left-color:#8296b2;transform:translateX(15px)}
+/* The steps are independent clipped tickets instead of a regular ruled table. */
+.veil-collage .vc-flow .steps{
+  position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  align-items:stretch;gap:10px;padding:22px 0 35px;
+  border:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+.veil-collage .vc-flow .steps::before{
+  content:"";position:absolute;left:2%;right:2%;top:46%;height:6px;z-index:0;
+  background:linear-gradient(90deg,#b7c7dc,#495d7c 44%,#c5d1df 68%,transparent);
+  transform:rotate(-3deg);clip-path:polygon(0 0,100% 0,99% 100%,0 100%);
+}
+.veil-collage .vc-flow .step{
+  position:relative;isolation:isolate;z-index:1;min-width:0;
+  padding:clamp(27px,2.6vw,35px) clamp(14px,1.8vw,26px);
+  border:1px solid #c2ccdc4a;
+  background:linear-gradient(165deg,#394b63f4,#172132f5 47%,#0d1420fb);
+  clip-path:polygon(0 0,89% 0,100% 19px,100% 92%,93% 100%,0 100%);
+}
+.veil-collage .vc-flow .step:nth-child(2n){transform:translateY(25px);background:linear-gradient(154deg,#111c2cf9,#2e3c50f6)}
+.veil-collage .vc-flow .step:nth-child(3){transform:translateY(-10px)}
+.veil-collage .vc-flow .step:nth-child(5){transform:translateY(9px)}
+.veil-collage .vc-flow .step small{font:900 clamp(17px,2vw,23px)/1.3 Georgia,serif;letter-spacing:.01em;color:#dce8f5}
+.veil-collage .vc-flow .step h3{font-size:clamp(23px,2.1vw,29px);font-weight:650;margin:22px 0 9px}
+.veil-collage .vc-flow .step p{font-size:13px;line-height:1.8;color:#d0d9e7}
+.veil-collage .vc-flow .note{position:relative;padding:18px 25px 18px 29px;margin:40px 0 0;
+  border-left:4px solid #8195b2;background:linear-gradient(90deg,#0a0f17f2,#243043e2);
+  color:#c5d1e0;max-width:980px;font-size:13px;letter-spacing:.035em;line-height:1.9;
+}
+/* House code: irregular, readable, numbered editorial stickers. */
+.veil-rules .vc-code::before{
+  background:linear-gradient(115deg,#121a26f5,#26364bf0 53%,#10151fec);
+  clip-path:polygon(0 7%,96% 0,100% 90%,88% 100%,4% 98%);
+}
+.veil-rules .vc-rules{columns:unset;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 25px;align-items:start;margin:30px 0 24px}
+.veil-rules .vc-rules p{
+  position:relative;margin:0!important;padding:26px clamp(20px,2.4vw,34px) 30px;
+  color:#dbe1ea;line-height:2;font-size:clamp(14px,1.15vw,16px);
+  background:linear-gradient(125deg,#3a485ce6,#1d2a3aee 40%,#101723f4);
+  border:1px solid #9dadc352;break-inside:avoid;
+  clip-path:polygon(0 0,94% 0,100% 15px,100% 94%,7% 100%,0 96%);
+  box-shadow:9px 12px 0 -7px #080c14;
+}
+.veil-rules .vc-rules p:nth-child(2n){margin-top:21px!important;
+  background:linear-gradient(115deg,#17202ef7,#34445aeb 65%,#161d2af8);
+  clip-path:polygon(4% 0,100% 0,100% 97%,9% 100%,0 92%,0 17%)}
+.veil-rules .vc-rules p:nth-child(3n){background:linear-gradient(140deg,#263547ef,#101825f7 66%);}
+.veil-rules .vc-rules strong{
+  display:block;width:fit-content;max-width:100%;margin:0 0 9px;padding:6px 13px 7px;
+  color:#101823;background:#c4d0e0;transform:skewX(-5deg) rotate(-.4deg);
+  font-size:clamp(16px,1.6vw,21px);font-weight:700;line-height:1.5;
+}
+.veil-rules .vc-rules br{display:none}
+.veil-rules .vc-code .note{margin-top:36px;padding:16px 24px;border-left:3px solid #99acc8;
+  background:#0b1220d9;color:#d6deea;line-height:1.9}
+/* Landing: the masthead and original city are intentionally untouched. */
+.veil-home .vc-section{margin-top:24px;margin-bottom:40px}
+.veil-home .vc-home-intro::before{clip-path:polygon(1% 0,100% 8%,95% 93%,3% 100%,0 58%)}
+.veil-home .vc-home-intro .lead{max-width:860px;padding:23px 28px;
+  background:#0c1522e3;border-left:4px solid #b9c5d7;color:#dee5ee;line-height:2.1;
+  clip-path:polygon(0 0,100% 0,97% 100%,0 100%)}
+.veil-home .vc-banner{
+  position:relative;max-width:1200px;margin:clamp(45px,6vw,88px) auto;
+  padding:clamp(70px,7vw,100px) 35px;
+  border:0;background:none;text-align:center;
+}
+.veil-home .vc-banner::before{
+  content:"";position:absolute;z-index:0;inset:0 10px 0;
+  background:linear-gradient(114deg,#c6d0deed 0%,#778ba7e9 17%,#202d40f2 18%,#17202ef9 82%,#7185a0a8 100%);
+  clip-path:polygon(5% 0,100% 8%,93% 100%,0 88%);
+  border:1px solid #b8c5d241;
+}
+.veil-home .vc-banner::after{
+  content:"";position:absolute;z-index:0;left:0;top:-19px;width:40%;height:45px;
+  background:linear-gradient(95deg,#b9c7d8,#64758c 68%,transparent);
+  clip-path:polygon(0 0,100% 0,91% 100%,8% 100%);
+  transform:rotate(-2deg)
+}
+.veil-home .vc-banner .kicker{background:#cdd8e7;color:#101725}
+.veil-home .vc-banner h2{
+  margin:26px auto 15px;max-width:850px;
+  font-size:clamp(26px,3.6vw,46px);line-height:1.5;font-weight:700;letter-spacing:.11em;
+  color:#f2f4f8;text-shadow:3px 3px 0 #121c2c;
+}
+.veil-home .vc-banner p{color:#d6dfec;font-size:15px}
+.veil-home .vc-banner .btn,.veil-collage .vc-flow .btn{
+  position:relative;padding:15px 32px;border:1px solid #c9d5e6;
+  background:linear-gradient(115deg,#aab9cedd,#61718ddd);color:#0c1422;
+  clip-path:polygon(5% 0,100% 0,95% 100%,0 100%);
+  font-weight:800;letter-spacing:.16em;
+}
+.veil-home .vc-banner .btn:hover{background:#edf1f7;transform:translateY(-3px)}
+/* Responsive: preserve energy, never sacrifice legibility / hit areas. */
+@media(max-width:1100px){
+  .veil-collage .vc-hero{padding-left:6.5vw}
+  .veil-collage .vc-section{padding:65px clamp(24px,5vw,55px)}
+  .veil-collage .vc-grid>.tile{padding:27px 20px}
+  .veil-collage .vc-flow .steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .veil-collage .vc-flow .step:nth-child(n){transform:none}
+  .veil-collage .vc-flow .step:nth-child(2),.veil-collage .vc-flow .step:nth-child(5){transform:translateY(13px)}
+}
+@media(max-width:760px){
+  .veil-collage main{overflow-x:clip}
+  .veil-collage .vc-hero{min-height:345px;padding:66px 25px 70px;align-items:flex-start}
+  .veil-collage .vc-hero::before{inset:22px 2% 12px -3%;clip-path:polygon(0 12%,91% 0,100% 24%,95% 96%,7% 100%,0 78%)}
+  .veil-collage .vc-hero::after{right:-8%;top:5%;width:48%;height:63%;opacity:.45}
+  .veil-collage .vc-hero .kicker{margin-bottom:19px}
+  .veil-collage .vc-hero h1{font-size:clamp(43px,10.2vw,75px);max-width:96%;line-height:1.1;letter-spacing:-.06em;margin-bottom:22px}
+  .veil-collage .vc-hero>p{margin-left:0;padding:12px 17px;font-size:13px;max-width:100%}
+  .veil-collage .vc-hero__no{font-size:130px;right:15px;bottom:18px;opacity:.45}
+  .veil-collage .vc-hero .vc-splash{width:130px;height:85px;right:2%;bottom:3%}
+  .veil-collage .vc-section{margin:25px auto 25px;padding:58px 26px 68px}
+  .veil-collage .vc-section::before{inset:8px 7px;clip-path:polygon(2% 0,99% 4%,95% 98%,0 96%)}
+  .veil-collage .vc-section:nth-of-type(even)::before{clip-path:polygon(1% 3%,96% 0,100% 95%,4% 100%)}
+  .veil-collage .vc-section .section-title{font-size:clamp(38px,8.2vw,57px)}
+  .veil-collage .vc-grid{grid-template-columns:1fr;gap:18px;padding-bottom:8px}
+  .veil-collage .vc-grid>.tile{min-height:220px;padding:25px 24px}
+  .veil-collage .vc-grid>.tile:nth-child(n){margin-top:0;clip-path:polygon(0 0,95% 0,100% 21px,100% 96%,5% 100%,0 100%)}
+  .veil-collage .vc-grid>.tile:nth-child(2){margin-left:12px;margin-right:0}
+  .veil-collage .vc-grid>.tile:nth-child(3){margin-left:0;margin-right:10px}
+  .veil-collage .vc-grid>.tile h3{margin:19px 0 10px}
+  .veil-collage .vc-grid>.tile p{max-width:none;margin:8px 0 0}
+  .veil-collage .vc-flow .steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px 0 10px}
+  .veil-collage .vc-flow .step{padding:24px 16px;min-height:175px}
+  .veil-collage .vc-flow .step:nth-child(n){transform:none}
+  .veil-collage .vc-flow .step:nth-child(2n){transform:translateY(8px)}
+  .veil-collage .vc-flow .step:last-child{grid-column:1/-1}
+  .veil-collage .vc-flow .step h3{margin:12px 0 7px}
+  .veil-collage .vc-flow .step p{margin:0}
+  .veil-collage .vc-flow .steps::before{height:4px;top:36%}
+  .veil-about .vc-manifesto .lead{padding:18px 22px;font-size:15px;max-width:100%}
+  .veil-about .vc-manifesto .lead+.lead{transform:none;margin-top:15px}
+  .veil-rules .vc-rules{grid-template-columns:1fr;gap:14px}
+  .veil-rules .vc-rules p{padding:22px 22px 26px;font-size:14px}
+  .veil-rules .vc-rules p:nth-child(n){margin-top:0!important}
+  .veil-rules .vc-rules p:nth-child(2n){margin-left:10px}
+  .veil-home .vc-banner{margin:25px 11px;padding:65px 23px}
+  .veil-home .vc-banner::before{inset:0;clip-path:polygon(4% 0,100% 7%,94% 100%,0 93%)}
+  .veil-home .vc-banner h2{font-size:clamp(25px,6vw,34px);line-height:1.65}
+  .veil-home .vc-banner p{font-size:13px}
+  .veil-home .vc-home-intro .lead{padding:18px 21px;font-size:15px}
+}
+@media(max-width:420px){
+  .veil-collage .vc-section{padding-left:22px;padding-right:22px}
+  .veil-collage .vc-grid>.tile:nth-child(2){margin-left:8px}
+  .veil-collage .vc-flow .steps{grid-template-columns:1fr;gap:10px}
+  .veil-collage .vc-flow .step:nth-child(n){transform:none;grid-column:auto;min-height:unset;padding:20px 23px}
+  .veil-collage .vc-flow .step:nth-child(2n){margin-left:11px}
+  .veil-collage .vc-flow .step:last-child{grid-column:auto}
+  .veil-collage .vc-hero h1{font-size:clamp(42px,10.6vw,50px)}
+  .veil-collage .vc-section .section-title{font-size:clamp(37px,8.5vw,46px)}
+}
+@media(hover:none){.veil-collage .vc-grid>.tile:hover{transform:none;filter:none}}
+@media(prefers-reduced-motion:reduce){
+ .veil-collage .vc-grid>.tile,.veil-home .vc-banner .btn{transition:none!important;transform:none!important}
+}
