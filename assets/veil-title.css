@@ -1,23 +1,21 @@
-/* VEIL / 薄幕 — independent transparent silver-graffiti image lockup.
-   Keep the site's original Tokyo/Taipei visual backgrounds untouched. */
-.hero-copy .veil-cn-image {
+/* VEIL / 薄幕 — subtle Chinese graffiti signature under the primary VEIL logo.
+   Only the Chinese wordmark is affected; original homepage background unchanged. */
+.hero-copy .veil-cn-image{
   display:block;
-  width:clamp(300px,46vw,575px);
+  width:clamp(170px,20vw,280px);
   max-width:100%;
   height:auto;
-  margin:-3px 0 -7px -12px;
+  margin:10px 0 0 2px;
   object-fit:contain;
-  filter:drop-shadow(0 9px 16px rgba(0,0,0,.46));
+  opacity:.96;
+  filter:drop-shadow(0 7px 14px rgba(0,0,0,.42));
 }
-@media (min-width:1600px){
-  .hero-copy .veil-cn-image {width:610px}
+@media(min-width:1600px){
+  .hero-copy .veil-cn-image{width:300px}
 }
-@media (max-width:760px){
-  .hero-copy .veil-cn-image {
-    width:min(100%,500px);
-    margin:-5px 0 1px -7px;
-  }
+@media(max-width:760px){
+  .hero-copy .veil-cn-image{width:min(56vw,220px);margin:8px 0 0}
 }
-@media (max-width:390px){
-  .hero-copy .veil-cn-image {width:100%;margin-left:-4px}
+@media(max-width:390px){
+  .hero-copy .veil-cn-image{width:min(58vw,190px)}
 }
