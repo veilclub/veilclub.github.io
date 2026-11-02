@@ -1,0 +1,90 @@
+/* VEIL / Location & Discord — a deliberate silver-blue contact plate.
+   Scoped to Home and Experience; background and MEMBER archive unchanged. */
+.veil-collage .veil-visit-panel{
+  position:relative;isolation:isolate;display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(270px,.95fr);
+  align-items:center;gap:clamp(25px,4vw,66px);
+  max-width:1320px;width:calc(100% - 48px);
+  margin:clamp(30px,5vw,72px) auto clamp(50px,6vw,86px);
+  padding:clamp(34px,5vw,65px) clamp(28px,5.5vw,80px);
+  color:#E7EDF5;
+}
+.veil-collage .veil-visit-panel::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(112deg,rgba(49,66,90,.94) 0%,rgba(19,31,49,.96) 49%,rgba(11,19,32,.95) 100%);
+  clip-path:polygon(0 11%,22% 0,94% 0,100% 24%,96% 91%,71% 100%,4% 97%,0 73%);
+  border:1px solid rgba(180,200,224,.36);
+}
+.veil-collage .veil-visit-panel::after{
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  top:13px;right:6%;width:27%;height:29%;
+  background:linear-gradient(116deg,rgba(191,209,230,.2),rgba(101,127,163,.08));
+  clip-path:polygon(11% 0,100% 18%,85% 100%,0 76%);
+}
+.veil-visit-panel__eyebrow{
+  display:inline-block;padding:8px 15px;margin-bottom:15px;
+  font:800 11px/1.4 system-ui,sans-serif;letter-spacing:.2em;
+  background:#B8C6D8;color:#152033;
+  clip-path:polygon(0 0,100% 0,94% 100%,0 100%);
+}
+.veil-visit-panel h2{
+  margin:0 0 15px;color:#EFF3F9;max-width:18ch;
+  font:600 clamp(31px,4vw,54px)/1.15 Georgia,serif;
+  letter-spacing:-.02em;text-shadow:3px 4px 0 #101a2b;
+}
+.veil-visit-panel__intro p{margin:0;color:#C2CDDC;font-size:14px;line-height:1.9;letter-spacing:.035em}
+.veil-visit-panel__details{display:grid;gap:15px;min-width:0}
+.veil-visit-panel__address{
+  display:flex;flex-direction:column;gap:10px;
+  padding:21px 22px 22px;min-width:0;
+  background:linear-gradient(117deg,rgba(11,19,32,.91),rgba(40,58,79,.78));
+  border-left:3px solid #B5C7DE;
+  clip-path:polygon(0 0,100% 0,97% 100%,0 100%);
+}
+.veil-visit-panel__address small{
+  font:700 10px/1.4 Georgia,serif;letter-spacing:.21em;color:#9EB2CD;
+}
+.veil-visit-panel__address strong{
+  font:700 clamp(19px,2.25vw,27px)/1.5 "Noto Sans TC",system-ui,sans-serif;
+  letter-spacing:.055em;color:#F0F4F9;
+}
+.veil-visit-panel__address strong span{color:#879CB9;font-weight:400}
+.veil-visit-panel__address em{
+  font-style:normal;font-family:Georgia,serif;color:#C9D8EB;
+  letter-spacing:.08em;white-space:nowrap;
+}
+.veil-visit-panel__address .veil-visit-panel__hint{
+  font-size:11px;color:#A9B9CF;letter-spacing:.12em;
+}
+.veil-visit-panel__discord{
+  display:flex;align-items:center;gap:13px;justify-content:flex-start;
+  min-height:57px;padding:13px 20px;
+  background:linear-gradient(108deg,#B7C9DD,#778DA9);
+  color:#132238;clip-path:polygon(0 0,100% 0,96% 100%,0 100%);
+  border:1px solid #D8E5F5;
+  font:800 12px/1.4 system-ui,sans-serif;letter-spacing:.17em;
+  transition:filter .2s,transform .2s;
+}
+.veil-visit-panel__discord svg{width:25px;height:25px;fill:currentColor;flex:none}
+.veil-visit-panel__discord .veil-visit-panel__arrow{margin-left:auto;font-size:23px;font-weight:400;line-height:1}
+.veil-visit-panel__discord:hover{filter:brightness(1.12);transform:translateY(-3px)}
+.veil-visit-panel__discord:focus-visible{outline:2px solid white;outline-offset:4px}
+@media(max-width:760px){
+  .veil-collage .veil-visit-panel{
+    grid-template-columns:minmax(0,1fr);gap:20px;
+    width:calc(100% - 26px);
+    padding:37px 26px 40px;
+    margin:33px auto 53px;
+  }
+  .veil-collage .veil-visit-panel::before{
+    clip-path:polygon(0 6%,20% 0,94% 2%,100% 15%,97% 96%,76% 100%,4% 97%,0 80%);
+  }
+  .veil-visit-panel h2{font-size:clamp(29px,8vw,40px)}
+  .veil-visit-panel__address{padding:20px 18px}
+  .veil-visit-panel__discord{min-height:54px;padding:11px 17px}
+}
+@media(max-width:390px){
+  .veil-collage .veil-visit-panel{padding:33px 22px 37px}
+  .veil-visit-panel__address strong{font-size:19px;letter-spacing:0}
+}
+@media(prefers-reduced-motion:reduce){.veil-visit-panel__discord{transition:none}}
