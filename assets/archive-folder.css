@@ -1,7 +1,9 @@
-/* VEIL / THE ARCHIVE v8. The sheet visibly expands above the stationary folder. */
+/* VEIL / THE ARCHIVE v9. The sheet visibly expands above the stationary folder. */
 .veil-archive-exit{position:fixed;inset:0;z-index:2147483645;background:#090b10;opacity:0;pointer-events:auto;transition:opacity 250ms ease}
 .veil-archive-exit.is-on{opacity:1}
 html.archive-intro .gentlemen-index .archive-book{visibility:hidden}
+/* The hidden real album must not hide the separate animated FLIP sheet. */
+html.archive-intro .gentlemen-index .archive-book.veil-archive-intro__document{visibility:visible!important}
 html.archive-intro .gentlemen-index .archive-book__content>*{opacity:0}
 html.archive-intro .gentlemen-index .veil-fixed-city{opacity:.24!important}
 html.archive-reveal-pending .gentlemen-index .archive-book__content>*{opacity:0;transform:translateY(12px)}
