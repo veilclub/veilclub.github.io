@@ -1,4 +1,4 @@
-/* VEIL / THE ARCHIVE v8 — visible sheet grows forward; folder recedes without shrinking. */
+/* VEIL / THE ARCHIVE v10 — printed member contents travel with the FLIP sheet. */
 (function () {
   'use strict';
   const html = document.documentElement;
@@ -74,10 +74,15 @@
     const documentPage = document.createElement('div');
     documentPage.className = 'archive-book veil-archive-intro__document';
     documentPage.setAttribute('aria-hidden', 'true');
-    ['.archive-book__shell', '.archive-book__index'].forEach(function (selector) {
+    // Clone the real printed page, not just its empty shell. It is laid out
+    // at the destination width before FLIP, so type and portraits scale with
+    // the document as one continuous composition.
+    ['.archive-book__shell', '.archive-book__index', '.archive-book__content'].forEach(function (selector) {
       const original = book.querySelector(selector);
       if (original) documentPage.appendChild(original.cloneNode(true));
     });
+    documentPage.querySelectorAll('[id]').forEach(function (node) { node.removeAttribute('id'); });
+    documentPage.querySelectorAll('img[loading="lazy"]').forEach(function (img) { img.loading = 'eager'; });
     stage.appendChild(documentPage);
     document.body.appendChild(stage);
     let finished = false;
@@ -170,20 +175,16 @@
         console.log('[VEIL archive] animation skipped');
         window.__archiveDebug = {skipped: true};
       }
-      html.classList.add('archive-handoff', 'archive-reveal-pending');
-      html.classList.remove('archive-intro');
+      // Atomic handoff: the animated sheet and real album share exactly
+      // the same printed contents. Reveal the original and remove the clone
+      // before the next paint, without a second text fade-in or blank frame.
+      html.classList.remove('archive-intro', 'archive-reveal-pending', 'archive-reveal', 'archive-handoff');
       stage.remove();
       document.removeEventListener('click', skipClick, true);
       window.removeEventListener('resize', onResize);
       unlock();
       removeIntroParam();
-      requestAnimationFrame(function () {
-        html.classList.add('archive-reveal');
-        setTimeout(function () {
-          html.classList.remove('archive-handoff', 'archive-reveal-pending', 'archive-reveal');
-          try { history.scrollRestoration = 'auto'; } catch (_) {}
-        }, 1300);
-      });
+      try { history.scrollRestoration = 'auto'; } catch (_) {}
     }
     function startPaper(from, duration) {
       if (finished) return;
