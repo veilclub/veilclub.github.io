@@ -1,4 +1,4 @@
-/* VEIL / THE ARCHIVE v7 — homepage fade; member-page FLIP. No geometry tweening. */
+/* VEIL / THE ARCHIVE v8 — visible sheet grows forward; folder recedes without shrinking. */
 (function () {
   'use strict';
   const html = document.documentElement;
@@ -192,7 +192,7 @@
       applyTarget(t);
       const initial = mapRect(from, t);
       paperAnimation = documentPage.animate([
-        {transform: initial, opacity: .65, offset: 0},
+        {transform: initial, opacity: 1, offset: 0},
         {transform: 'translate(' + (from.left-t.left) + 'px,' + (from.top-t.top-60) + 'px) scale(' + (from.width/t.width) + ',' + (from.height/t.height) + ')', opacity: 1, offset: .18},
         {transform: 'none', opacity: 1, offset: 1}
       ], {duration: duration, easing: 'cubic-bezier(.22,.8,.2,1)', fill: 'forwards'});
@@ -241,10 +241,12 @@
       cancelAnimation(entrance);
       paperStartTime = performance.now();
       startPaper(folderSource(), 1100);
+      // Keep the folder's size stable; let the visible paper grow above it.
       folderRetreat = folder.animate([
-        {transform: 'translate(-50%,-50%) scale(1)', opacity: 1},
-        {transform: 'translate(-50%,-50%) translateY(28px) scale(.86)', opacity: 0}
-      ], {duration: 580, easing: 'ease-in', fill: 'forwards'});
+        {transform: 'translate(-50%,-50%)', opacity: 1, offset: 0},
+        {transform: 'translate(-50%,-50%)', opacity: 1, offset: .18},
+        {transform: 'translate(-50%,-50%) translateY(16px)', opacity: 0, offset: 1}
+      ], {duration: 850, easing: 'ease-in', fill: 'forwards'});
     }, 600);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once: true});
