@@ -1,0 +1,94 @@
+/* VEIL | 瑾曜 — archive 005
+   Muted amethyst and gold details echo the character's heterochromatic eyes.
+   The regular profile/layout system and portraits are left intact. */
+.gentlemen-index .roster-cards>.roster-card--jinyao{
+  --edge:#897b97;--tone:#d4c0d7;--panel-a:#211a28;
+}
+.gentlemen-index .roster-cards>.roster-card--jinyao .roster-card__photo{
+  background:radial-gradient(ellipse at 56% 34%,#51445f,#16121e 71%);
+}
+.profile-page--jinyao{
+  --character-red:#a995bc;
+  --character-rose:#dbcae4;
+  --character-dark:#211627;
+}
+.profile-page--jinyao .character-cover{
+  background:linear-gradient(124deg,#282032,#16121f 60%,#090b11);
+  border-color:#80708d;
+}
+.profile-page--jinyao .character-cover__photo{
+  background:radial-gradient(ellipse at 48% 38%,#4e435c,#15131e 70%);
+}
+.profile-page--jinyao .character-cover__top{color:#c2b1ce}
+.profile-page--jinyao .status-indicator{color:#e3d3ed;border-color:#947eaa}
+.profile-page--jinyao .character-cover__pretitle{color:#dfcfae}
+.profile-page--jinyao .character-cover__main h1{
+  color:#f2eafa;text-shadow:3px 4px 0 #392a48;letter-spacing:.1em;
+}
+.profile-page--jinyao .character-cover__en{color:#ddc9a9;letter-spacing:.21em}
+.profile-page--jinyao .character-cover__main blockquote{
+  color:#f3e6f4;border-left-color:#b59bc3;
+}
+.profile-page--jinyao .character-cover__summary{color:#d5c8db}
+.profile-page--jinyao .character-cover__facts{border-top-color:#a58bb971}
+.profile-page--jinyao .character-cover__facts span{color:#cbb4d7}
+.profile-page--jinyao .cover-index{color:#ebdbf00d}
+.profile-page--jinyao .profile-side__line{background:#b49bc2}
+.profile-page--jinyao .chapter-heading{border-left-color:#ad97c0}
+.profile-page--jinyao .chapter-heading span{color:#c9afd5}
+.profile-page--jinyao .profile-keywords span{
+  color:#e9d7ed;border-color:#9d88ad;background:#4e37544a;
+}
+.profile-page--jinyao .jinyao-interaction-label{
+  color:#ebdced;font-weight:600;letter-spacing:.08em;
+}
+.profile-page--jinyao .profile-chapter--boundary{
+  border-color:#9981a5;background:linear-gradient(155deg,#22192bbd,#090b11da);
+}
+.profile-page--jinyao .boundary-finale{color:#e0cee7;border-top-color:#947eac6a}
+.profile-page--jinyao .jinyao-message{
+  font:500 clamp(20px,2.2vw,28px)/2 "Noto Serif TC",serif;
+  color:#efe0f4;border-left:3px solid #b5a0c2;
+  padding:10px 0 10px 21px;
+}
+.profile-page--jinyao .profile-return a{border-color:#967fa6}
+.profile-page--jinyao .profile-return a:hover{background:#4c365b}
+/* Real name is deliberately closed until the reader chooses to reveal it. */
+.profile-page--jinyao .jinyao-true-name{
+  margin-top:16px;max-width:100%;
+  border:1px solid #9d87ad8c;
+  background:linear-gradient(105deg,#30263cdb,#171320bd);
+}
+.profile-page--jinyao .jinyao-true-name summary{
+  cursor:pointer;display:flex;align-items:center;gap:12px;
+  padding:13px 17px;color:#e0cce9;
+  font-size:12px;letter-spacing:.1em;
+  list-style:none;
+}
+.profile-page--jinyao .jinyao-true-name summary::-webkit-details-marker{display:none}
+.profile-page--jinyao .jinyao-true-name summary::after{
+  content:"＋";font-size:17px;line-height:1;margin-left:auto;
+}
+.profile-page--jinyao .jinyao-true-name[open] summary::after{content:"－"}
+.profile-page--jinyao .jinyao-true-name summary:focus-visible{
+  outline:2px solid #e4cfed;outline-offset:3px;
+}
+.profile-page--jinyao .jinyao-true-name__inside{
+  display:flex;flex-direction:column;gap:7px;
+  border-top:1px solid #9d87ad55;padding:15px 17px 19px;
+}
+.profile-page--jinyao .jinyao-true-name__inside strong{
+  font-size:clamp(15px,2.1vw,19px);letter-spacing:.02em;color:#f1e6f5;
+  overflow-wrap:anywhere;line-height:1.7;
+}
+.profile-page--jinyao .jinyao-true-name__inside small{
+  font-size:12px;color:#ddc7e5;line-height:1.8;
+}
+@media(max-width:650px){
+  .profile-page--jinyao .character-cover__main h1{
+    font-size:clamp(78px,22vw,118px);letter-spacing:.06em;
+  }
+  .profile-page--jinyao .jinyao-true-name{margin-top:12px}
+  .profile-page--jinyao .jinyao-true-name__inside strong{font-size:16px}
+  .profile-page--jinyao .jinyao-message{font-size:20px}
+}
