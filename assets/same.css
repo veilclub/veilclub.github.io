@@ -1,0 +1,118 @@
+/* VEIL / ARCHIVE 006 — 鮫 SAME
+   Distinct indigo and muted serpentine teal, with the existing photo and
+   GENTLEMEN book layout retained. No generated portrait. */
+.gentlemen-index .roster-cards>.roster-card--same{
+  --edge:#5b7985;--tone:#afcfcc;--panel-a:#15252c;
+}
+.gentlemen-index .roster-cards>.roster-card--same .roster-card__photo{
+  background:radial-gradient(ellipse at 52% 31%,#2f5060,#121c28 69%,#0a1018);
+}
+.gentlemen-index .roster-cards>.roster-card--same .roster-card__name{
+  align-items:baseline;column-gap:13px;
+}
+.gentlemen-index .roster-cards>.roster-card--same .roster-card__name h3{
+  font-size:clamp(34px,3.8vw,53px);letter-spacing:.04em;
+}
+.gentlemen-index .roster-cards>.roster-card--same .roster-card__name h3 .same-latin{
+  font-family:Georgia,serif;font-weight:500;font-size:.78em;
+  letter-spacing:.08em;white-space:nowrap;
+}
+.profile-page--same{
+  --character-red:#73a3af;
+  --character-rose:#badbd8;
+  --character-dark:#101f29;
+}
+.profile-page--same .character-cover{
+  border-color:#4e7480;
+  background:linear-gradient(123deg,#172f3a,#141a29 58%,#090e17);
+}
+.profile-page--same .character-cover__photo{
+  background:radial-gradient(ellipse at 54% 40%,#355a68,#111e2b 65%,#090c13);
+}
+.profile-page--same .character-cover__top{color:#c2d6da}
+.profile-page--same .status-indicator{color:#c7e4e4;border-color:#648b97}
+.profile-page--same .character-cover__pretitle{color:#b1d2d5}
+.profile-page--same .character-cover__main h1{
+  font-size:clamp(49px,5vw,87px);
+  line-height:1.18;letter-spacing:.05em;
+  color:#edf6f5;text-shadow:3px 4px 0 #142f3f;
+}
+.profile-page--same .character-cover__main h1 .same-latin{
+  display:inline-block;font-family:Georgia,serif;font-weight:500;
+  font-size:.74em;letter-spacing:.04em;white-space:nowrap;
+}
+.profile-page--same .character-cover__en{
+  color:#accacc;letter-spacing:.21em;font-size:13px;
+  margin:17px 0 32px;
+}
+.profile-page--same .character-cover__main blockquote{
+  color:#e5f2f0;border-left-color:#81b6ba;
+  font-size:clamp(19px,2vw,26px);
+}
+.profile-page--same .character-cover__summary{color:#c6d8dc}
+.profile-page--same .character-cover__facts{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  border-top-color:#75949b79;
+}
+.profile-page--same .character-cover__facts span{color:#a8c9cf}
+.profile-page--same .character-cover__facts strong{line-height:1.75}
+.profile-page--same .cover-index{color:#c4e5ea0b}
+.profile-page--same .profile-side__line{background:#78aab5}
+.profile-page--same .chapter-heading{border-left-color:#82b6bb}
+.profile-page--same .chapter-heading span{color:#abcbd0}
+.profile-page--same .profile-keywords span{
+  border-color:#5d8c98;color:#cde6e5;background:#1934407a;
+}
+.profile-page--same .profile-service-tags span{
+  background:#315562;color:#eaf4f2;
+}
+.profile-page--same .profile-chapter--boundary{
+  background:linear-gradient(145deg,#152e3cbd,#090e19e0);border-color:#6a929d;
+}
+.profile-page--same .boundary-finale{border-top-color:#658b977c;color:#d5e7e6}
+.profile-page--same .same-subpoints{
+  list-style:none;padding:0;margin:0 0 20px;
+  display:grid;gap:13px;
+}
+.profile-page--same .same-subpoints li{
+  position:relative;padding:15px 17px 15px 20px;
+  border-left:2px solid #6d9eab;
+  background:linear-gradient(100deg,#1a313d9c,#0c17249c);
+  color:#c9d4da;font-size:15px;line-height:2;letter-spacing:.03em;
+}
+.profile-page--same .same-subpoints li strong{color:#e2efef;font-weight:600}
+.profile-page--same .same-appointment-note{
+  color:#d6e8e7;line-height:1.9;
+  font-size:13px;
+}
+.profile-page--same .same-quote{
+  border-left:3px solid #7eb9bd;padding:10px 0 10px 21px;
+  color:#e9f3f2;font:500 clamp(19px,2.2vw,28px)/2 "Noto Serif TC",serif;
+}
+.profile-page--same .profile-return a{border-color:#7699a4}
+.profile-page--same .profile-return a:hover{background:#2d5361}
+/* Seven members: director closes the odd-length grid in the centre,
+   at exactly one ordinary card's width. */
+.gentlemen-index .roster-cards>.roster-card--director:last-child{
+  grid-column:1/-1!important;
+  justify-self:center;
+  width:calc((100% - clamp(22px,3vw,36px)) / 2);
+}
+@media(max-width:650px){
+  .profile-page--same .character-cover__main h1{
+    font-size:clamp(43px,12vw,67px);line-height:1.25;
+  }
+  .profile-page--same .character-cover__main h1 .same-latin{font-size:.7em}
+  .profile-page--same .character-cover__facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .profile-page--same .same-subpoints li{font-size:14px;padding:12px 14px}
+}
+@media(max-width:540px){
+  .gentlemen-index .roster-cards>.roster-card--director:last-child{
+    grid-column:auto!important;
+    width:100%;
+  }
+}
+@media(max-width:390px){
+  .profile-page--same .character-cover__main h1{font-size:43px}
+  .gentlemen-index .roster-cards>.roster-card--same .roster-card__name h3{font-size:37px}
+}
