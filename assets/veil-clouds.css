@@ -15,17 +15,18 @@
     radial-gradient(ellipse 19% 13% at 43% 44%,rgba(229,236,248,.27),rgba(176,192,220,.11) 58%,transparent 80%),
     radial-gradient(ellipse 26% 16% at 62% 57%,rgba(204,217,238,.22),rgba(147,170,208,.08) 53%,transparent 78%),
     radial-gradient(ellipse 15% 12% at 79% 47%,rgba(220,231,248,.19),transparent 80%);
-  filter:blur(clamp(8px,1.4vw,22px));
+  /* Gradient edges supply softness without an animated GPU blur pass. */
+  backface-visibility:hidden;
   will-change:transform,opacity;
 }
 .veil-home .veil-fixed-city::before{
-  width:72vw;height:29vh;left:8%;top:8%;
+  width:min(72vw,1120px);height:25vh;left:8%;top:8%;
   opacity:0;
   transform-origin:60% 57%;
   animation:veil-cloud-near 72s linear infinite;
 }
 .veil-home .veil-fixed-city::after{
-  width:53vw;height:19vh;left:45%;top:22%;
+  width:min(53vw,820px);height:17vh;left:45%;top:22%;
   opacity:0;
   transform-origin:35% 44%;
   animation:veil-cloud-far 96s linear -28s infinite;
@@ -45,8 +46,9 @@
   100%{transform:translate3d(17vw,-12vh,0) scale(.48) rotate(11deg) skewX(9deg);opacity:0}
 }
 @media(max-width:760px){
-  .veil-home .veil-fixed-city::before{width:118vw;height:22vh;left:-13%;top:12%;animation-duration:86s}
-  .veil-home .veil-fixed-city::after{width:92vw;height:16vh;left:34%;top:24%;animation-duration:110s}
+  /* Keep a single smaller moving layer on phones to reduce compositing work. */
+  .veil-home .veil-fixed-city::before{width:96vw;height:18vh;left:-8%;top:12%;animation-duration:86s}
+  .veil-home .veil-fixed-city::after{display:none;animation:none;will-change:auto}
 }
 @media(prefers-reduced-motion:reduce){
   .veil-home .veil-fixed-city::before,
