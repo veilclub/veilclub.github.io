@@ -1,0 +1,54 @@
+/* VEIL homepage: restrained cloud banks in the high-angle city view.
+   Separate overlay: the original skyline and page content are unchanged. */
+.veil-home .veil-fixed-city{overflow:hidden;isolation:isolate}
+.veil-home .veil-fixed-city::before,
+.veil-home .veil-fixed-city::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  display:block;
+  z-index:1;
+  background-repeat:no-repeat;
+  /* Uneven, broken cloud silhouettes rather than a rectangular fog sheet. */
+  background-image:
+    radial-gradient(ellipse 23% 17% at 23% 51%,rgba(222,229,244,.28) 0%,rgba(174,190,218,.14) 46%,transparent 76%),
+    radial-gradient(ellipse 19% 13% at 43% 44%,rgba(229,236,248,.27),rgba(176,192,220,.11) 58%,transparent 80%),
+    radial-gradient(ellipse 26% 16% at 62% 57%,rgba(204,217,238,.22),rgba(147,170,208,.08) 53%,transparent 78%),
+    radial-gradient(ellipse 15% 12% at 79% 47%,rgba(220,231,248,.19),transparent 80%);
+  filter:blur(clamp(8px,1.4vw,22px));
+  will-change:transform,opacity;
+}
+.veil-home .veil-fixed-city::before{
+  width:72vw;height:29vh;left:8%;top:8%;
+  opacity:0;
+  transform-origin:60% 57%;
+  animation:veil-cloud-near 72s linear infinite;
+}
+.veil-home .veil-fixed-city::after{
+  width:53vw;height:19vh;left:45%;top:22%;
+  opacity:0;
+  transform-origin:35% 44%;
+  animation:veil-cloud-far 96s linear -28s infinite;
+}
+/* Near clouds approach the lower-left foreground and grow;
+   the distant bank recedes diagonally toward the upper-right skyline. */
+@keyframes veil-cloud-near{
+  0%{transform:translate3d(12vw,-9vh,0) scale(.58) rotate(-7deg) skewX(-8deg);opacity:0}
+  17%{opacity:.46}
+  70%{opacity:.38}
+  100%{transform:translate3d(-20vw,19vh,0) scale(1.24) rotate(-13deg) skewX(-13deg);opacity:0}
+}
+@keyframes veil-cloud-far{
+  0%{transform:translate3d(-12vw,10vh,0) scale(1.04) rotate(5deg) skewX(5deg);opacity:0}
+  20%{opacity:.31}
+  75%{opacity:.27}
+  100%{transform:translate3d(17vw,-12vh,0) scale(.48) rotate(11deg) skewX(9deg);opacity:0}
+}
+@media(max-width:760px){
+  .veil-home .veil-fixed-city::before{width:118vw;height:22vh;left:-13%;top:12%;animation-duration:86s}
+  .veil-home .veil-fixed-city::after{width:92vw;height:16vh;left:34%;top:24%;animation-duration:110s}
+}
+@media(prefers-reduced-motion:reduce){
+  .veil-home .veil-fixed-city::before,
+  .veil-home .veil-fixed-city::after{animation:none;opacity:.2;transform:none;will-change:auto}
+}
