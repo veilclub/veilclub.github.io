@@ -92,3 +92,11 @@
   .profile-page--jinyao .jinyao-true-name__inside strong{font-size:16px}
   .profile-page--jinyao .jinyao-message{font-size:20px}
 }
+
+/* Six-card roster: keep the final two cards in the same row. The director
+   remains the last entry, now on the right rather than isolated below. */
+.gentlemen-index .roster-cards>.roster-card--director:last-child{
+  grid-column:auto!important;
+  justify-self:stretch;
+  width:100%;
+}
