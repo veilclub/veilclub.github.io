@@ -34,3 +34,21 @@
 .profile-page--director .profile-final-quote{color:#ebdce9;font:400 clamp(18px,2.2vw,25px)/2 "Noto Serif TC",serif}
 @media(max-width:900px){.roster-card--director{grid-template-columns:40% 60%}.profile-page--director .character-cover__photo{min-height:500px}}
 @media(max-width:650px){.roster-card--director{display:flex;flex-direction:column}.roster-card--director .roster-card__photo{height:300px;min-height:300px}.roster-card--director .roster-card__name{flex-wrap:wrap;gap:8px}.roster-card--director .roster-card__name h3{font-size:clamp(35px,10vw,55px)}.roster-card--director .roster-card__name span{padding-bottom:2px}.profile-page--director .character-cover__photo{height:clamp(350px,100vw,520px);min-height:350px}.profile-page--director .character-cover__main h1{font-size:clamp(52px,14vw,80px)}.profile-page--director .character-cover__facts{grid-template-columns:1fr 1fr}.profile-page--director .character-cover__top{font-size:9px}}
+
+/* Shared profile chapter structure, with discreet titles for Izayoi's
+   retained specialist narratives. No existing illustration/layout changes. */
+.profile-page--director .profile-chapter__subheading{
+  color:#cbbcd6;
+  font:500 clamp(16px,1.7vw,21px)/1.7 "Noto Serif TC",serif;
+  letter-spacing:.12em;
+  margin:23px 0 22px;
+  padding:0 0 9px;
+  border-bottom:1px solid #9984ae4d;
+}
+.profile-page--director .profile-chapter__subheading:first-child{margin-top:2px}
+@media(max-width:650px){
+  .profile-page--director .profile-chapter__subheading{
+    font-size:17px;
+    margin:18px 0;
+  }
+}
