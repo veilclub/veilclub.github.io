@@ -1,0 +1,78 @@
+/* VEIL / ARCHIVE 007 — 言曦
+   A reserved slate-blue and pale-gold accent for the scholar / gentleman.
+   Keep original GENTLEMEN book, portrait proportions and other members intact. */
+.gentlemen-index .roster-cards>.roster-card--yanxi{
+  --edge:#7B829B;--tone:#D3C8B3;--panel-a:#1D2030;
+}
+.gentlemen-index .roster-cards>.roster-card--yanxi .roster-card__photo{
+  background:radial-gradient(ellipse at 52% 32%,#41445F,#121522 70%,#0B0C12);
+}
+.profile-page--yanxi{
+  --character-red:#A6ADC7;
+  --character-rose:#D3CCE5;
+  --character-dark:#151B2D;
+}
+.profile-page--yanxi .character-cover{
+  border-color:#777F9C;
+  background:linear-gradient(124deg,#262D41,#171D2D 59%,#0A0E18);
+}
+.profile-page--yanxi .character-cover__photo{
+  background:radial-gradient(ellipse at 53% 35%,#424C62,#121828 70%);
+}
+.profile-page--yanxi .character-cover__top{color:#D3D3DE}
+.profile-page--yanxi .status-indicator{border-color:#7F88AB;color:#D8DFEF}
+.profile-page--yanxi .character-cover__pretitle{color:#D7C6A5}
+.profile-page--yanxi .character-cover__main h1{
+  font-size:clamp(66px,8.6vw,125px);
+  color:#F2EFF6;letter-spacing:.1em;
+  text-shadow:3px 4px 0 #2C354D;
+}
+.profile-page--yanxi .character-cover__en{color:#D5C5AB;letter-spacing:.2em;font-size:13px}
+.profile-page--yanxi .character-cover__main blockquote{
+  border-left-color:#9DA5C6;color:#E9E5F0;
+}
+.profile-page--yanxi .character-cover__summary{color:#D3D2DC}
+.profile-page--yanxi .character-cover__facts{
+  border-top-color:#8790AE70;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.profile-page--yanxi .character-cover__facts span{color:#BCC4D9}
+.profile-page--yanxi .cover-index{color:#E9E4F50B}
+.profile-page--yanxi .profile-side__line{background:#A4ACC7}
+.profile-page--yanxi .profile-jump a:hover{color:#D6DEF0}
+.profile-page--yanxi .chapter-heading{border-left-color:#A0A8CA}
+.profile-page--yanxi .chapter-heading span{color:#C2C8E0}
+.profile-page--yanxi .profile-keywords span{
+  border-color:#878FAF;background:#33395759;color:#E4E4F0;
+}
+.profile-page--yanxi .profile-service-tags span{
+  background:#4A536F;color:#F2EFF6;
+}
+.profile-page--yanxi .profile-chapter--boundary{
+  border-color:#8C92B4;background:linear-gradient(155deg,#1E2336C9,#090D18DF);
+}
+.profile-page--yanxi .boundary-finale{color:#DDDDEA;border-top-color:#8B96B178}
+.profile-page--yanxi .yanxi-quote{
+  border-left:3px solid #A6ABC8;
+  padding:13px 0 13px 23px;
+  color:#E9E6F0;
+  font:500 clamp(20px,2.2vw,28px)/2 "Noto Serif TC",serif;
+}
+.profile-page--yanxi .profile-return a{border-color:#8E96B6}
+.profile-page--yanxi .profile-return a:hover{background:#454D6B}
+/* With 8 people, director is in the final two-card row and must not span. */
+.gentlemen-index .roster-cards>.roster-card--director:last-child{
+  grid-column:auto!important;
+  justify-self:stretch;
+  width:100%;
+}
+@media(max-width:900px){
+  .profile-page--yanxi .character-cover__facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+  .profile-page--yanxi .character-cover__main h1{
+    font-size:clamp(75px,22vw,120px);letter-spacing:.08em;
+  }
+  .profile-page--yanxi .character-cover__facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .profile-page--yanxi .yanxi-quote{font-size:21px}
+}
