@@ -1,0 +1,102 @@
+/* VEIL / ARCHIVE 004 — 謝新達沒有死
+   Existing VEIL portrait/card grammar, restrained cold-steel variation.
+   Long 6-character name gets its own responsive type scale. */
+.gentlemen-index .roster-cards>.roster-card--xiexinda{
+  --edge:#70839A;--tone:#D4DFED;--panel-a:#18212E;
+}
+.gentlemen-index .roster-cards>.roster-card--xiexinda .roster-card__photo{
+  background:linear-gradient(150deg,#29384B,#0C111C 84%);
+}
+.gentlemen-index .roster-cards>.roster-card--xiexinda .roster-card__name h3{
+  font-size:clamp(28px,3vw,48px);letter-spacing:.025em;
+  overflow-wrap:anywhere;
+}
+.profile-page--xiexinda{
+  --character-red:#8DA6BE;
+  --character-rose:#D1DEE9;
+  --character-dark:#101B2A;
+}
+.profile-page--xiexinda .character-cover{
+  border-color:#667B92;
+  background:linear-gradient(125deg,#25364A,#141D2B 58%,#090D14);
+}
+.profile-page--xiexinda .character-cover__photo{
+  background:linear-gradient(145deg,#253449,#0B1019);
+}
+.profile-page--xiexinda .character-cover__photo:after{
+  background:linear-gradient(90deg,transparent 65%,#132032d6 100%),
+    linear-gradient(0deg,#101927,transparent 36%);
+}
+.profile-page--xiexinda .character-cover__top{color:#AFBED0}
+.profile-page--xiexinda .status-indicator{color:#D6E2F0;border-color:#718AA6}
+.profile-page--xiexinda .character-cover__pretitle{color:#B6C7DC}
+.profile-page--xiexinda .character-cover__main h1{
+  font-size:clamp(32px,4.6vw,70px);
+  line-height:1.27;
+  letter-spacing:.055em;
+  text-shadow:3px 4px 0 #17283C;
+  overflow-wrap:anywhere;
+}
+.profile-page--xiexinda .character-cover__en{
+  font:400 13px/1.5 Georgia,serif;
+  letter-spacing:.19em;color:#ADC1D9;
+  margin:14px 0 31px;
+}
+.profile-page--xiexinda .character-cover__main blockquote{
+  border-left-color:#8FA5BD;color:#E8EDF6;
+  font-size:clamp(17px,1.65vw,23px);
+}
+.profile-page--xiexinda .character-cover__summary{color:#CCD6E3}
+.profile-page--xiexinda .character-cover__facts{
+  border-top-color:#8A9DB275;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.profile-page--xiexinda .character-cover__facts span{color:#A9BCD2}
+.profile-page--xiexinda .character-cover__facts strong{color:#E7ECF3}
+.profile-page--xiexinda .cover-index{color:#CFDEEF0D}
+.profile-page--xiexinda .profile-side__line{background:#8EA7C0}
+.profile-page--xiexinda .profile-jump a:hover{color:#DCE8F5}
+.profile-page--xiexinda .profile-jump a{overflow-wrap:anywhere}
+.profile-page--xiexinda .chapter-heading{border-left-color:#8EA9C5}
+.profile-page--xiexinda .chapter-heading span{color:#B4C8DF}
+.profile-page--xiexinda .profile-chapter{border-bottom-color:#8399B345}
+.profile-page--xiexinda .profile-service-tags span{
+  background:#354B65;color:#EDF3FA;
+}
+.profile-page--xiexinda .profile-keywords span{
+  border-color:#7C96B4;color:#E0EAF5;background:#263A5159;
+}
+.profile-page--xiexinda .profile-chapter--boundary{
+  border-color:#7289A5;background:linear-gradient(155deg,#162638CA,#080D16D9);
+}
+.profile-page--xiexinda .boundary-finale{color:#D8E5F1;border-top-color:#8399B365}
+.profile-page--xiexinda .xiexinda-quote{
+  color:#EEF3F9;font:500 clamp(19px,2vw,27px)/2 "Noto Serif TC",serif;
+  border-left:3px solid #8EA9C5;padding:14px 0 14px 22px;
+}
+.profile-page--xiexinda .profile-return a{border-color:#869DB7}
+.profile-page--xiexinda .profile-return a:hover{background:#2A435E}
+@media(max-width:900px){
+  .profile-page--xiexinda .character-cover__facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+  .profile-page--xiexinda .character-cover__main h1{
+    font-size:clamp(30px,7.7vw,49px);
+    letter-spacing:.035em;
+    line-height:1.36;
+  }
+  .profile-page--xiexinda .character-cover__facts{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .profile-page--xiexinda .character-cover__main blockquote{
+    font-size:clamp(16px,4.4vw,21px);
+  }
+  .profile-page--xiexinda .xiexinda-quote{
+    font-size:19px;line-height:1.9;
+  }
+}
+@media(max-width:390px){
+  .gentlemen-index .roster-cards>.roster-card--xiexinda .roster-card__name h3{
+    font-size:34px;letter-spacing:.015em;
+  }
+}
