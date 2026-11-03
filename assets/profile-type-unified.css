@@ -1,0 +1,70 @@
+/* VEIL / GENTLEMEN — shared editorial typography v1
+   Formatting only. Loaded after each character's own stylesheet so that
+   identical chapter names, paragraph rhythm and principal quotes share a
+   consistent presentation. No profile biography text is changed. */
+.profile-page .profile-sections .profile-chapter > p:not(.profile-character-quote){
+  line-height:2.16;
+  margin-block-end:20px;
+}
+.profile-page .profile-sections .profile-chapter > p:last-child{
+  margin-block-end:0;
+}
+.profile-page .profile-sections .profile-chapter > p.boundary-finale{
+  margin-block-start:28px;
+  padding-block-start:19px;
+}
+.profile-page .profile-sections .profile-chapter .profile-service-tags,
+.profile-page .profile-sections .profile-chapter .profile-keywords{
+  margin-block-end:27px;
+}
+/* One consistent treatment for character dialogue, including MESSAGE and
+   each person's existing QUOTE. Keep their individual accent colours. */
+.profile-page{
+  --profile-quote-accent:#b5a9be;
+  --profile-quote-ink:#ece8f0;
+  --profile-quote-surface:rgba(24,28,42,.44);
+}
+.profile-page:not(.profile-page--director):not(.profile-page--guilan):not(.profile-page--canele):not(.profile-page--xiexinda):not(.profile-page--jinyao):not(.profile-page--same):not(.profile-page--yanxi){
+  --profile-quote-accent:#b8879a;
+}
+.profile-page--director{--profile-quote-accent:#aa9abc;--profile-quote-ink:#e9dfec}
+.profile-page--guilan{--profile-quote-accent:#8f8bba;--profile-quote-ink:#e1ddf1}
+.profile-page--canele{--profile-quote-accent:#c4a49a;--profile-quote-ink:#f0e7e2}
+.profile-page--xiexinda{--profile-quote-accent:#8fa8c0;--profile-quote-ink:#e8eff8}
+.profile-page--jinyao{--profile-quote-accent:#bba3c9;--profile-quote-ink:#eee2f4}
+.profile-page--same{--profile-quote-accent:#82b6bd;--profile-quote-ink:#e3f2f1}
+.profile-page--yanxi{--profile-quote-accent:#a3acc7;--profile-quote-ink:#efedf7}
+.profile-page .profile-sections .profile-chapter p.profile-character-quote{
+  display:block;
+  margin:8px 0 26px;
+  padding:18px clamp(17px,2.6vw,29px);
+  max-width:100%;
+  overflow-wrap:anywhere;
+  border-inline-start:3px solid var(--profile-quote-accent);
+  background:var(--profile-quote-surface);
+  color:var(--profile-quote-ink);
+  font:500 clamp(18px,1.95vw,25px)/1.93 "Noto Serif TC",serif;
+  letter-spacing:.035em;
+  text-wrap:pretty;
+}
+.profile-page .profile-sections .profile-chapter p.profile-character-quote--intro{
+  font-size:clamp(17px,1.7vw,22px);
+  padding-block:13px;
+  margin:2px 0 24px;
+}
+@media(max-width:650px){
+  .profile-page .profile-sections .profile-chapter > p:not(.profile-character-quote){
+    line-height:2.08;
+    margin-block-end:18px;
+  }
+  .profile-page .profile-sections .profile-chapter p.profile-character-quote{
+    font-size:clamp(17px,4.5vw,21px);
+    padding:14px 17px;
+    margin:6px 0 22px;
+    line-height:1.9;
+  }
+  .profile-page .profile-sections .profile-chapter p.profile-character-quote--intro{
+    font-size:17px;
+    margin:2px 0 21px;
+  }
+}
