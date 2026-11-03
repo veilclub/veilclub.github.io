@@ -100,3 +100,17 @@
     font-size:34px;letter-spacing:.015em;
   }
 }
+
+/* Director-last composition: the fifth, non-nominable member closes the
+   two-column archive centred, at the SAME width as all other portraits. */
+.gentlemen-index .roster-cards>.roster-card--director:last-child{
+  grid-column:1 / -1!important;
+  justify-self:center;
+  width:calc((100% - clamp(22px,3vw,36px)) / 2);
+}
+@media(max-width:540px){
+  .gentlemen-index .roster-cards>.roster-card--director:last-child{
+    grid-column:auto!important;
+    width:100%;
+  }
+}
