@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VEIL 薄幕俱樂部：翻閱紳士檔案，查看服務、遊戲內 Gil 價目及預約須知。">
+  <title>ORDER · THE DOSSIER | VEIL 薄幕俱樂部</title>
+  <link rel="stylesheet" href="assets/site.css?v=gentlemen01">
+  <link rel="stylesheet" href="assets/veil-header.css?v=header03">
+  <link rel="stylesheet" href="assets/veil-order.css?v=order01">
+  <script src="assets/veil-order.js?v=order01" defer></script>
+</head>
+<body class="veil-order-page">
+  <header>
+    <div class="veil-header-brand">
+      <a class="veil-header-brand__logo" href="index.html" aria-label="VEIL 薄幕俱樂部首頁"><img src="assets/veil-logo-silver.svg" width="105" alt="VEIL 標誌"></a>
+      <span class="veil-header-brand__divider" aria-hidden="true"></span>
+      <div class="veil-header-brand__name">VEIL <b>薄幕</b></div>
+    </div>
+    <nav class="nav" aria-label="主選單">
+      <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="members.html">GENTLEMEN</a><a href="guide.html">EXPERIENCE</a><a href="rules.html">ETIQUETTE</a><a href="order.html" aria-current="page">ORDER</a>
+      <a class="veil-discord-nav" href="https://discord.gg/mnvnZCWWas" target="_blank" rel="noopener noreferrer" aria-label="加入 VEIL Discord" title="加入 VEIL Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.32 4.37a19.8 19.8 0 0 0-4.89-1.52c-.22.39-.45.87-.61 1.25a19 19 0 0 0-5.49 0c-.16-.39-.4-.87-.62-1.25A19.74 19.74 0 0 0 3.83 4.4C.53 9.05-.32 13.58.1 18.06a.08.08 0 0 0 .03.06 19.86 19.86 0 0 0 6 3.03c.46-.63.87-1.29 1.23-1.99a12.3 12.3 0 0 1-1.88-.9.08.08 0 0 1-.01-.12l.37-.3a.08.08 0 0 1 .08-.01 13.73 13.73 0 0 0 12.06 0 .08.08 0 0 1 .08.01l.37.3a.08.08 0 0 1-.01.12c-.6.34-1.23.65-1.88.9.36.7.77 1.36 1.23 1.99a19.88 19.88 0 0 0 6-3.03.08.08 0 0 0 .03-.06c.5-5.18-.84-9.67-3.55-13.66ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42 2.17 1.1 2.16 2.42c0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42 2.17 1.1 2.16 2.42c0 1.33-.95 2.42-2.16 2.42Z"/></svg></a>
+    </nav>
+  </header>
+  <main class="order-main" id="order-main">
+    <div class="order-shell">
+      <div class="order-masthead"><span class="order-micro">VEIL / CONFIDENTIAL COLLECTION / NO. 01</span><h1>THE DOSSIER<span class="order-slash"> / </span><em>ORDER</em></h1><p>翻閱檔案，選擇想認識的紳士。抽出人物檔案後，即可查看完整服務價目與細則。</p></div>
+      <section class="order-browse" id="order-browse" aria-label="翻閱成員檔案">
+        <div class="order-browse-top"><span>GENTLEMEN / THE ARCHIVE</span><span>SWIPE · DRAG · SELECT</span></div>
+        <div class="order-carousel-frame">
+          <button class="order-arrow order-arrow--prev" id="order-prev" type="button" aria-label="上一位">‹</button>
+          <div class="order-stage" id="order-stage" role="listbox" aria-label="紳士檔案，可左右滑動或使用方向鍵" tabindex="0"></div>
+          <button class="order-arrow order-arrow--next" id="order-next" type="button" aria-label="下一位">›</button>
+        </div>
+        <div class="order-counterline"><div class="order-dots" id="order-dots" aria-label="檔案頁碼"></div><div class="order-counter" id="order-counter">01 / 08</div></div>
+        <div class="order-browse-bottom"><p id="order-announcer" class="order-announcer" aria-live="polite" aria-atomic="true">ARCHIVE 001 囚夜</p><button type="button" class="order-select" id="order-select">抽出這份檔案 <span aria-hidden="true">↗</span></button></div>
+      </section>
+      <section class="order-wall" id="order-wall" hidden aria-label="人物檔案及完整價目單">
+        <div class="order-wall-top"><span>THE WALL / FILE REVIEW</span><span>VEIL · MEMBERS &amp; SERVICES</span></div>
+        <div class="order-wall-grid">
+          <div class="order-dossier-wrap"><div class="order-dart-mount" id="order-dart-mount" aria-hidden="true"></div><article class="order-dossier" id="order-dossier" aria-label="成員簡介"></article></div>
+          <aside class="order-rates" id="order-rates" aria-labelledby="order-rates-title"><span class="order-pin" aria-hidden="true"></span><div id="order-rates-content"></div></aside>
+        </div>
+        <div class="order-wall-actions"><button class="order-back" id="order-back" type="button">← 換一位</button><a class="order-discord" href="https://discord.gg/mnvnZCWWas" target="_blank" rel="noopener noreferrer">前往 Discord 預約 <span aria-hidden="true">↗</span></a></div>
+        <p class="order-nontransaction">本站不提供線上收費或預約交易。詳細安排請透過 Discord 洽詢。</p>
+      </section>
+    </div>
+    <div class="order-cinematic" id="order-cinematic" aria-hidden="true" hidden><div class="order-cinematic-shade"></div><div class="order-pull-folder" id="order-pull-folder"><div class="order-pull-pocket"></div><div class="order-pull-cover"><span>VEIL / THE ARCHIVE</span><strong id="order-pull-label"></strong></div></div><div class="order-transit-sheet" id="order-transit-sheet"></div></div>
+    <div class="order-dart-flyer" id="order-dart-flyer" aria-hidden="true" hidden></div>
+  </main>
+  <footer><span>VEIL · 薄幕俱樂部</span><span>THE DOSSIER / SERVICE LEDGER</span></footer>
+</body>
+</html>
