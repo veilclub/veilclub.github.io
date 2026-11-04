@@ -74,7 +74,7 @@ rates.innerHTML=`<span class="order-pin" aria-hidden="true"></span><div id="orde
 rates.classList.remove('is-visible','is-sliding');
 }
 function renderDart(){
-if(!mount.querySelector('.veil-dart-art'))mount.innerHTML='<img class="veil-dart-art" src="assets/veil-dart-silver.webp" width="660" height="221" draggable="false" alt=""><div class="order-sparks">'+ '<i></i>'.repeat(6)+'</div>';
+if(!mount.querySelector('.veil-dart-art'))mount.innerHTML='<span class="veil-dart-wound" aria-hidden="true"></span><img class="veil-dart-art" src="assets/veil-dart-silver.webp" width="660" height="221" draggable="false" alt=""><span class="veil-dart-paper-lip" aria-hidden="true"></span><div class="order-sparks">'+ '<i></i>'.repeat(6)+'</div>';
 mount.className='order-dart-mount';
 }
 function createBrowse(){
@@ -141,7 +141,7 @@ selected.tabIndex=-1;selected.style.removeProperty('pointer-events');
 selected.style.transformOrigin='top left';
 mount.classList.add('is-visible','is-aiming');
 alignDartToPaper();
-if(direct){mount.classList.remove('is-aiming');rates.classList.add('is-visible');state='PINNED'}
+if(direct){mount.classList.remove('is-aiming');mount.classList.add('is-pierced');rates.classList.add('is-visible');state='PINNED'}
 return {oldRect,newRect:selected.getBoundingClientRect()};
 }
 function finishPinned(token){
@@ -154,7 +154,7 @@ if(portraitNode)portraitNode.style.transformOrigin='';
 // Measure the final settled paper, never a frame from the moving animation.
 alignDartToPaper();
 mount.getAnimations().forEach(a=>a.cancel());mount.style.opacity='';
-mount.classList.remove('is-aiming');mount.classList.add('is-visible','is-hit');
+mount.classList.remove('is-aiming');mount.classList.add('is-visible','is-hit','is-pierced');
 selected.classList.add('is-hit');wall.classList.add('is-hit');
 mount.querySelector('.order-sparks')?.classList.add('is-hit');
 const m=run;
@@ -172,6 +172,7 @@ mount.animate([
 {translate:`${sx}px ${sy}px`,opacity:0,offset:0},
 {translate:`${sx*.58}px ${sy*.66}px`,opacity:1,offset:.33},
 {translate:`${sx*.23}px ${sy*.27}px`,opacity:1,offset:.7},
+{translate:'-3px -1px',opacity:1,offset:.92},
 {translate:'0px 0px',opacity:1,offset:1}
 ],{duration:285,easing:'cubic-bezier(.15,.73,.23,1)',fill:'both'});
 }
