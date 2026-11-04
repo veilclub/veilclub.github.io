@@ -74,7 +74,7 @@ rates.innerHTML=`<span class="order-pin" aria-hidden="true"></span><div id="orde
 rates.classList.remove('is-visible','is-sliding');
 }
 function renderDart(){
-if(!mount.querySelector('.veil-dart-art'))mount.innerHTML='<span class="veil-dart-wound" aria-hidden="true"></span><img class="veil-dart-art" src="assets/veil-dart-silver.webp" width="660" height="221" draggable="false" alt=""><span class="veil-dart-paper-lip" aria-hidden="true"></span><div class="order-sparks">'+ '<i></i>'.repeat(6)+'</div>';
+if(!mount.querySelector('.veil-dart-art'))mount.innerHTML='<span class="veil-dart-wound" aria-hidden="true"></span><img class="veil-dart-art" src="assets/veil-dart-angled.webp" width="700" height="407" draggable="false" alt=""><span class="veil-dart-paper-lip" aria-hidden="true"></span><div class="order-sparks">'+ '<i></i>'.repeat(6)+'</div>';
 mount.className='order-dart-mount';
 }
 function createBrowse(){
@@ -115,14 +115,14 @@ function alignDartToPaper(){
   const paper=selected.getBoundingClientRect();
   const wrap=mount.offsetParent?.getBoundingClientRect();
   if(!wrap || !paper.width)return;
-  // Pin slightly left of center, directly inside the dossier header:
-  // this point stays clear of the large title and avoids the paper edge.
+  // The new image is pre-rotated to its actual flight angle.
+  // Pin at the REAL metal tip, near the bottom-left of its transparent canvas.
   const tipX=paper.left+paper.width*.42;
-  const tipY=paper.top+16;
-  // The art's visible metal tip is 3px from its left edge; CSS already
-  // translates the mount by -3px, keeping mount.left+3 at tipX.
-  mount.style.left=(tipX-wrap.left)+'px';
-  mount.style.top=(tipY-wrap.top-mount.offsetHeight/2)+'px';
+  const tipY=paper.top+18;
+  const anchorX=mount.offsetWidth*.01;
+  const anchorY=mount.offsetHeight*.98;
+  mount.style.left=(tipX-wrap.left-anchorX)+'px';
+  mount.style.top=(tipY-wrap.top-anchorY)+'px';
 }
 function preparePinnedCard({direct=false}={}){
 const ticketLink=$('order-ticket-link');
@@ -162,19 +162,22 @@ delay(()=>{if(state==='PINNED'&&run===m){selected.classList.remove('is-hit');wal
 delay(()=>{if(state==='PINNED'&&run===m){rates.classList.add('is-visible');$('order-rates-title').focus({preventScroll:true})}},240);
 }
 function fireDart(token){
-if(token!==run||state!=='FLIGHT')return;
-const tip=mount.getBoundingClientRect();
-const sx=innerWidth+90-(tip.left+3);
-const sy=Math.max(100,Math.min(innerHeight*.33,tip.top+120))-(tip.top+mount.offsetHeight/2);
-mount.classList.remove('is-aiming');mount.style.opacity='0';
-mount.getAnimations().forEach(a=>a.cancel());
-mount.animate([
-{translate:`${sx}px ${sy}px`,opacity:0,offset:0},
-{translate:`${sx*.58}px ${sy*.66}px`,opacity:1,offset:.33},
-{translate:`${sx*.23}px ${sy*.27}px`,opacity:1,offset:.7},
-{translate:'-3px -1px',opacity:1,offset:.92},
-{translate:'0px 0px',opacity:1,offset:1}
-],{duration:285,easing:'cubic-bezier(.15,.73,.23,1)',fill:'both'});
+  if(token!==run||state!=='FLIGHT')return;
+  const r=mount.getBoundingClientRect();
+  // The point travels from the upper right into the sheet along the shaft's
+  // actual diagonal. The drawing never flips or changes to a second dart.
+  const tipX=r.left+r.width*.01;
+  const dx=Math.max(280,innerWidth-tipX+150);
+  const dy=-Math.max(170,Math.min(innerHeight*.68,dx*.49));
+  mount.classList.remove('is-aiming');
+  mount.style.opacity='0';
+  mount.getAnimations().forEach(a=>a.cancel());
+  mount.animate([
+    {translate:`${dx}px ${dy}px`,rotate:'-2deg',scale:'1.08',opacity:0,offset:0},
+    {translate:`${dx*.57}px ${dy*.57}px`,rotate:'-1deg',scale:'1.04',opacity:1,offset:.36},
+    {translate:'-5px -3px',rotate:'1deg',scale:'1',opacity:1,offset:.93},
+    {translate:'0px 0px',rotate:'0deg',scale:'1',opacity:1,offset:1}
+  ],{duration:285,easing:'cubic-bezier(.15,.73,.23,1)',fill:'both'});
 }
 function openMember(){
 if(state!=='BROWSE')return;
