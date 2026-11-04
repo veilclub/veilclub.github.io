@@ -10,9 +10,6 @@ const MEMBERS = [
   {slug:'izayoi-kou',archive:'ARCHIVE ⋰⟡⋱ ⛵︎ ⌁̷⋯',name:'十六夜航',role:'CREATIVE / DESIGN / TECHNICAL DIRECTOR',tags:['技術','設計','藝術'],appointment:'非指名',photo:'assets/izayoi-kou-portrait.webp',accent:'#9081a7',intro:'「月光尚懂得姍姍來遲，今夜又何必如此匆忙？」\n俊雅從容、略帶慵懶的駐店（？）總監。將技術與美感藏在薄幕之後，不親自駛入夜色，卻為夜航者留下一束光。'}
 ];
 const RATE_GROUPS = [
-  {title:'基本體驗',items:[
-    {id:'house',code:'THE HOUSE',name:'基本體驗',price:'無低消',unit:'—',notes:['吧檯自由交流・餐桌・飲品']}
-  ]},
   {title:'指名與專屬服務',items:[
     {id:'s01',code:'PERSONAL APPOINTMENT',name:'指名',price:'20 萬',unit:'／30 分鐘',notes:['同行每增加 1 人，加收 5 萬。','續時 15 萬／30 分鐘。','原同行者人頭費只收首次，續時不重複收取。']},
     {id:'s02',code:'OUTING',name:'外出',price:'30 萬',unit:'／30 分鐘',notes:['可在遊戲內隨處走動，同組客人可同行，最長 1 小時。','可前往其他 RP 店，所產生的額外費用另計。','續時 15 萬／30 分鐘']},
