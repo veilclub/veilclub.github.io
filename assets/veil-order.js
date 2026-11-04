@@ -117,8 +117,8 @@ function alignDartToPaper(){
   if(!wrap || !paper.width)return;
   // The new image is pre-rotated to its actual flight angle.
   // Pin at the REAL metal tip, near the bottom-left of its transparent canvas.
-  const tipX=paper.left+paper.width*.42;
-  const tipY=paper.top+18;
+  const tipX=paper.left+paper.width*.52;
+  const tipY=paper.top+19;
   const anchorX=mount.offsetWidth*.01;
   const anchorY=mount.offsetHeight*.98;
   mount.style.left=(tipX-wrap.left-anchorX)+'px';

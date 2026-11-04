@@ -771,3 +771,32 @@
 @media(prefers-reduced-motion:reduce){
   .veil-order-page .order-dart-mount.is-hit .veil-dart-art{animation:none}
 }
+
+
+/* VEIL ORDER v16 — real metallic binder clip belongs to the SERVICE LEDGER,
+   not to the dart-pinned member dossier.  It travels with the rate sheet. */
+.veil-order-page .order-rates{
+  overflow:visible;
+}
+.veil-order-page .order-rates > .order-pin{
+  display:block;
+  position:absolute;
+  left:50%;
+  top:clamp(-43px,-3.7vw,-34px);
+  width:clamp(84px,8.7vw,108px);
+  height:auto;
+  aspect-ratio:840 / 481;
+  transform:translateX(-50%);
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:transparent url("veil-rates-clip-v1.webp") center / contain no-repeat;
+  z-index:8;
+  pointer-events:none;
+  filter:drop-shadow(1px 4px 3px rgba(7,10,19,.46));
+}
+.veil-order-page .order-rates > .order-pin::before,
+.veil-order-page .order-rates > .order-pin::after{
+  content:none;
+  display:none;
+}
