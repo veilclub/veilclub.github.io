@@ -27,179 +27,249 @@ const RATE_GROUPS = [
   ]}
 ];
 
-(() => {
-  'use strict';
-  const $ = id => document.getElementById(id);
-  const stage=$('order-stage'),browse=$('order-browse'),wall=$('order-wall'),cinema=$('order-cinematic');
-  const sheet=$('order-transit-sheet'),folder=$('order-pull-folder'),dartFlyer=$('order-dart-flyer');
-  const dossier=$('order-dossier'),dossierWrap=dossier.parentElement,rates=$('order-rates'),mount=$('order-dart-mount');
-  const dots=$('order-dots'),counter=$('order-counter'),announcer=$('order-announcer');
-  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-  const pagePath=location.pathname+location.search;
-  const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
-  let state='BROWSE',active=0,drag=null,dragFrac=0,run=0,timers=[],clickLock=0,wheelTime=0;
-  const isReduced=()=>reduced.matches;
-  const delay=(fn,ms)=>{const t=setTimeout(fn,ms);timers.push(t);return t};
-  const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];run++};
-  const member=()=>MEMBERS[active];
-  const archiveLabel=m=>m.archive;
-  const pending=()=>'<span class="order-photo-pending" role="img" aria-label="PORTRAIT PENDING"><b>V</b><span>VEIL / THE ARCHIVE</span><span>PORTRAIT PENDING</span></span>';
-  const portrait=(m,eager=false)=>m.photo?`<img src="${safe(m.photo)}" alt="${safe(m.name)}形象照" loading="${eager?'eager':'lazy'}" decoding="async" onerror="const p=this.parentNode,f=p.querySelector('.order-photo-pending');this.replaceWith(f);f.hidden=false"><span class="order-photo-pending" hidden><b>V</b><span>VEIL / THE ARCHIVE</span><span>PORTRAIT PENDING</span></span>`:pending();
-  // The same optimized image is used during flight and after impact.
-  const dartSVG=()=>`<img class="veil-dart-art" src="assets/veil-dart-silver.webp" alt="" decoding="async" draggable="false" width="660" height="221">`;
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const stage=$('order-stage'),browse=$('order-browse'),wall=$('order-wall'),slot=$('order-dossier-slot');
+const rates=$('order-rates'),mount=$('order-dart-mount'),dots=$('order-dots'),counter=$('order-counter'),announcer=$('order-announcer');
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+const pagePath=location.pathname+location.search;
+const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const initialIsReduced=()=>reduced.matches;
+let state='BROWSE',active=0,drag=null,dragFrac=0,run=0,timers=[],clickLock=0,wheelTime=0,selected=null;
+const delay=(fn,ms)=>{const t=setTimeout(fn,ms);timers.push(t);return t};
+const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];run++;if(selected){selected.getAnimations().forEach(a=>a.cancel())}mount.getAnimations().forEach(a=>a.cancel())};
+const member=()=>MEMBERS[active];
+const pending=()=>'<span class="order-photo-pending" role="img" aria-label="PORTRAIT PENDING"><b>V</b><span>VEIL / THE ARCHIVE</span><span>PORTRAIT PENDING</span></span>';
+const portrait=(m,eager=false)=>m.photo?`<img src="${safe(m.photo)}" alt="${safe(m.name)}形象照" loading="${eager?'eager':'lazy'}" decoding="async" draggable="false" onerror="const p=this.parentNode,f=p.querySelector('.order-photo-pending');this.replaceWith(f);f.hidden=false"><span class="order-photo-pending" hidden><b>V</b><span>VEIL / THE ARCHIVE</span><span>PORTRAIT PENDING</span></span>`:pending();
 
-  function folderHTML(m,i){return `<span class="order-folder-shell"><span class="order-folder-tab"><span>${safe(m.archive)}</span><strong>${safe(m.name)}</strong></span><span class="order-folder-face"><span class="order-folder-head"><span>VEIL / THE ARCHIVE</span><span>CLASS: GENTLEMEN</span></span><span class="order-folder-photo">${portrait(m,Math.abs(i-active)<=1)}</span><span class="order-folder-bottom"><span class="order-folder-name">${safe(m.name)}</span><span class="order-folder-stamp">CONFIDENTIAL<span class="order-barcode"></span></span></span></span></span>`}
-  function cardHTML(m){return `<div class="order-dossier-head"><span class="order-dossier-brand">VEIL<small>THE ORDER DOSSIER</small></span><span class="order-dossier-archive">${safe(m.archive)}<br>PERSONAL FILE</span></div><div class="order-dossier-idband"><span>GENTLEMEN / PRIVATE ARCHIVE</span><span class="order-dossier-barcode" aria-hidden="true"></span></div><h3 class="order-dossier-name">${safe(m.name)}</h3><div class="order-dossier-main"><figure class="order-dossier-photo">${portrait(m,true)}</figure><dl class="order-dossier-fields"><div><dt>NAME</dt><dd>${safe(m.name)}</dd></div><div><dt>ROLE</dt><dd>${safe(m.role)}</dd></div><div><dt>ARCHIVE</dt><dd>${safe(m.archive)}</dd></div><div><dt>TAGS</dt><dd>${m.tags.map(safe).join('・')}</dd></div></dl></div><section class="order-intro-block"><div class="order-intro-label">INTRODUCTION <span>／ PERSONALITY</span></div><p class="order-dossier-intro">${safe(m.intro)}</p></section><div class="order-dossier-tags">${m.tags.map(t=>`<span>${safe(t)}</span>`).join('')}</div><div class="order-dossier-stamp">VEIL</div><span class="order-holo" aria-hidden="true"></span>`}
-  function ratesHTML(m){const noAppointment=m.appointment==='不接受指名'||m.appointment==='非指名';return `<span class="order-rates-kicker">VEIL / SERVICE LEDGER / GIL</span><h2 id="order-rates-title" tabindex="-1">Service &amp; Rates</h2><p class="order-rates-lead">${safe(m.name)} · 遊戲內 Gil 計價（1 萬 = 10,000 Gil）</p>${RATE_GROUPS.map(g=>`<section class="order-rate-group"><h3>${safe(g.title)}</h3>${g.items.map(p=>{const unavailable=noAppointment&&['s01','s02','s03','s04'].includes(p.id);const photo=m.slug==='guilan'&&['s05','s06'].includes(p.id);return `<article class="order-rate-item${unavailable?' is-unavailable':''}${photo?' is-photographer':''}" data-rate="${p.id}"><div class="order-rate-head"><div class="order-rate-title"><span class="order-rate-code">${safe(p.code)}</span><h4>${safe(p.name)}</h4>${unavailable?'<span class="order-availability">此位不接受指名</span>':''}${photo?'<span class="order-photo-label">館內攝影師</span>':''}</div><div class="order-rate-price">${safe(p.price)}<span class="order-price-unit">${safe(p.unit)}</span></div></div><ul class="order-rate-notes">${p.notes.map(t=>`<li>${safe(t)}</li>`).join('')}</ul></article>`}).join('')}</section>`).join('')}<p class="order-rate-footer">其他需求可洽館內公關。實際接待與安排以雙方意願為前提。</p>`}
-
-  function createBrowse(){
-    stage.innerHTML=MEMBERS.map((m,i)=>`<button class="order-folder" id="order-folder-${i}" type="button" role="option" data-index="${i}" aria-selected="false" aria-label="${safe(m.archive)} ${safe(m.name)}" style="--folder-accent:${m.accent}">${folderHTML(m,i)}</button>`).join('');
-    dots.innerHTML=MEMBERS.map((m,i)=>`<button class="order-dot" type="button" data-dot="${i}" aria-label="移至 ${safe(m.archive)} ${safe(m.name)}" aria-current="false"></button>`).join('');
-    dots.addEventListener('click',e=>{const b=e.target.closest('[data-dot]');if(b&&state==='BROWSE')setActive(Number(b.dataset.dot))});
-    positionCards();
-  }
-  function stepSize(){return window.innerWidth<600?Math.min(196,window.innerWidth*.49):window.innerWidth<900?202:Math.min(250,stage.clientWidth*.22)}
-  function positionCards(){const step=stepSize();stage.querySelectorAll('.order-folder').forEach((el,i)=>{
-      const d=i-active-dragFrac,ad=Math.abs(d),side=Math.sign(d);const cutoff=window.innerWidth<600?1.95:window.innerWidth<900?2.4:3.25;
-      const pos=side*(Math.min(ad,1)*step+Math.max(0,ad-1)*step*.66);
-      el.style.setProperty('--shift',`${pos}px`);el.style.setProperty('--z',`${-120*ad}px`);el.style.setProperty('--turn',`${-side*Math.min(32,ad*32)}deg`);el.style.setProperty('--size',String(Math.max(.58,1-.13*ad)));el.style.setProperty('--alpha',String(ad>cutoff?0:Math.max(.3,1-ad*.17)));el.style.setProperty('--light',String(Math.max(.42,1-ad*.19)));el.style.setProperty('--order',String(100-Math.round(ad*12)));el.style.setProperty('--click',ad>2.7?'none':'auto');el.setAttribute('aria-selected',String(i===active));el.classList.toggle('is-active',i===active);
-      const img=el.querySelector('img');if(img)img.loading=ad<=1?'eager':'lazy';
-    });
-    dots.querySelectorAll('.order-dot').forEach((dot,i)=>dot.setAttribute('aria-current',String(i===active)));
-    $('order-prev').disabled=active===0;$('order-next').disabled=active===MEMBERS.length-1;
-    counter.textContent=String(active+1).padStart(2,'0')+' / '+String(MEMBERS.length).padStart(2,'0');
-    announcer.textContent=archiveLabel(member())+' '+member().name;
-  }
-  function setActive(index){if(state!=='BROWSE')return;active=clamp(index,0,MEMBERS.length-1);dragFrac=0;positionCards()}
-
-  function previewMember(m){dossier.style.setProperty('--folder-accent',m.accent);dossier.style.setProperty('--paper-rotation',`${[-2,-1,1,2,-1,2,-2,1][active]}deg`);dossier.innerHTML=cardHTML(m);rates.innerHTML=`<span class="order-pin" aria-hidden="true"></span><div id="order-rates-content">${ratesHTML(m)}</div>`;rates.classList.remove('is-visible','is-sliding');mount.className='order-dart-mount';mount.innerHTML=dartSVG(m.accent)+`<div class="order-sparks">${'<i></i>'.repeat(6)}</div>`}
-  function showPinned({direct=false,hit=false}={}){
-    state='PINNED';clearTimers();drag=null;const m=member();
-    dossier.getAnimations().forEach(a=>a.cancel());dossierWrap.getAnimations().forEach(a=>a.cancel());dossierWrap.style.transform='';dossierWrap.classList.remove('is-flying');rates.getAnimations().forEach(a=>a.cancel());
-    wall.hidden=false;browse.hidden=true;cinema.hidden=true;cinema.className='order-cinematic';dartFlyer.hidden=true;
-    // Keep the same content and loaded portrait at impact, without rebuilding it.
-    if(direct || !dossier.hasChildNodes())previewMember(m);
-    dossier.style.visibility='visible';dossier.style.opacity='';mount.classList.add('is-visible');
-    if(hit){mount.classList.remove('is-aiming');mount.classList.add('is-hit');dossier.classList.add('is-hit');wall.classList.add('is-hit');mount.querySelector('.order-sparks').classList.add('is-hit');delay(()=>{dossier.classList.remove('is-hit');wall.classList.remove('is-hit');mount.classList.remove('is-hit')},450)}
-    // Before impact the price sheet is not shown. After the dart lands,
-    // a separate physical ledger slides onto the tabletop from the right.
-    // A shared token prevents the sheet from arriving after a user goes back.
-    const revealRun=run;
-    const revealLedger=()=>{
-      if(state!=='PINNED'||revealRun!==run)return;
-      rates.classList.add('is-visible');
-      if(hit&&!isReduced())rates.classList.add('is-sliding');
-      $('order-rates-title').focus({preventScroll:true});
-    };
-    if(direct||isReduced())revealLedger();
-    else delay(revealLedger,220);
-    // On deep links only: an instant scroll. During flight the wall is already fixed.
-    if(direct)wall.scrollIntoView({behavior:'instant',block:'start'});
-  }
-  function openMember(){if(state!=='BROWSE')return;history.pushState({veilPinned:true},'',pagePath+'#'+member().slug);if(isReduced()){showPinned({direct:true});return}
-    clearTimers();state='PULL';browse.classList.add('is-pulling');cinema.hidden=false;cinema.className='order-cinematic';
-    $('order-pull-label').textContent=member().archive;sheet.innerHTML=cardHTML(member());sheet.removeAttribute('style');sheet.style.setProperty('--folder-accent',member().accent);
-    // Restart CSS animation only after DOM is ready.
-    cinema.offsetWidth;cinema.classList.add('is-pull');
-    const token=run;delay(()=>{if(state!=='PULL'||token!==run)return;sheet.addEventListener('pointerdown',skipPause,{once:true});delay(()=>{if(state==='PULL'&&token===run)beginFlight()},900)},820);
-  }
-  function skipPause(){if(state==='PULL')beginFlight()}
-  const FLIGHT_DURATION=610;
-  const DART_DURATION=290;
-  const DART_TIP_X=3;
-  const dartTipY=()=>mount.offsetHeight/2;
-  // The full dossier itself is the flying sheet. One element moves and remains
-  // pinned, so there is no midair fade-out or second paper swap at impact.
-  function beginFlight(){
-    if(state!=='PULL')return;
-    state='FLIGHT';const token=run,m=member();
-    sheet.removeEventListener('pointerdown',skipPause);
-    browse.hidden=true;wall.hidden=false;previewMember(m);
-    dossier.style.visibility='visible';dossier.style.opacity='1';
-    // Resolve scrolling exactly once before measuring viewport coordinates.
-    wall.scrollIntoView({behavior:'instant',block:'start'});
-    sheet.getAnimations().forEach(a=>a.cancel());
-    sheet.style.animation='none';
-    sheet.style.transform='translate(-50%,-50%) rotate(1deg)';
-    sheet.style.opacity='1';
-    const from=sheet.getBoundingClientRect(),to=dossierWrap.getBoundingClientRect();
-    const sx=from.width/to.width,sy=from.height/to.height;
-    const dx=(from.left+from.width/2)-(to.left+to.width/2);
-    const dy=(from.top+from.height/2)-(to.top+to.height/2);
-    // Read the mount anchor in its final resting place BEFORE paper moves.
-    mount.classList.add('is-visible','is-aiming');
-    const anchor=mount.getBoundingClientRect();
-    const targetX=anchor.left+DART_TIP_X,targetY=anchor.top+dartTipY();
-    const starting=`translate3d(${dx}px,${dy}px,0) scale(${sx},${sy})`;
-    dossierWrap.classList.add('is-flying');
-    dossierWrap.style.transformOrigin='50% 50%';
-    dossierWrap.style.transform=starting;
-    dossierWrap.getBoundingClientRect();
-    // Swap the compact summary for the full sheet at matching bounds.
-    cinema.hidden=true;
-    const motion=dossierWrap.animate([
-      {transform:starting},
-      {transform:'translate3d(0px,0px,0px) scale(1,1)'}
-    ],{duration:FLIGHT_DURATION,easing:'cubic-bezier(.25,.72,.27,1)',fill:'forwards'});
-    // No delayed visible dart at (0,0). Create and launch at the real time.
-    delay(()=>{
-      if(token===run && state==='FLIGHT')launchDart(m.accent,targetX,targetY);
-    },FLIGHT_DURATION-DART_DURATION);
-    delay(()=>{
-      if(token!==run||state!=='FLIGHT')return;
-      motion.cancel();dossierWrap.style.transform='';dossierWrap.classList.remove('is-flying');
-      showPinned({hit:true});
-    },FLIGHT_DURATION);
-  }
-  function launchDart(accent,x,y){
-    dartFlyer.hidden=true;
-    dartFlyer.getAnimations().forEach(a=>a.cancel());
-    // Fixed on body: unaffected by order-main's overflow/stacking context.
-    if(dartFlyer.parentElement!==document.body)document.body.append(dartFlyer);
-    dartFlyer.innerHTML=dartSVG(accent);
-    // Start beyond the right edge but within vertical view. The old negative
-    // Y route was invisible until it reached the upper-left part of the page.
-    const sx=innerWidth+90,sy=Math.max(105,Math.min(innerHeight*.30,y+135));
-    const midX=x+(sx-x)*.53,midY=Math.min(innerHeight*.42,sy+52);
-    const tipY=dartTipY();
-    const at=(xx,yy,deg)=>`translate3d(${xx-DART_TIP_X}px,${yy-tipY}px,0) rotate(${deg}deg)`;
-    dartFlyer.style.offsetPath='none';
-    dartFlyer.style.transform=at(sx,sy,-8);
-    dartFlyer.style.opacity='0';
-    dartFlyer.hidden=false;
-    dartFlyer.animate([
-      {transform:at(sx,sy,-8),opacity:0,offset:0},
-      {transform:at(sx-(sx-x)*.32,sy+(midY-sy)*.62,-13),opacity:1,offset:.32},
-      {transform:at(midX,midY,-20),opacity:1,offset:.62},
-      {transform:at(x,y,-25),opacity:1,offset:1}
-    ],{duration:DART_DURATION,delay:0,easing:'cubic-bezier(.14,.62,.32,1)',fill:'both'});
-  }
-  function restoreBrowse({reverse=false}={}){
-    if(state==='BROWSE')return;clearTimers();const old=state;state='FLIGHT';
-    cinema.hidden=true;dartFlyer.hidden=true;folder.hidden=false;browse.classList.remove('is-pulling');
-    const finish=()=>{wall.hidden=true;browse.hidden=false;state='BROWSE';stage.focus({preventScroll:true});positionCards();browse.scrollIntoView({behavior:'instant',block:'center'})};
-    if(reverse&&old==='PINNED'&&!isReduced()){
-      dossier.animate([{transform:'translateY(0) scale(1)',opacity:1},{transform:'translateY(100px) scale(.78) rotate(-5deg)',opacity:0}],{duration:470,easing:'ease-in',fill:'forwards'});
-      rates.animate([{transform:'translateX(0)',opacity:1},{transform:'translateX(45px)',opacity:0}],{duration:420,fill:'forwards'});
-      delay(finish,480);
-    }else finish();
-  }
-  function backToBrowse(){if(state!=='PINNED')return;if(history.state?.veilPinned){history.back()}else{history.replaceState({veilBrowse:true},'',pagePath);restoreBrowse({reverse:true})}}
-  function syncFromLocation(){const slug=decodeURIComponent(location.hash.slice(1));const idx=MEMBERS.findIndex(m=>m.slug===slug);if(idx>=0){clearTimers();active=idx;positionCards();showPinned({direct:true})}else restoreBrowse({reverse:true})}
-
-  // Pointer Events: capture drag; separate click from >6px drag; velocity adds inertia.
-  stage.addEventListener('pointerdown',e=>{if(state!=='BROWSE'||(e.button!==undefined&&e.button!==0))return;drag={id:e.pointerId,start:e.clientX,last:e.clientX,lastTime:performance.now(),velocity:0,target:e.target.closest('.order-folder'),moved:false};stage.setPointerCapture(e.pointerId)});
-  stage.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id||state!=='BROWSE')return;const now=performance.now(),dt=Math.max(1,now-drag.lastTime),dx=e.clientX-drag.start;drag.velocity=(e.clientX-drag.last)/dt;drag.last=e.clientX;drag.lastTime=now;if(Math.abs(dx)>6)drag.moved=true;if(drag.moved){dragFrac=clamp(-dx/stepSize(),-3.5,3.5);positionCards()}});
-  function endPointer(e,cancel=false){if(!drag||e.pointerId!==drag.id)return;const d=drag;drag=null;const dx=e.clientX-d.start;const isDrag=d.moved||Math.abs(dx)>6;dragFrac=0;if(state!=='BROWSE')return;if(cancel){positionCards();return}if(isDrag){const fling=clamp(-dx/stepSize() - d.velocity*200/stepSize(),-3,3);const steps=Math.abs(fling)<.3?0:(fling>0?Math.max(1,Math.round(fling)):Math.min(-1,Math.round(fling)));setActive(active+steps);clickLock=performance.now()+250}else if(d.target){const i=Number(d.target.dataset.index);if(i!==active)setActive(i);else openMember()}else positionCards()}
-  stage.addEventListener('pointerup',e=>endPointer(e));stage.addEventListener('pointercancel',e=>endPointer(e,true));stage.addEventListener('lostpointercapture',e=>{if(drag&&e.pointerId===drag.id){drag=null;dragFrac=0;positionCards()}});
-  stage.addEventListener('wheel',e=>{if(state!=='BROWSE')return;const delta=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;if(!delta)return;e.preventDefault();const now=performance.now();if(now-wheelTime<260)return;wheelTime=now;setActive(active+(delta>0?1:-1))},{passive:false});
-  stage.addEventListener('click',e=>{if(performance.now()<clickLock)e.preventDefault()});
-  $('order-prev').addEventListener('click',()=>setActive(active-1));$('order-next').addEventListener('click',()=>setActive(active+1));$('order-select').addEventListener('click',openMember);$('order-back').addEventListener('click',backToBrowse);
-  document.addEventListener('keydown',e=>{const tag=document.activeElement?.tagName;if(['INPUT','TEXTAREA','SELECT'].includes(tag))return;if(state==='BROWSE'){if(e.key==='ArrowRight'){e.preventDefault();setActive(active+1)}else if(e.key==='ArrowLeft'){e.preventDefault();setActive(active-1)}else if((e.key==='Enter'||e.key===' ')&&(document.activeElement===stage||stage.contains(document.activeElement))){e.preventDefault();openMember()}}else if(e.key==='Escape'&&state==='PINNED'){e.preventDefault();backToBrowse()}});
-  window.addEventListener('resize',()=>{if(state==='BROWSE')positionCards()});window.addEventListener('popstate',syncFromLocation);
-  createBrowse();
-  const first=decodeURIComponent(location.hash.slice(1)),found=MEMBERS.findIndex(m=>m.slug===first);
-  if(found!==-1){history.replaceState({veilBrowse:true},'',pagePath);history.pushState({veilPinned:true},'',pagePath+'#'+first);active=found;positionCards();showPinned({direct:true})}
-  else{history.replaceState({veilBrowse:true},'',pagePath);browse.hidden=false;wall.hidden=true}
+// The exact same photo node and dossier sheet stay in the DOM during
+// browse, extraction, flight, impact, and return. Nothing is cloned.
+function folderHTML(m,i){
+return `<span class="order-folder-shell">
+ <span class="order-folder-tab"><span>${safe(m.archive)}</span><strong>${safe(m.name)}</strong></span>
+ <span class="order-folder-face">
+  <span class="order-folder-head"><span>VEIL / THE ARCHIVE</span><span>CLASS: GENTLEMEN</span></span>
+  <span class="order-folder-photo">${portrait(m,Math.abs(i-active)<=1)}</span>
+  <span class="order-folder-bottom"><strong class="order-folder-name">${safe(m.name)}</strong><span class="order-folder-stamp">CONFIDENTIAL<span class="order-barcode"></span></span></span>
+ </span>
+ <span class="order-folder-detail">
+  <span class="order-file-id"><span>VEIL / PERSONAL ARCHIVE</span><span class="order-file-barcode"></span></span>
+  <span class="order-file-fields">
+   <span><b>NAME</b><span>${safe(m.name)}</span></span>
+   <span><b>ROLE</b><span>${safe(m.role)}</span></span>
+   <span><b>ARCHIVE</b><span>${safe(m.archive)}</span></span>
+   <span><b>TAGS</b><span>${m.tags.map(safe).join('・')}</span></span>
+  </span>
+  <span class="order-file-intro"><b>INTRODUCTION / PERSONALITY</b><span>${safe(m.intro)}</span></span>
+  <span class="order-file-tags">${m.tags.map(x=>`<em>${safe(x)}</em>`).join('')}</span>
+  <span class="order-file-stamp">VEIL</span>
+ </span></span>`;
+}
+function ratesHTML(m){
+const noAppointment=['不接受指名','非指名'].includes(m.appointment);
+return `<span class="order-rates-kicker">VEIL / SERVICE LEDGER / GIL</span><h2 id="order-rates-title" tabindex="-1">Service &amp; Rates</h2><p class="order-rates-lead">${safe(m.name)} · 遊戲內 Gil 計價（1 萬 = 10,000 Gil）</p>${RATE_GROUPS.map(g=>`<section class="order-rate-group"><h3>${safe(g.title)}</h3>${g.items.map(p=>{const unavailable=noAppointment&&['s01','s02','s03','s04'].includes(p.id),photo=m.slug==='guilan'&&['s05','s06'].includes(p.id);return `<article class="order-rate-item${unavailable?' is-unavailable':''}${photo?' is-photographer':''}" data-rate="${p.id}"><div class="order-rate-head"><div class="order-rate-title"><span class="order-rate-code">${safe(p.code)}</span><h4>${safe(p.name)}</h4>${unavailable?'<span class="order-availability">此位不接受指名</span>':''}${photo?'<span class="order-photo-label">館內攝影師</span>':''}</div><div class="order-rate-price">${safe(p.price)}<span class="order-price-unit">${safe(p.unit)}</span></div></div><ul class="order-rate-notes">${p.notes.map(t=>`<li>${safe(t)}</li>`).join('')}</ul></article>`}).join('')}</section>`).join('')}<p class="order-rate-footer">其他需求可洽館內公關。實際接待與安排以雙方意願為前提。</p>`;
+}
+function renderRates(){
+rates.innerHTML=`<span class="order-pin" aria-hidden="true"></span><div id="order-rates-content">${ratesHTML(member())}</div>`;
+rates.classList.remove('is-visible','is-sliding');
+}
+function renderDart(){
+if(!mount.querySelector('.veil-dart-art'))mount.innerHTML='<img class="veil-dart-art" src="assets/veil-dart-silver.webp" width="660" height="221" draggable="false" alt=""><div class="order-sparks">'+ '<i></i>'.repeat(6)+'</div>';
+mount.className='order-dart-mount';
+}
+function createBrowse(){
+stage.innerHTML=MEMBERS.map((m,i)=>`<button type="button" class="order-folder" id="order-folder-${i}" data-index="${i}" role="option" tabindex="-1" aria-selected="false" aria-label="${safe(m.archive)} ${safe(m.name)}" style="--folder-accent:${m.accent}">${folderHTML(m,i)}</button>`).join('');
+dots.innerHTML=MEMBERS.map((m,i)=>`<button class="order-dot" type="button" data-dot="${i}" aria-current="false" aria-label="移至 ${safe(m.archive)} ${safe(m.name)}"></button>`).join('');
+dots.addEventListener('click',e=>{const b=e.target.closest('[data-dot]');if(b&&state==='BROWSE')setActive(Number(b.dataset.dot))});
+positionCards();renderDart();
+}
+function stepSize(){return innerWidth<600?Math.min(196,innerWidth*.49):innerWidth<900?202:Math.min(250,stage.clientWidth*.22)}
+function positionCards(){
+const step=stepSize();
+stage.querySelectorAll('.order-folder').forEach((el,i)=>{
+const d=i-active-dragFrac,ad=Math.abs(d),side=Math.sign(d),cutoff=innerWidth<600?1.95:innerWidth<900?2.4:3.25;
+const pos=side*(Math.min(ad,1)*step+Math.max(0,ad-1)*step*.66);
+el.style.setProperty('--shift',`${pos}px`);
+el.style.setProperty('--z',`${-120*ad}px`);
+el.style.setProperty('--turn',`${-side*Math.min(32,ad*32)}deg`);
+el.style.setProperty('--size',String(Math.max(.58,1-.13*ad)));
+el.style.setProperty('--alpha',String(ad>cutoff?0:Math.max(.3,1-ad*.17)));
+el.style.setProperty('--light',String(Math.max(.42,1-ad*.19)));
+el.style.setProperty('--order',String(100-Math.round(ad*12)));
+el.style.setProperty('--click',ad>2.7?'none':'auto');
+el.setAttribute('aria-selected',String(i===active));
+el.tabIndex=i===active?0:-1;
+el.classList.toggle('is-active',i===active);
+const img=el.querySelector('img');if(img)img.loading=ad<=1?'eager':'lazy';
+});
+dots.querySelectorAll('.order-dot').forEach((d,i)=>d.setAttribute('aria-current',String(i===active)));
+$('order-prev').disabled=active===0;$('order-next').disabled=active===MEMBERS.length-1;
+counter.textContent=String(active+1).padStart(2,'0')+' / '+String(MEMBERS.length).padStart(2,'0');
+announcer.textContent=member().archive+' '+member().name;
+}
+function setActive(i){if(state!=='BROWSE')return;active=clamp(i,0,MEMBERS.length-1);dragFrac=0;positionCards()}
+function preparePinnedCard({direct=false}={}){
+if(selected?.parentElement===stage){}else selected=stage.querySelector(`#order-folder-${active}`);
+if(!selected)throw Error("Selected archive is missing.");
+renderRates();renderDart();
+const oldRect=selected.getBoundingClientRect();
+wall.hidden=false;browse.hidden=true;
+slot.appendChild(selected);
+selected.classList.add('is-pinned');
+selected.classList.remove('is-active');
+selected.removeAttribute('role');selected.removeAttribute('aria-selected');
+selected.tabIndex=-1;selected.style.removeProperty('pointer-events');
+selected.style.transformOrigin='top left';
+mount.classList.add('is-visible','is-aiming');
+if(direct){mount.classList.remove('is-aiming');rates.classList.add('is-visible');state='PINNED'}
+return {oldRect,newRect:selected.getBoundingClientRect()};
+}
+function finishPinned(token){
+if(token!==run||state!=='FLIGHT')return;
+state='PINNED';selected.classList.remove('is-lifting');selected.style.transformOrigin='';
+selected.getAnimations().forEach(a=>a.cancel());
+mount.getAnimations().forEach(a=>a.cancel());mount.style.opacity='';
+mount.classList.remove('is-aiming');mount.classList.add('is-visible','is-hit');
+selected.classList.add('is-hit');wall.classList.add('is-hit');
+mount.querySelector('.order-sparks')?.classList.add('is-hit');
+const m=run;
+delay(()=>{if(state==='PINNED'&&run===m){selected.classList.remove('is-hit');wall.classList.remove('is-hit');mount.classList.remove('is-hit');mount.querySelector('.order-sparks')?.classList.remove('is-hit')}},430);
+delay(()=>{if(state==='PINNED'&&run===m){rates.classList.add('is-visible');$('order-rates-title').focus({preventScroll:true})}},240);
+}
+function fireDart(token){
+if(token!==run||state!=='FLIGHT')return;
+const tip=mount.getBoundingClientRect();
+const sx=innerWidth+90-(tip.left+3);
+const sy=Math.max(100,Math.min(innerHeight*.33,tip.top+120))-(tip.top+mount.offsetHeight/2);
+mount.classList.remove('is-aiming');mount.style.opacity='0';
+mount.getAnimations().forEach(a=>a.cancel());
+mount.animate([
+{translate:`${sx}px ${sy}px`,opacity:0,offset:0},
+{translate:`${sx*.58}px ${sy*.66}px`,opacity:1,offset:.33},
+{translate:`${sx*.23}px ${sy*.27}px`,opacity:1,offset:.7},
+{translate:'0px 0px',opacity:1,offset:1}
+],{duration:285,easing:'cubic-bezier(.15,.73,.23,1)',fill:'both'});
+}
+function openMember(){
+if(state!=='BROWSE')return;
+history.pushState({veilPinned:true},'',pagePath+'#'+member().slug);
+clearTimers();const token=run;
+state='PULL';
+const {oldRect,newRect}=preparePinnedCard();
+selected.classList.add('is-lifting');
+if(initialIsReduced()){state='FLIGHT';finishPinned(token);return}
+const dx=oldRect.left-newRect.left,dy=oldRect.top-newRect.top;
+const sx=oldRect.width/newRect.width,sy=oldRect.height/newRect.height;
+const k=[
+{transform:`translate3d(${dx}px,${dy}px,0) scale(${sx},${sy})`,offset:0,opacity:1},
+{transform:`translate3d(${dx*.45}px,${dy*.37-40}px,0) scale(${sx+(1-sx)*.45},${sy+(1-sy)*.45}) rotate(-3deg)`,offset:.54,opacity:1},
+{transform:'translate3d(0px,0px,0) scale(1,1) rotate(0deg)',offset:1,opacity:1}
+];
+selected.animate(k,{duration:1040,easing:'cubic-bezier(.28,.7,.3,1)',fill:'both'});
+delay(()=>{if(token===run)state='FLIGHT'},540);
+delay(()=>fireDart(token),755);
+delay(()=>finishPinned(token),1040);
+}
+function restoreBrowse({reverse=true}={}){
+if(state==='BROWSE')return;
+clearTimers();const token=run,old=state;
+state='RETURN';
+rates.classList.remove('is-visible','is-sliding');
+mount.className='order-dart-mount';mount.style.opacity='';
+const item=selected;
+if(!item){wall.hidden=true;browse.hidden=false;state='BROWSE';positionCards();return}
+const start=item.getBoundingClientRect();
+browse.hidden=false;
+stage.appendChild(item);
+item.classList.remove('is-pinned','is-lifting','is-hit');
+item.setAttribute('role','option');item.setAttribute('aria-selected','true');
+item.style.transformOrigin='';
+selected=null;
+positionCards();
+wall.hidden=true;
+const end=item.getBoundingClientRect();
+const done=()=>{
+if(token!==run)return;
+state='BROWSE';positionCards();
+browse.scrollIntoView({behavior:'instant',block:'center'});
+stage.focus({preventScroll:true});
+};
+if(reverse&&!initialIsReduced()){
+const dx=start.left-end.left,dy=start.top-end.top;
+const sx=start.width/end.width,sy=start.height/end.height;
+const anim=item.animate([{translate:`${dx}px ${dy}px`,scale:`${sx} ${sy}`,opacity:1},{translate:'0px 0px',scale:'1 1',opacity:1}],{duration:580,easing:'cubic-bezier(.25,.75,.3,1)',fill:'both'});
+delay(()=>{anim.cancel();done()},585);
+}else done();
+}
+function backToBrowse(){if(state!=='PINNED')return;if(history.state?.veilPinned)history.back();else{history.replaceState({veilBrowse:true},'',pagePath);restoreBrowse()}}
+function syncFromLocation(){
+const slug=decodeURIComponent(location.hash.slice(1)),idx=MEMBERS.findIndex(m=>m.slug===slug);
+if(idx>=0){
+if(state!=='BROWSE')restoreBrowse({reverse:false});
+active=idx;positionCards();clearTimers();
+selected=stage.querySelector(`#order-folder-${active}`);
+preparePinnedCard({direct:true});
+}else restoreBrowse({reverse:true});
+}
+// Capture pointer to distinguish swipe from click on the same DOM node.
+stage.addEventListener('pointerdown',e=>{
+if(state!=='BROWSE'||(e.button!==undefined&&e.button!==0))return;
+drag={id:e.pointerId,start:e.clientX,last:e.clientX,lastTime:performance.now(),velocity:0,target:e.target.closest('.order-folder'),moved:false};
+stage.setPointerCapture(e.pointerId);
+});
+stage.addEventListener('pointermove',e=>{
+if(!drag||e.pointerId!==drag.id||state!=='BROWSE')return;
+const now=performance.now(),dt=Math.max(1,now-drag.lastTime),dx=e.clientX-drag.start;
+drag.velocity=(e.clientX-drag.last)/dt;drag.last=e.clientX;drag.lastTime=now;
+if(Math.abs(dx)>6)drag.moved=true;
+if(drag.moved){dragFrac=clamp(-dx/stepSize(),-3.5,3.5);positionCards()}
+});
+function endPointer(e,cancel=false){
+if(!drag||e.pointerId!==drag.id)return;
+const d=drag;drag=null;
+const dx=e.clientX-d.start,isDrag=d.moved||Math.abs(dx)>6;dragFrac=0;
+if(state!=='BROWSE')return;
+if(cancel){positionCards();return}
+if(isDrag){
+const fling=clamp(-dx/stepSize()-d.velocity*200/stepSize(),-3,3);
+const steps=Math.abs(fling)<.3?0:fling>0?Math.max(1,Math.round(fling)):Math.min(-1,Math.round(fling));
+setActive(active+steps);clickLock=performance.now()+250;
+}else if(d.target){const idx=Number(d.target.dataset.index);if(idx!==active)setActive(idx);else openMember()}else positionCards();
+}
+stage.addEventListener('pointerup',e=>endPointer(e));
+stage.addEventListener('pointercancel',e=>endPointer(e,true));
+stage.addEventListener('lostpointercapture',e=>{if(drag&&e.pointerId===drag.id){drag=null;dragFrac=0;positionCards()}});
+stage.addEventListener('wheel',e=>{
+if(state!=='BROWSE')return;
+const delta=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;
+if(!delta)return;e.preventDefault();
+const now=performance.now();if(now-wheelTime<260)return;
+wheelTime=now;setActive(active+(delta>0?1:-1));
+},{passive:false});
+stage.addEventListener('click',e=>{if(performance.now()<clickLock)e.preventDefault()});
+$('order-prev').addEventListener('click',()=>setActive(active-1));
+$('order-next').addEventListener('click',()=>setActive(active+1));
+$('order-select').addEventListener('click',openMember);
+$('order-back').addEventListener('click',backToBrowse);
+document.addEventListener('keydown',e=>{
+const tag=document.activeElement?.tagName;if(['INPUT','TEXTAREA','SELECT'].includes(tag))return;
+if(state==='BROWSE'){
+if(e.key==='ArrowRight'){e.preventDefault();setActive(active+1)}
+else if(e.key==='ArrowLeft'){e.preventDefault();setActive(active-1)}
+else if((e.key==='Enter'||e.key===' ')&&(document.activeElement===stage||stage.contains(document.activeElement))){e.preventDefault();openMember()}
+}else if(e.key==='Escape'&&state==='PINNED'){e.preventDefault();backToBrowse()}
+});
+window.addEventListener('resize',()=>{if(state==='BROWSE')positionCards()});
+window.addEventListener('popstate',syncFromLocation);
+createBrowse();
+const first=decodeURIComponent(location.hash.slice(1)),found=MEMBERS.findIndex(m=>m.slug===first);
+if(found!==-1){
+history.replaceState({veilBrowse:true},'',pagePath);
+history.pushState({veilPinned:true},'',pagePath+'#'+first);
+active=found;positionCards();
+selected=stage.querySelector(`#order-folder-${active}`);
+preparePinnedCard({direct:true});
+}else{history.replaceState({veilBrowse:true},'',pagePath);browse.hidden=false;wall.hidden=true}
 })();
