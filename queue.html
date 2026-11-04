@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="VEIL 薄幕俱樂部入場號碼牌：取號、帶位與館內點餐流程。">
+  <meta name="description" content="VEIL 薄幕俱樂部入場號碼牌：取號、帶位與專屬服務流程。">
   <title>ADMISSION TICKET | VEIL 薄幕俱樂部</title>
   <link rel="stylesheet" href="assets/site.css?v=gentlemen01">
   <link rel="stylesheet" href="assets/veil-header.css?v=header03">
   <link rel="stylesheet" href="assets/veil-queue.css?v=queue01">
   
-  <script src="assets/veil-queue.js?v=queue01" defer></script>
+  <script src="assets/veil-queue.js?v=queue02" defer></script>
 </head>
 <body class="veil-queue-page">
   <header>
@@ -27,8 +27,8 @@
   <section class="queue-shell" aria-labelledby="queue-title">
     <p class="queue-overline">VEIL / THE RECEPTION / 01</p>
     <h1 id="queue-title">ADMISSION <em>TICKET</em></h1>
-    <p class="queue-lead">領取入場號碼牌，等待館方帶位。帶位後才會開放點餐；取號並非預約或付款。</p>
-    <div class="queue-flow" aria-label="接待流程"><span class="is-current">01 取號</span><span>02 帶位</span><span>03 點餐</span><span>04 確認</span></div>
+    <p class="queue-lead">領取入場號碼牌，等待館方帶位。帶位後由館方引導確認服務項目；取號並非預約或付款。</p>
+    <div class="queue-flow" aria-label="接待流程"><span class="is-current">01 取號</span><span>02 帶位</span><span>03 選擇服務</span><span>04 確認服務單</span></div>
     <div class="queue-grid">
       <section class="queue-panel" aria-labelledby="ticket-form-title">
         <div class="queue-panel-top"><span>REQUEST / ADMISSION</span><span>VEIL NO. 01</span></div>
@@ -54,7 +54,7 @@
         <div class="queue-ticket" id="queue-ticket" hidden>
           <span>ADMISSION / TICKET</span><strong id="queue-ticket-code"></strong>
           <span id="queue-ticket-state">等待帶位</span>
-          <p>請保留本頁的號碼牌。帶位完成後可依引導前往點餐。</p>
+          <p>請保留本頁的號碼牌。帶位完成後由館方引導選擇與確認服務。</p>
           <button type="button" id="queue-refresh" class="queue-refresh">更新帶位狀態</button>
         </div>
         <div class="queue-placeholder" id="queue-placeholder"><span>VEIL</span><p>號碼牌將在成功取號後顯示於此。</p></div>
