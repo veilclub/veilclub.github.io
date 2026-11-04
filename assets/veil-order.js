@@ -46,7 +46,8 @@ const RATE_GROUPS = [
   const archiveLabel=m=>m.archive;
   const pending=()=>'<span class="order-photo-pending" role="img" aria-label="PORTRAIT PENDING"><b>V</b><span>VEIL / THE ARCHIVE</span><span>PORTRAIT PENDING</span></span>';
   const portrait=(m,eager=false)=>m.photo?`<img src="${safe(m.photo)}" alt="${safe(m.name)}形象照" loading="${eager?'eager':'lazy'}" decoding="async" onerror="const p=this.parentNode,f=p.querySelector('.order-photo-pending');this.replaceWith(f);f.hidden=false"><span class="order-photo-pending" hidden><b>V</b><span>VEIL / THE ARCHIVE</span><span>PORTRAIT PENDING</span></span>`:pending();
-  const dartSVG=(accent)=>`<svg viewBox="0 0 108 55" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="dartMetal" x1="0" x2="1"><stop stop-color="#5e6a78"/><stop offset=".45" stop-color="#f2f4f8"/><stop offset="1" stop-color="#788696"/></linearGradient></defs><path d="M4 27L25 23L25 32Z" fill="#dbe6f4"/><path d="M25 24L72 24L74 30L25 30Z" fill="url(#dartMetal)" stroke="#596a7d" stroke-width="1"/><path d="M69 22L83 18L89 35L74 32Z" fill="#a5b7cb"/><path d="M82 27L105 7L102 26L106 47Z" fill="${safe(accent)}" stroke="#d4dfec" stroke-width="1.3"/><path d="M83 27L105 7M83 27L106 47" stroke="#f0f2fa" opacity=".7"/></svg>`;
+  // The same optimized image is used during flight and after impact.
+  const dartSVG=()=>`<img class="veil-dart-art" src="assets/veil-dart-silver.webp" alt="" decoding="async" draggable="false" width="660" height="221">`;
 
   function folderHTML(m,i){return `<span class="order-folder-shell"><span class="order-folder-tab"><span>${safe(m.archive)}</span><strong>${safe(m.name)}</strong></span><span class="order-folder-face"><span class="order-folder-head"><span>VEIL / THE ARCHIVE</span><span>CLASS: GENTLEMEN</span></span><span class="order-folder-photo">${portrait(m,Math.abs(i-active)<=1)}</span><span class="order-folder-bottom"><span class="order-folder-name">${safe(m.name)}</span><span class="order-folder-stamp">CONFIDENTIAL<span class="order-barcode"></span></span></span></span></span>`}
   function cardHTML(m){return `<div class="order-dossier-head"><span class="order-dossier-archive">${safe(m.archive)}<br>VEIL / PRIVATE FILE</span><span class="order-dossier-archive">GENTLEMEN / 01</span></div><h3 class="order-dossier-name">${safe(m.name)}</h3><div class="order-dossier-main"><figure class="order-dossier-photo">${portrait(m,true)}</figure><dl class="order-dossier-fields"><div><dt>NAME</dt><dd>${safe(m.name)}</dd></div><div><dt>ROLE</dt><dd>${safe(m.role)}</dd></div><div><dt>ARCHIVE</dt><dd>${safe(m.archive)}</dd></div><div><dt>TAGS</dt><dd>${m.tags.map(safe).join('・')}</dd></div></dl></div><p class="order-dossier-intro">${safe(m.intro)}</p><div class="order-dossier-tags">${m.tags.map(t=>`<span>${safe(t)}</span>`).join('')}</div><div class="order-dossier-stamp">VEIL</div><span class="order-holo" aria-hidden="true"></span>`}
@@ -96,7 +97,8 @@ const RATE_GROUPS = [
   function skipPause(){if(state==='PULL')beginFlight()}
   const FLIGHT_DURATION=610;
   const DART_DURATION=290;
-  const DART_TIP_X=100*4/108, DART_TIP_Y=27;
+  const DART_TIP_X=3;
+  const dartTipY=()=>mount.offsetHeight/2;
   // The full dossier itself is the flying sheet. One element moves and remains
   // pinned, so there is no midair fade-out or second paper swap at impact.
   function beginFlight(){
@@ -118,7 +120,7 @@ const RATE_GROUPS = [
     // Read the mount anchor in its final resting place BEFORE paper moves.
     mount.classList.add('is-visible','is-aiming');
     const anchor=mount.getBoundingClientRect();
-    const targetX=anchor.left+DART_TIP_X,targetY=anchor.top+DART_TIP_Y;
+    const targetX=anchor.left+DART_TIP_X,targetY=anchor.top+dartTipY();
     const starting=`translate3d(${dx}px,${dy}px,0) scale(${sx},${sy})`;
     dossierWrap.classList.add('is-flying');
     dossierWrap.style.transformOrigin='50% 50%';
@@ -150,7 +152,8 @@ const RATE_GROUPS = [
     // Y route was invisible until it reached the upper-left part of the page.
     const sx=innerWidth+90,sy=Math.max(105,Math.min(innerHeight*.30,y+135));
     const midX=x+(sx-x)*.53,midY=Math.min(innerHeight*.42,sy+52);
-    const at=(xx,yy,deg)=>`translate3d(${xx-DART_TIP_X}px,${yy-DART_TIP_Y}px,0) rotate(${deg}deg)`;
+    const tipY=dartTipY();
+    const at=(xx,yy,deg)=>`translate3d(${xx-DART_TIP_X}px,${yy-tipY}px,0) rotate(${deg}deg)`;
     dartFlyer.style.offsetPath='none';
     dartFlyer.style.transform=at(sx,sy,-8);
     dartFlyer.style.opacity='0';
