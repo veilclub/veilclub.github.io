@@ -130,6 +130,9 @@ function finishPinned(token){
 if(token!==run||state!=='FLIGHT')return;
 state='PINNED';selected.classList.remove('is-lifting');selected.style.transformOrigin='';
 selected.getAnimations().forEach(a=>a.cancel());
+const portraitNode=selected.querySelector('.order-folder-photo');
+portraitNode?.getAnimations().forEach(a=>a.cancel());
+if(portraitNode)portraitNode.style.transformOrigin='';
 mount.getAnimations().forEach(a=>a.cancel());mount.style.opacity='';
 mount.classList.remove('is-aiming');mount.classList.add('is-visible','is-hit');
 selected.classList.add('is-hit');wall.classList.add('is-hit');
@@ -157,11 +160,27 @@ if(state!=='BROWSE')return;
 history.pushState({veilPinned:true},'',pagePath+'#'+member().slug);
 clearTimers();const token=run;
 state='PULL';
+const photo=stage.querySelector('#order-folder-'+active+' .order-folder-photo');
+// Preserve the portrait's screen-space position as the paper unfolds.
+const oldPhotoRect=photo?.getBoundingClientRect();
 const {oldRect,newRect}=preparePinnedCard();
 selected.classList.add('is-lifting');
 if(initialIsReduced()){state='FLIGHT';finishPinned(token);return}
 const dx=oldRect.left-newRect.left,dy=oldRect.top-newRect.top;
 const sx=oldRect.width/newRect.width,sy=oldRect.height/newRect.height;
+if(photo&&oldPhotoRect){
+  const newPhotoRect=photo.getBoundingClientRect();
+  const expectedX=oldRect.left+(newPhotoRect.left-newRect.left)*sx;
+  const expectedY=oldRect.top+(newPhotoRect.top-newRect.top)*sy;
+  const tx=(oldPhotoRect.left-expectedX)/sx,ty=(oldPhotoRect.top-expectedY)/sy;
+  const px=oldPhotoRect.width/(newPhotoRect.width*sx);
+  const py=oldPhotoRect.height/(newPhotoRect.height*sy);
+  photo.style.transformOrigin='top left';
+  photo.animate([
+    {translate:`${tx}px ${ty}px`,scale:`${px} ${py}`,opacity:1},
+    {translate:'0px 0px',scale:'1 1',opacity:1}
+  ],{duration:1040,easing:'cubic-bezier(.28,.7,.3,1)',fill:'both'});
+}
 // Individual transform properties do not conflict with the pinned layout's
 // base transform. The same node travels throughout the complete motion.
 const k=[
