@@ -660,37 +660,32 @@
   z-index:3;
   left:3px;
   top:50%;
-  width:18px;
-  height:13px;
+  width:11px;
+  height:8px;
   pointer-events:none;
   border-radius:48% 52% 43% 57%;
   transform:translate(-47%,-50%) rotate(-20deg) scale(.72);
   opacity:0;
-  background:radial-gradient(ellipse at 49% 51%,
-    #151923 0 24%,
-    #293241 29% 39%,
-    #8792a4 43% 49%,
-    rgba(235,237,244,.2) 56%,
-    transparent 76%);
-  box-shadow:0 2px 2px rgba(0,0,0,.21);
+  background:radial-gradient(ellipse at 50% 50%,
+    #171a25 0 34%,#3c4657 52%,#758197 70%,transparent 85%);
+  box-shadow:1px 1px 2px rgba(0,0,0,.53);
   transition:opacity .055s ease,transform .19s cubic-bezier(.2,.8,.2,1);
 }
 .veil-order-page .order-dart-mount .veil-dart-paper-lip{
   display:block;
   position:absolute;
   z-index:4;
-  left:3px;
+  left:6px;
   top:50%;
-  width:15px;
-  height:12px;
+  width:8px;
+  height:8px;
   pointer-events:none;
   opacity:0;
-  background:linear-gradient(155deg,
-    #f9f9fc 6%,#e5e7ee 42%,#c7cfdb 70%,#586678 100%);
-  clip-path:polygon(0 7%,42% 0,68% 20%,100% 5%,84% 76%,45% 100%,0 81%,18% 50%);
+  background:linear-gradient(140deg,#d7dbe4,#aeb8c7 75%,#6e7b8c);
+  clip-path:polygon(0 18%,74% 0,100% 21%,70% 56%,100% 100%,20% 80%,0 44%);
   transform-origin:37% 47%;
-  transform:translate(-52%,-50%) rotate(-20deg);
-  filter:drop-shadow(1px 2px 1px rgba(7,11,19,.65));
+  transform:translate(-20%,-50%) rotate(-20deg);
+  filter:drop-shadow(1px 2px 1px rgba(7,11,19,.55));
   transition:opacity .065s ease;
 }
 .veil-order-page .order-dart-mount.is-pierced .veil-dart-wound{
@@ -706,8 +701,8 @@
   left:3px;top:50%;
 }
 @media(max-width:599px){
-  .veil-order-page .order-dart-mount .veil-dart-wound{width:15px;height:11px}
-  .veil-order-page .order-dart-mount .veil-dart-paper-lip{width:13px;height:10px}
+  .veil-order-page .order-dart-mount .veil-dart-wound{width:10px;height:7px}
+  .veil-order-page .order-dart-mount .veil-dart-paper-lip{width:7px;height:7px}
 }
 @media(prefers-reduced-motion:reduce){
   .veil-order-page .order-dart-mount .veil-dart-wound,
