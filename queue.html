@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VEIL 薄幕俱樂部入場號碼牌：取號、帶位與館內點餐流程。">
+  <title>ADMISSION TICKET | VEIL 薄幕俱樂部</title>
+  <link rel="stylesheet" href="assets/site.css?v=gentlemen01">
+  <link rel="stylesheet" href="assets/veil-header.css?v=header03">
+  <link rel="stylesheet" href="assets/veil-queue.css?v=queue01">
+  
+  <script src="assets/veil-queue.js?v=queue01" defer></script>
+</head>
+<body class="veil-queue-page">
+  <header>
+    <div class="veil-header-brand">
+      <a class="veil-header-brand__logo" href="index.html" aria-label="VEIL 薄幕俱樂部首頁"><img src="assets/veil-logo-silver.svg" width="105" alt="VEIL 標誌"></a>
+      <span class="veil-header-brand__divider" aria-hidden="true"></span>
+      <div class="veil-header-brand__name">VEIL <b>薄幕</b></div>
+    </div>
+    <nav class="nav" aria-label="主選單">
+      <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="members.html">GENTLEMEN</a><a href="guide.html">EXPERIENCE</a><a href="rules.html">ETIQUETTE</a><a href="order.html">ORDER</a>
+      <a class="veil-discord-nav" href="https://discord.gg/mnvnZCWWas" target="_blank" rel="noopener noreferrer" aria-label="加入 VEIL Discord" title="加入 VEIL Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.32 4.37a19.8 19.8 0 0 0-4.89-1.52c-.22.39-.45.87-.61 1.25a19 19 0 0 0-5.49 0c-.16-.39-.4-.87-.62-1.25A19.74 19.74 0 0 0 3.83 4.4C.53 9.05-.32 13.58.1 18.06a.08.08 0 0 0 .03.06 19.86 19.86 0 0 0 6 3.03c.46-.63.87-1.29 1.23-1.99a12.3 12.3 0 0 1-1.88-.9.08.08 0 0 1-.01-.12l.37-.3a.08.08 0 0 1 .08-.01 13.73 13.73 0 0 0 12.06 0 .08.08 0 0 1 .08.01l.37.3a.08.08 0 0 1-.01.12c-.6.34-1.23.65-1.88.9.36.7.77 1.36 1.23 1.99a19.88 19.88 0 0 0 6-3.03.08.08 0 0 0 .03-.06c.5-5.18-.84-9.67-3.55-13.66ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42 2.17 1.1 2.16 2.42c0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42 2.17 1.1 2.16 2.42c0 1.33-.95 2.42-2.16 2.42Z"/></svg></a>
+    </nav>
+  </header>
+  <main class="queue-main">
+  <section class="queue-shell" aria-labelledby="queue-title">
+    <p class="queue-overline">VEIL / THE RECEPTION / 01</p>
+    <h1 id="queue-title">ADMISSION <em>TICKET</em></h1>
+    <p class="queue-lead">領取入場號碼牌，等待館方帶位。帶位後才會開放點餐；取號並非預約或付款。</p>
+    <div class="queue-flow" aria-label="接待流程"><span class="is-current">01 取號</span><span>02 帶位</span><span>03 點餐</span><span>04 確認</span></div>
+    <div class="queue-grid">
+      <section class="queue-panel" aria-labelledby="ticket-form-title">
+        <div class="queue-panel-top"><span>REQUEST / ADMISSION</span><span>VEIL NO. 01</span></div>
+        <h2 id="ticket-form-title">領取號碼牌</h2>
+        <p class="queue-status" id="queue-status" role="status" aria-live="polite">正在確認本館取號狀態…</p>
+        <form id="queue-form" novalidate>
+          <label for="queue-guest">旅者名稱</label>
+          <input id="queue-guest" name="guest" maxlength="48" minlength="2" autocomplete="off" placeholder="請填寫遊戲內角色名稱" required>
+          <label for="queue-count">同行人數（包含本人）</label>
+          <select id="queue-count" name="count" required><option value="1">1 位</option><option value="2">2 位</option><option value="3">3 位</option><option value="4">4 位</option><option value="5">5 位</option><option value="6">6 位</option><option value="7">7 位</option><option value="8">8 位</option><option value="9">9 位</option><option value="10">10 位</option></select>
+          <label for="queue-member">選擇公關</label>
+          <select id="queue-member" name="member" required>
+            <option value="qiuye">囚夜</option><option value="xie-xinda">謝新達沒有死</option><option value="jinyao">瑾曜</option><option value="same">鮫 SAME</option><option value="yanxi">言曦</option>
+          </select>
+          <p class="queue-hint">入場與服務須由館方確認；若無法取號，請等候館方開放營業。</p>
+          <button class="queue-submit" id="queue-submit" type="submit" disabled>尚未開放取號</button>
+          <p class="queue-feedback" id="queue-feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+      <aside class="queue-info" aria-labelledby="queue-info-title">
+        <span class="queue-info-id">VEIL / THE ARCHIVE</span>
+        <h2 id="queue-info-title">THE RECEPTION</h2>
+        <div class="queue-ticket" id="queue-ticket" hidden>
+          <span>ADMISSION / TICKET</span><strong id="queue-ticket-code"></strong>
+          <span id="queue-ticket-state">等待帶位</span>
+          <p>請保留本頁的號碼牌。帶位完成後可依引導前往點餐。</p>
+          <button type="button" id="queue-refresh" class="queue-refresh">更新帶位狀態</button>
+        </div>
+        <div class="queue-placeholder" id="queue-placeholder"><span>VEIL</span><p>號碼牌將在成功取號後顯示於此。</p></div>
+        <a href="order.html" class="queue-return">← 返回人物檔案</a>
+      </aside>
+    </div>
+  </section>
+</main>
+  <footer><span>VEIL · 薄幕俱樂部</span><span>THE RECEPTION / ADMISSION</span></footer>
+</body>
+</html>
