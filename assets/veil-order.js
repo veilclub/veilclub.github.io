@@ -50,7 +50,7 @@ const RATE_GROUPS = [
   const dartSVG=()=>`<img class="veil-dart-art" src="assets/veil-dart-silver.webp" alt="" decoding="async" draggable="false" width="660" height="221">`;
 
   function folderHTML(m,i){return `<span class="order-folder-shell"><span class="order-folder-tab"><span>${safe(m.archive)}</span><strong>${safe(m.name)}</strong></span><span class="order-folder-face"><span class="order-folder-head"><span>VEIL / THE ARCHIVE</span><span>CLASS: GENTLEMEN</span></span><span class="order-folder-photo">${portrait(m,Math.abs(i-active)<=1)}</span><span class="order-folder-bottom"><span class="order-folder-name">${safe(m.name)}</span><span class="order-folder-stamp">CONFIDENTIAL<span class="order-barcode"></span></span></span></span></span>`}
-  function cardHTML(m){return `<div class="order-dossier-head"><span class="order-dossier-archive">${safe(m.archive)}<br>VEIL / PRIVATE FILE</span><span class="order-dossier-archive">GENTLEMEN / 01</span></div><h3 class="order-dossier-name">${safe(m.name)}</h3><div class="order-dossier-main"><figure class="order-dossier-photo">${portrait(m,true)}</figure><dl class="order-dossier-fields"><div><dt>NAME</dt><dd>${safe(m.name)}</dd></div><div><dt>ROLE</dt><dd>${safe(m.role)}</dd></div><div><dt>ARCHIVE</dt><dd>${safe(m.archive)}</dd></div><div><dt>TAGS</dt><dd>${m.tags.map(safe).join('・')}</dd></div></dl></div><p class="order-dossier-intro">${safe(m.intro)}</p><div class="order-dossier-tags">${m.tags.map(t=>`<span>${safe(t)}</span>`).join('')}</div><div class="order-dossier-stamp">VEIL</div><span class="order-holo" aria-hidden="true"></span>`}
+  function cardHTML(m){return `<div class="order-dossier-head"><span class="order-dossier-brand">VEIL<small>THE ORDER DOSSIER</small></span><span class="order-dossier-archive">${safe(m.archive)}<br>PERSONAL FILE</span></div><div class="order-dossier-idband"><span>GENTLEMEN / PRIVATE ARCHIVE</span><span class="order-dossier-barcode" aria-hidden="true"></span></div><h3 class="order-dossier-name">${safe(m.name)}</h3><div class="order-dossier-main"><figure class="order-dossier-photo">${portrait(m,true)}</figure><dl class="order-dossier-fields"><div><dt>NAME</dt><dd>${safe(m.name)}</dd></div><div><dt>ROLE</dt><dd>${safe(m.role)}</dd></div><div><dt>ARCHIVE</dt><dd>${safe(m.archive)}</dd></div><div><dt>TAGS</dt><dd>${m.tags.map(safe).join('・')}</dd></div></dl></div><section class="order-intro-block"><div class="order-intro-label">INTRODUCTION <span>／ PERSONALITY</span></div><p class="order-dossier-intro">${safe(m.intro)}</p></section><div class="order-dossier-tags">${m.tags.map(t=>`<span>${safe(t)}</span>`).join('')}</div><div class="order-dossier-stamp">VEIL</div><span class="order-holo" aria-hidden="true"></span>`}
   function ratesHTML(m){const noAppointment=m.appointment==='不接受指名'||m.appointment==='非指名';return `<span class="order-rates-kicker">VEIL / SERVICE LEDGER / GIL</span><h2 id="order-rates-title" tabindex="-1">Service &amp; Rates</h2><p class="order-rates-lead">${safe(m.name)} · 遊戲內 Gil 計價（1 萬 = 10,000 Gil）</p>${RATE_GROUPS.map(g=>`<section class="order-rate-group"><h3>${safe(g.title)}</h3>${g.items.map(p=>{const unavailable=noAppointment&&['s01','s02','s03','s04'].includes(p.id);const photo=m.slug==='guilan'&&['s05','s06'].includes(p.id);return `<article class="order-rate-item${unavailable?' is-unavailable':''}${photo?' is-photographer':''}" data-rate="${p.id}"><div class="order-rate-head"><div class="order-rate-title"><span class="order-rate-code">${safe(p.code)}</span><h4>${safe(p.name)}</h4>${unavailable?'<span class="order-availability">此位不接受指名</span>':''}${photo?'<span class="order-photo-label">館內攝影師</span>':''}</div><div class="order-rate-price">${safe(p.price)}<span class="order-price-unit">${safe(p.unit)}</span></div></div><ul class="order-rate-notes">${p.notes.map(t=>`<li>${safe(t)}</li>`).join('')}</ul></article>`}).join('')}</section>`).join('')}<p class="order-rate-footer">其他需求可洽館內公關。實際接待與安排以雙方意願為前提。</p>`}
 
   function createBrowse(){
@@ -73,7 +73,7 @@ const RATE_GROUPS = [
   }
   function setActive(index){if(state!=='BROWSE')return;active=clamp(index,0,MEMBERS.length-1);dragFrac=0;positionCards()}
 
-  function previewMember(m){dossier.style.setProperty('--folder-accent',m.accent);dossier.style.setProperty('--paper-rotation',`${[-2,-1,1,2,-1,2,-2,1][active]}deg`);dossier.innerHTML=cardHTML(m);rates.innerHTML=`<span class="order-pin" aria-hidden="true"></span><div id="order-rates-content">${ratesHTML(m)}</div>`;rates.classList.remove('is-visible');mount.className='order-dart-mount';mount.innerHTML=dartSVG(m.accent)+`<div class="order-sparks">${'<i></i>'.repeat(6)}</div>`}
+  function previewMember(m){dossier.style.setProperty('--folder-accent',m.accent);dossier.style.setProperty('--paper-rotation',`${[-2,-1,1,2,-1,2,-2,1][active]}deg`);dossier.innerHTML=cardHTML(m);rates.innerHTML=`<span class="order-pin" aria-hidden="true"></span><div id="order-rates-content">${ratesHTML(m)}</div>`;rates.classList.remove('is-visible','is-sliding');mount.className='order-dart-mount';mount.innerHTML=dartSVG(m.accent)+`<div class="order-sparks">${'<i></i>'.repeat(6)}</div>`}
   function showPinned({direct=false,hit=false}={}){
     state='PINNED';clearTimers();drag=null;const m=member();
     dossier.getAnimations().forEach(a=>a.cancel());dossierWrap.getAnimations().forEach(a=>a.cancel());dossierWrap.style.transform='';dossierWrap.classList.remove('is-flying');rates.getAnimations().forEach(a=>a.cancel());
@@ -82,10 +82,20 @@ const RATE_GROUPS = [
     if(direct || !dossier.hasChildNodes())previewMember(m);
     dossier.style.visibility='visible';dossier.style.opacity='';mount.classList.add('is-visible');
     if(hit){mount.classList.remove('is-aiming');mount.classList.add('is-hit');dossier.classList.add('is-hit');wall.classList.add('is-hit');mount.querySelector('.order-sparks').classList.add('is-hit');delay(()=>{dossier.classList.remove('is-hit');wall.classList.remove('is-hit');mount.classList.remove('is-hit')},450)}
-    rates.classList.add('is-visible');
+    // Before impact the price sheet is not shown. After the dart lands,
+    // a separate physical ledger slides onto the tabletop from the right.
+    // A shared token prevents the sheet from arriving after a user goes back.
+    const revealRun=run;
+    const revealLedger=()=>{
+      if(state!=='PINNED'||revealRun!==run)return;
+      rates.classList.add('is-visible');
+      if(hit&&!isReduced())rates.classList.add('is-sliding');
+      $('order-rates-title').focus({preventScroll:true});
+    };
+    if(direct||isReduced())revealLedger();
+    else delay(revealLedger,220);
     // On deep links only: an instant scroll. During flight the wall is already fixed.
     if(direct)wall.scrollIntoView({behavior:'instant',block:'start'});
-    $('order-rates-title').focus({preventScroll:true});
   }
   function openMember(){if(state!=='BROWSE')return;history.pushState({veilPinned:true},'',pagePath+'#'+member().slug);if(isReduced()){showPinned({direct:true});return}
     clearTimers();state='PULL';browse.classList.add('is-pulling');cinema.hidden=false;cinema.className='order-cinematic';
