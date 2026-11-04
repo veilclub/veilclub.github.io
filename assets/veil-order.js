@@ -32,7 +32,7 @@ const RATE_GROUPS = [
   const $ = id => document.getElementById(id);
   const stage=$('order-stage'),browse=$('order-browse'),wall=$('order-wall'),cinema=$('order-cinematic');
   const sheet=$('order-transit-sheet'),folder=$('order-pull-folder'),dartFlyer=$('order-dart-flyer');
-  const dossier=$('order-dossier'),rates=$('order-rates'),mount=$('order-dart-mount');
+  const dossier=$('order-dossier'),dossierWrap=dossier.parentElement,rates=$('order-rates'),mount=$('order-dart-mount');
   const dots=$('order-dots'),counter=$('order-counter'),announcer=$('order-announcer');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const pagePath=location.pathname+location.search;
@@ -75,9 +75,11 @@ const RATE_GROUPS = [
   function previewMember(m){dossier.style.setProperty('--folder-accent',m.accent);dossier.style.setProperty('--paper-rotation',`${[-2,-1,1,2,-1,2,-2,1][active]}deg`);dossier.innerHTML=cardHTML(m);rates.innerHTML=`<span class="order-pin" aria-hidden="true"></span><div id="order-rates-content">${ratesHTML(m)}</div>`;rates.classList.remove('is-visible');mount.className='order-dart-mount';mount.innerHTML=dartSVG(m.accent)+`<div class="order-sparks">${'<i></i>'.repeat(6)}</div>`}
   function showPinned({direct=false,hit=false}={}){
     state='PINNED';clearTimers();drag=null;const m=member();
-    dossier.getAnimations().forEach(a=>a.cancel());rates.getAnimations().forEach(a=>a.cancel());
+    dossier.getAnimations().forEach(a=>a.cancel());dossierWrap.getAnimations().forEach(a=>a.cancel());dossierWrap.style.transform='';dossierWrap.classList.remove('is-flying');rates.getAnimations().forEach(a=>a.cancel());
     wall.hidden=false;browse.hidden=true;cinema.hidden=true;cinema.className='order-cinematic';dartFlyer.hidden=true;
-    previewMember(m);dossier.style.visibility='visible';dossier.style.opacity='';mount.classList.add('is-visible');
+    // Keep the same content and loaded portrait at impact, without rebuilding it.
+    if(direct || !dossier.hasChildNodes())previewMember(m);
+    dossier.style.visibility='visible';dossier.style.opacity='';mount.classList.add('is-visible');
     if(hit){mount.classList.remove('is-aiming');mount.classList.add('is-hit');dossier.classList.add('is-hit');wall.classList.add('is-hit');mount.querySelector('.order-sparks').classList.add('is-hit');delay(()=>{dossier.classList.remove('is-hit');wall.classList.remove('is-hit');mount.classList.remove('is-hit')},450)}
     rates.classList.add('is-visible');
     // On deep links only: an instant scroll. During flight the wall is already fixed.
@@ -95,60 +97,70 @@ const RATE_GROUPS = [
   const FLIGHT_DURATION=610;
   const DART_DURATION=290;
   const DART_TIP_X=100*4/108, DART_TIP_Y=27;
+  // The full dossier itself is the flying sheet. One element moves and remains
+  // pinned, so there is no midair fade-out or second paper swap at impact.
   function beginFlight(){
     if(state!=='PULL')return;
     state='FLIGHT';const token=run,m=member();
     sheet.removeEventListener('pointerdown',skipPause);
     browse.hidden=true;wall.hidden=false;previewMember(m);
-    dossier.style.visibility='visible';dossier.style.opacity='0';
-    // site.css enables smooth scrolling. Fix the wall's viewport position
-    // synchronously BEFORE computing the flight and dart landing geometry.
+    dossier.style.visibility='visible';dossier.style.opacity='1';
+    // Resolve scrolling exactly once before measuring viewport coordinates.
     wall.scrollIntoView({behavior:'instant',block:'start'});
-    cinema.classList.add('is-flight');folder.hidden=true;
+    sheet.getAnimations().forEach(a=>a.cancel());
     sheet.style.animation='none';
     sheet.style.transform='translate(-50%,-50%) rotate(1deg)';
     sheet.style.opacity='1';
-    const from=sheet.getBoundingClientRect(),to=dossier.getBoundingClientRect();
-    const x=to.left+to.width/2-(from.left+from.width/2);
-    const y=to.top+to.height/2-(from.top+from.height/2);
-    const scale=to.width/from.width;
-    sheet.getAnimations().forEach(a=>a.cancel());
-    // The extracted summary sheet is shorter than the full dossier.
-    // Keep the moving sheet fully opaque until it is replaced at impact.
-    // Both paper elements must never fade away at the same time.
-    sheet.animate([
-      {transform:'translate(-50%,-50%) rotate(1deg)',opacity:1,offset:0},
-      {transform:'translate(-50%,-50%) translate3d('+x*.72+'px,'+y*.72+'px,0) scale('+(1+(scale-1)*.72)+') rotate(-1deg)',opacity:1,offset:.60},
-      {transform:'translate(-50%,-50%) translate3d('+x+'px,'+y+'px,0) scale('+scale+') rotate(-2deg)',opacity:1,offset:1}
-    ],{duration:FLIGHT_DURATION,fill:'forwards',easing:'cubic-bezier(.2,.7,.3,1)'});
-    dossier.animate([{opacity:0,offset:0},{opacity:0,offset:.72},{opacity:1,offset:1}],
-      {duration:FLIGHT_DURATION,fill:'forwards',easing:'ease-out'});
-    cinema.querySelector('.order-cinematic-shade').animate([
-      {opacity:1},{opacity:.2}
-    ],{duration:FLIGHT_DURATION,fill:'forwards'});
-    // The stationary and moving dart use the SAME measured tip anchor.
+    const from=sheet.getBoundingClientRect(),to=dossierWrap.getBoundingClientRect();
+    const sx=from.width/to.width,sy=from.height/to.height;
+    const dx=(from.left+from.width/2)-(to.left+to.width/2);
+    const dy=(from.top+from.height/2)-(to.top+to.height/2);
+    // Read the mount anchor in its final resting place BEFORE paper moves.
     mount.classList.add('is-visible','is-aiming');
     const anchor=mount.getBoundingClientRect();
-    launchDart(m.accent,anchor.left+DART_TIP_X,anchor.top+DART_TIP_Y);
+    const targetX=anchor.left+DART_TIP_X,targetY=anchor.top+DART_TIP_Y;
+    const starting=`translate3d(${dx}px,${dy}px,0) scale(${sx},${sy})`;
+    dossierWrap.classList.add('is-flying');
+    dossierWrap.style.transformOrigin='50% 50%';
+    dossierWrap.style.transform=starting;
+    dossierWrap.getBoundingClientRect();
+    // Swap the compact summary for the full sheet at matching bounds.
+    cinema.hidden=true;
+    const motion=dossierWrap.animate([
+      {transform:starting},
+      {transform:'translate3d(0px,0px,0px) scale(1,1)'}
+    ],{duration:FLIGHT_DURATION,easing:'cubic-bezier(.25,.72,.27,1)',fill:'forwards'});
+    // No delayed visible dart at (0,0). Create and launch at the real time.
+    delay(()=>{
+      if(token===run && state==='FLIGHT')launchDart(m.accent,targetX,targetY);
+    },FLIGHT_DURATION-DART_DURATION);
     delay(()=>{
       if(token!==run||state!=='FLIGHT')return;
-      folder.hidden=false;showPinned({hit:true});
+      motion.cancel();dossierWrap.style.transform='';dossierWrap.classList.remove('is-flying');
+      showPinned({hit:true});
     },FLIGHT_DURATION);
   }
   function launchDart(accent,x,y){
-    dartFlyer.innerHTML=dartSVG(accent);dartFlyer.hidden=false;
+    dartFlyer.hidden=true;
     dartFlyer.getAnimations().forEach(a=>a.cancel());
-    const sx=innerWidth+120,sy=Math.min(-70,y-270);
-    const midX=x+(sx-x)*.50,midY=y-Math.min(180,Math.abs(y-sy)*.62);
-    const at=(xx,yy,deg)=>'translate3d('+(xx-DART_TIP_X)+'px,'+(yy-DART_TIP_Y)+'px,0) rotate('+deg+'deg)';
+    // Fixed on body: unaffected by order-main's overflow/stacking context.
+    if(dartFlyer.parentElement!==document.body)document.body.append(dartFlyer);
+    dartFlyer.innerHTML=dartSVG(accent);
+    // Start beyond the right edge but within vertical view. The old negative
+    // Y route was invisible until it reached the upper-left part of the page.
+    const sx=innerWidth+90,sy=Math.max(105,Math.min(innerHeight*.30,y+135));
+    const midX=x+(sx-x)*.53,midY=Math.min(innerHeight*.42,sy+52);
+    const at=(xx,yy,deg)=>`translate3d(${xx-DART_TIP_X}px,${yy-DART_TIP_Y}px,0) rotate(${deg}deg)`;
     dartFlyer.style.offsetPath='none';
+    dartFlyer.style.transform=at(sx,sy,-8);
+    dartFlyer.style.opacity='0';
+    dartFlyer.hidden=false;
     dartFlyer.animate([
       {transform:at(sx,sy,-8),opacity:0,offset:0},
-      {transform:at(sx-(sx-x)*.25,sy+(midY-sy)*.62,-16),opacity:1,offset:.25},
-      {transform:at(midX,midY,-19),opacity:1,offset:.56},
+      {transform:at(sx-(sx-x)*.32,sy+(midY-sy)*.62,-13),opacity:1,offset:.32},
+      {transform:at(midX,midY,-20),opacity:1,offset:.62},
       {transform:at(x,y,-25),opacity:1,offset:1}
-    ],{duration:DART_DURATION,delay:FLIGHT_DURATION-DART_DURATION,
-       easing:'cubic-bezier(.17,.63,.26,1)',fill:'both' /* hide at offscreen start during delay */});
+    ],{duration:DART_DURATION,delay:0,easing:'cubic-bezier(.14,.62,.32,1)',fill:'both'});
   }
   function restoreBrowse({reverse=false}={}){
     if(state==='BROWSE')return;clearTimers();const old=state;state='FLIGHT';
