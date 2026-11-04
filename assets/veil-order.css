@@ -773,30 +773,32 @@
 }
 
 
-/* VEIL ORDER v16 — real metallic binder clip belongs to the SERVICE LEDGER,
-   not to the dart-pinned member dossier.  It travels with the rate sheet. */
-.veil-order-page .order-rates{
-  overflow:visible;
-}
+/* VEIL ORDER v17 — slim sprung steel ledger clasp.
+   Keeps the member file exclusively dart-pinned; the clamp belongs only
+   to the independently sliding service ledger, moving with its sheet. */
+.veil-order-page .order-rates{overflow:visible}
 .veil-order-page .order-rates > .order-pin{
   display:block;
   position:absolute;
+  z-index:8;
   left:50%;
-  top:clamp(-43px,-3.7vw,-34px);
-  width:clamp(84px,8.7vw,108px);
+  top:-35px;
+  width:102px;
   height:auto;
-  aspect-ratio:840 / 481;
+  aspect-ratio:291 / 145;
   transform:translateX(-50%);
   border:0;
   border-radius:0;
   box-shadow:none;
-  background:transparent url("veil-rates-clip-v1.webp") center / contain no-repeat;
-  z-index:8;
+  background:transparent url("veil-rates-clip-v2.webp") center / contain no-repeat;
+  filter:drop-shadow(0 3px 2px rgba(7,12,22,.38));
   pointer-events:none;
-  filter:drop-shadow(1px 4px 3px rgba(7,10,19,.46));
 }
 .veil-order-page .order-rates > .order-pin::before,
-.veil-order-page .order-rates > .order-pin::after{
-  content:none;
-  display:none;
+.veil-order-page .order-rates > .order-pin::after{display:none;content:none}
+@media(max-width:899px){
+  .veil-order-page .order-rates > .order-pin{width:90px;top:-31px}
+}
+@media(max-width:599px){
+  .veil-order-page .order-rates > .order-pin{width:82px;top:-28px}
 }
