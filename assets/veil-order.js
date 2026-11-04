@@ -162,10 +162,12 @@ selected.classList.add('is-lifting');
 if(initialIsReduced()){state='FLIGHT';finishPinned(token);return}
 const dx=oldRect.left-newRect.left,dy=oldRect.top-newRect.top;
 const sx=oldRect.width/newRect.width,sy=oldRect.height/newRect.height;
+// Individual transform properties do not conflict with the pinned layout's
+// base transform. The same node travels throughout the complete motion.
 const k=[
-{transform:`translate3d(${dx}px,${dy}px,0) scale(${sx},${sy})`,offset:0,opacity:1},
-{transform:`translate3d(${dx*.45}px,${dy*.37-40}px,0) scale(${sx+(1-sx)*.45},${sy+(1-sy)*.45}) rotate(-3deg)`,offset:.54,opacity:1},
-{transform:'translate3d(0px,0px,0) scale(1,1) rotate(0deg)',offset:1,opacity:1}
+{translate:`${dx}px ${dy}px`,scale:`${sx} ${sy}`,rotate:'0deg',offset:0,opacity:1},
+{translate:`${dx*.45}px ${dy*.37-40}px`,scale:`${sx+(1-sx)*.45} ${sy+(1-sy)*.45}`,rotate:'-3deg',offset:.54,opacity:1},
+{translate:'0px 0px',scale:'1 1',rotate:'0deg',offset:1,opacity:1}
 ];
 selected.animate(k,{duration:1040,easing:'cubic-bezier(.28,.7,.3,1)',fill:'both'});
 delay(()=>{if(token===run)state='FLIGHT'},540);
