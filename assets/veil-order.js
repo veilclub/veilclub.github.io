@@ -125,6 +125,9 @@ function alignDartToPaper(){
   mount.style.top=(tipY-wrap.top-mount.offsetHeight/2)+'px';
 }
 function preparePinnedCard({direct=false}={}){
+const ticketLink=$('order-ticket-link');
+if(ticketLink)ticketLink.href='queue.html?member='+encodeURIComponent(member().slug);
+
 if(selected?.parentElement===stage){}else selected=stage.querySelector(`#order-folder-${active}`);
 if(!selected)throw Error("Selected archive is missing.");
 renderRates();renderDart();
