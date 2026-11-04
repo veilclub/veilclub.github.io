@@ -610,3 +610,33 @@
 .veil-order-page .order-folder.is-lifting .order-folder-detail{animation:veil-single-detail-reveal .9s ease both}
 @keyframes veil-single-detail-reveal{0%,25%{opacity:.25}100%{opacity:1}}
 @media(prefers-reduced-motion:reduce){.veil-order-page .order-folder.is-lifting .order-folder-detail{animation:none}}
+
+/* VEIL ORDER mobile folder / pin calibration
+   Keep horizontal clipping for coverflow. Make actual vertical room for
+   the protruding archive tabs instead of invalid overflow-x/y combinations. */
+@media(max-width:599px){
+  .veil-order-page .order-stage{
+    height:calc(clamp(410px,125vw,485px) + 52px);
+  }
+  .veil-order-page .order-stage .order-folder:not(.is-pinned){
+    top:calc(49% + 16px);
+  }
+}
+/* The metal point is at x:3px / y:50%; angle never moves the tip anchor. */
+.veil-order-page .order-dart-mount .veil-dart-art{
+  transform-origin:3px 50%;
+  transform:rotate(-20deg);
+}
+.veil-order-page .order-dart-mount.is-hit .veil-dart-art{
+  animation:veil-dart-pin-wobble .38s ease-out;
+}
+@keyframes veil-dart-pin-wobble{
+  0%{transform:rotate(-15deg)}
+  25%{transform:rotate(-25deg)}
+  52%{transform:rotate(-18deg)}
+  76%{transform:rotate(-22deg)}
+  100%{transform:rotate(-20deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  .veil-order-page .order-dart-mount.is-hit .veil-dart-art{animation:none}
+}
