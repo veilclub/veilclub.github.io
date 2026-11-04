@@ -26,6 +26,7 @@ const RATE_GROUPS = [
 
 (function(){
 'use strict';
+const ORDER_MEMBERS = MEMBERS.filter(m => !['不接受指名','非指名'].includes(m.appointment));
 const $=id=>document.getElementById(id);
 const stage=$('order-stage'),browse=$('order-browse'),wall=$('order-wall'),slot=$('order-dossier-slot');
 const rates=$('order-rates'),mount=$('order-dart-mount'),dots=$('order-dots'),counter=$('order-counter'),announcer=$('order-announcer');
@@ -37,7 +38,7 @@ const initialIsReduced=()=>reduced.matches;
 let state='BROWSE',active=0,drag=null,dragFrac=0,run=0,timers=[],clickLock=0,wheelTime=0,selected=null;
 const delay=(fn,ms)=>{const t=setTimeout(fn,ms);timers.push(t);return t};
 const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];run++;if(selected){selected.getAnimations().forEach(a=>a.cancel())}mount.getAnimations().forEach(a=>a.cancel())};
-const member=()=>MEMBERS[active];
+const member=()=>ORDER_MEMBERS[active];
 const pending=()=>'<span class="order-photo-pending" role="img" aria-label="PORTRAIT PENDING"><b>V</b><span>VEIL / THE ARCHIVE</span><span>PORTRAIT PENDING</span></span>';
 const portrait=(m,eager=false)=>m.photo?`<img src="${safe(m.photo)}" alt="${safe(m.name)}形象照" loading="${eager?'eager':'lazy'}" decoding="async" draggable="false" onerror="const p=this.parentNode,f=p.querySelector('.order-photo-pending');this.replaceWith(f);f.hidden=false"><span class="order-photo-pending" hidden><b>V</b><span>VEIL / THE ARCHIVE</span><span>PORTRAIT PENDING</span></span>`:pending();
 
@@ -77,8 +78,8 @@ if(!mount.querySelector('.veil-dart-art'))mount.innerHTML='<img class="veil-dart
 mount.className='order-dart-mount';
 }
 function createBrowse(){
-stage.innerHTML=MEMBERS.map((m,i)=>`<button type="button" class="order-folder" id="order-folder-${i}" data-index="${i}" role="option" tabindex="-1" aria-selected="false" aria-label="${safe(m.archive)} ${safe(m.name)}" style="--folder-accent:${m.accent}">${folderHTML(m,i)}</button>`).join('');
-dots.innerHTML=MEMBERS.map((m,i)=>`<button class="order-dot" type="button" data-dot="${i}" aria-current="false" aria-label="移至 ${safe(m.archive)} ${safe(m.name)}"></button>`).join('');
+stage.innerHTML=ORDER_MEMBERS.map((m,i)=>`<button type="button" class="order-folder" id="order-folder-${i}" data-index="${i}" role="option" tabindex="-1" aria-selected="false" aria-label="${safe(m.archive)} ${safe(m.name)}" style="--folder-accent:${m.accent}">${folderHTML(m,i)}</button>`).join('');
+dots.innerHTML=ORDER_MEMBERS.map((m,i)=>`<button class="order-dot" type="button" data-dot="${i}" aria-current="false" aria-label="移至 ${safe(m.archive)} ${safe(m.name)}"></button>`).join('');
 dots.addEventListener('click',e=>{const b=e.target.closest('[data-dot]');if(b&&state==='BROWSE')setActive(Number(b.dataset.dot))});
 positionCards();renderDart();
 }
@@ -102,11 +103,11 @@ el.classList.toggle('is-active',i===active);
 const img=el.querySelector('img');if(img)img.loading=ad<=1?'eager':'lazy';
 });
 dots.querySelectorAll('.order-dot').forEach((d,i)=>d.setAttribute('aria-current',String(i===active)));
-$('order-prev').disabled=active===0;$('order-next').disabled=active===MEMBERS.length-1;
-counter.textContent=String(active+1).padStart(2,'0')+' / '+String(MEMBERS.length).padStart(2,'0');
+$('order-prev').disabled=active===0;$('order-next').disabled=active===ORDER_MEMBERS.length-1;
+counter.textContent=String(active+1).padStart(2,'0')+' / '+String(ORDER_MEMBERS.length).padStart(2,'0');
 announcer.textContent=member().archive+' '+member().name;
 }
-function setActive(i){if(state!=='BROWSE')return;active=clamp(i,0,MEMBERS.length-1);dragFrac=0;positionCards()}
+function setActive(i){if(state!=='BROWSE')return;active=clamp(i,0,ORDER_MEMBERS.length-1);dragFrac=0;positionCards()}
 // Position the actual dart tip on the TOP EDGE OF THE REAL PAPER, not the
 // dossier wrapper. The wrapper has breakpoint-dependent padding.
 function alignDartToPaper(){
@@ -242,7 +243,7 @@ delay(()=>{anim.cancel();done()},585);
 }
 function backToBrowse(){if(state!=='PINNED')return;if(history.state?.veilPinned)history.back();else{history.replaceState({veilBrowse:true},'',pagePath);restoreBrowse()}}
 function syncFromLocation(){
-const slug=decodeURIComponent(location.hash.slice(1)),idx=MEMBERS.findIndex(m=>m.slug===slug);
+const slug=decodeURIComponent(location.hash.slice(1)),idx=ORDER_MEMBERS.findIndex(m=>m.slug===slug);
 if(idx>=0){
 if(state!=='BROWSE')restoreBrowse({reverse:false});
 active=idx;positionCards();clearTimers();
@@ -304,7 +305,7 @@ window.addEventListener('resize',()=>{
 });
 window.addEventListener('popstate',syncFromLocation);
 createBrowse();
-const first=decodeURIComponent(location.hash.slice(1)),found=MEMBERS.findIndex(m=>m.slug===first);
+const first=decodeURIComponent(location.hash.slice(1)),found=ORDER_MEMBERS.findIndex(m=>m.slug===first);
 if(found!==-1){
 history.replaceState({veilBrowse:true},'',pagePath);
 history.pushState({veilPinned:true},'',pagePath+'#'+first);
