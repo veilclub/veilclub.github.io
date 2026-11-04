@@ -640,3 +640,76 @@
 @media(prefers-reduced-motion:reduce){
   .veil-order-page .order-dart-mount.is-hit .veil-dart-art{animation:none}
 }
+
+/* VEIL ORDER / dart pierce v13:
+   Same original dart art. Dark puncture is behind the shaft; a tiny torn
+   paper lip occludes the needle so it enters the sheet instead of floating. */
+.veil-order-page .order-dart-mount{
+  isolation:isolate;
+}
+.veil-order-page .order-dart-mount .veil-dart-art{
+  position:relative;
+  z-index:2;
+  filter:brightness(.95)
+    drop-shadow(1px 3px 2px rgba(0,0,0,.76))
+    drop-shadow(4px 7px 5px rgba(0,0,0,.23));
+}
+.veil-order-page .order-dart-mount .veil-dart-wound{
+  display:block;
+  position:absolute;
+  z-index:3;
+  left:3px;
+  top:50%;
+  width:18px;
+  height:13px;
+  pointer-events:none;
+  border-radius:48% 52% 43% 57%;
+  transform:translate(-47%,-50%) rotate(-20deg) scale(.72);
+  opacity:0;
+  background:radial-gradient(ellipse at 49% 51%,
+    #151923 0 24%,
+    #293241 29% 39%,
+    #8792a4 43% 49%,
+    rgba(235,237,244,.2) 56%,
+    transparent 76%);
+  box-shadow:0 2px 2px rgba(0,0,0,.21);
+  transition:opacity .055s ease,transform .19s cubic-bezier(.2,.8,.2,1);
+}
+.veil-order-page .order-dart-mount .veil-dart-paper-lip{
+  display:block;
+  position:absolute;
+  z-index:4;
+  left:3px;
+  top:50%;
+  width:15px;
+  height:12px;
+  pointer-events:none;
+  opacity:0;
+  background:linear-gradient(155deg,
+    #f9f9fc 6%,#e5e7ee 42%,#c7cfdb 70%,#586678 100%);
+  clip-path:polygon(0 7%,42% 0,68% 20%,100% 5%,84% 76%,45% 100%,0 81%,18% 50%);
+  transform-origin:37% 47%;
+  transform:translate(-52%,-50%) rotate(-20deg);
+  filter:drop-shadow(1px 2px 1px rgba(7,11,19,.65));
+  transition:opacity .065s ease;
+}
+.veil-order-page .order-dart-mount.is-pierced .veil-dart-wound{
+  opacity:1;transform:translate(-47%,-50%) rotate(-20deg) scale(1);
+}
+.veil-order-page .order-dart-mount.is-pierced .veil-dart-paper-lip{
+  opacity:1;
+}
+.veil-order-page .order-dart-mount .order-sparks{
+  position:absolute;inset:0;z-index:5;
+}
+.veil-order-page .order-dart-mount .order-sparks i{
+  left:3px;top:50%;
+}
+@media(max-width:599px){
+  .veil-order-page .order-dart-mount .veil-dart-wound{width:15px;height:11px}
+  .veil-order-page .order-dart-mount .veil-dart-paper-lip{width:13px;height:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .veil-order-page .order-dart-mount .veil-dart-wound,
+  .veil-order-page .order-dart-mount .veil-dart-paper-lip{transition:none}
+}
