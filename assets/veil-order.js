@@ -117,8 +117,10 @@ function alignDartToPaper(){
   const paper=selected.getBoundingClientRect();
   const wrap=mount.offsetParent?.getBoundingClientRect();
   if(!wrap || !paper.width)return;
-  const tipX=paper.left+paper.width/2;
-  const tipY=paper.top+clamp(paper.height*.055,25,35);
+  // Pin slightly left of center, directly inside the dossier header:
+  // this point stays clear of the large title and avoids the paper edge.
+  const tipX=paper.left+paper.width*.42;
+  const tipY=paper.top+16;
   // The art's visible metal tip is 3px from its left edge; CSS already
   // translates the mount by -3px, keeping mount.left+3 at tipX.
   mount.style.left=(tipX-wrap.left)+'px';
@@ -145,10 +147,11 @@ function finishPinned(token){
 if(token!==run||state!=='FLIGHT')return;
 state='PINNED';selected.classList.remove('is-lifting');selected.style.transformOrigin='';
 selected.getAnimations().forEach(a=>a.cancel());
-alignDartToPaper();
 const portraitNode=selected.querySelector('.order-folder-photo');
 portraitNode?.getAnimations().forEach(a=>a.cancel());
 if(portraitNode)portraitNode.style.transformOrigin='';
+// Measure the final settled paper, never a frame from the moving animation.
+alignDartToPaper();
 mount.getAnimations().forEach(a=>a.cancel());mount.style.opacity='';
 mount.classList.remove('is-aiming');mount.classList.add('is-visible','is-hit');
 selected.classList.add('is-hit');wall.classList.add('is-hit');
