@@ -114,13 +114,14 @@ const RATE_GROUPS = [
     const scale=to.width/from.width;
     sheet.getAnimations().forEach(a=>a.cancel());
     // The extracted summary sheet is shorter than the full dossier.
-    // Fade between them during approach instead of a sudden vertical jump.
+    // Keep the moving sheet fully opaque until it is replaced at impact.
+    // Both paper elements must never fade away at the same time.
     sheet.animate([
       {transform:'translate(-50%,-50%) rotate(1deg)',opacity:1,offset:0},
       {transform:'translate(-50%,-50%) translate3d('+x*.72+'px,'+y*.72+'px,0) scale('+(1+(scale-1)*.72)+') rotate(-1deg)',opacity:1,offset:.60},
-      {transform:'translate(-50%,-50%) translate3d('+x+'px,'+y+'px,0) scale('+scale+') rotate(-2deg)',opacity:0,offset:1}
+      {transform:'translate(-50%,-50%) translate3d('+x+'px,'+y+'px,0) scale('+scale+') rotate(-2deg)',opacity:1,offset:1}
     ],{duration:FLIGHT_DURATION,fill:'forwards',easing:'cubic-bezier(.2,.7,.3,1)'});
-    dossier.animate([{opacity:0,offset:0},{opacity:0,offset:.52},{opacity:1,offset:1}],
+    dossier.animate([{opacity:0,offset:0},{opacity:0,offset:.72},{opacity:1,offset:1}],
       {duration:FLIGHT_DURATION,fill:'forwards',easing:'ease-out'});
     cinema.querySelector('.order-cinematic-shade').animate([
       {opacity:1},{opacity:.2}
@@ -147,7 +148,7 @@ const RATE_GROUPS = [
       {transform:at(midX,midY,-19),opacity:1,offset:.56},
       {transform:at(x,y,-25),opacity:1,offset:1}
     ],{duration:DART_DURATION,delay:FLIGHT_DURATION-DART_DURATION,
-       easing:'cubic-bezier(.17,.63,.26,1)',fill:'forwards'});
+       easing:'cubic-bezier(.17,.63,.26,1)',fill:'both' /* hide at offscreen start during delay */});
   }
   function restoreBrowse({reverse=false}={}){
     if(state==='BROWSE')return;clearTimers();const old=state;state='FLIGHT';
