@@ -110,6 +110,20 @@ counter.textContent=String(active+1).padStart(2,'0')+' / '+String(MEMBERS.length
 announcer.textContent=member().archive+' '+member().name;
 }
 function setActive(i){if(state!=='BROWSE')return;active=clamp(i,0,MEMBERS.length-1);dragFrac=0;positionCards()}
+// Position the actual dart tip on the TOP EDGE OF THE REAL PAPER, not the
+// dossier wrapper. The wrapper has breakpoint-dependent padding.
+function alignDartToPaper(){
+  if(!selected || selected.parentElement!==slot)return;
+  const paper=selected.getBoundingClientRect();
+  const wrap=mount.offsetParent?.getBoundingClientRect();
+  if(!wrap || !paper.width)return;
+  const tipX=paper.left+paper.width/2;
+  const tipY=paper.top+clamp(paper.height*.055,25,35);
+  // The art's visible metal tip is 3px from its left edge; CSS already
+  // translates the mount by -3px, keeping mount.left+3 at tipX.
+  mount.style.left=(tipX-wrap.left)+'px';
+  mount.style.top=(tipY-wrap.top-mount.offsetHeight/2)+'px';
+}
 function preparePinnedCard({direct=false}={}){
 if(selected?.parentElement===stage){}else selected=stage.querySelector(`#order-folder-${active}`);
 if(!selected)throw Error("Selected archive is missing.");
@@ -123,6 +137,7 @@ selected.removeAttribute('role');selected.removeAttribute('aria-selected');
 selected.tabIndex=-1;selected.style.removeProperty('pointer-events');
 selected.style.transformOrigin='top left';
 mount.classList.add('is-visible','is-aiming');
+alignDartToPaper();
 if(direct){mount.classList.remove('is-aiming');rates.classList.add('is-visible');state='PINNED'}
 return {oldRect,newRect:selected.getBoundingClientRect()};
 }
@@ -130,6 +145,7 @@ function finishPinned(token){
 if(token!==run||state!=='FLIGHT')return;
 state='PINNED';selected.classList.remove('is-lifting');selected.style.transformOrigin='';
 selected.getAnimations().forEach(a=>a.cancel());
+alignDartToPaper();
 const portraitNode=selected.querySelector('.order-folder-photo');
 portraitNode?.getAnimations().forEach(a=>a.cancel());
 if(portraitNode)portraitNode.style.transformOrigin='';
@@ -282,7 +298,10 @@ else if(e.key==='ArrowLeft'){e.preventDefault();setActive(active-1)}
 else if((e.key==='Enter'||e.key===' ')&&(document.activeElement===stage||stage.contains(document.activeElement))){e.preventDefault();openMember()}
 }else if(e.key==='Escape'&&state==='PINNED'){e.preventDefault();backToBrowse()}
 });
-window.addEventListener('resize',()=>{if(state==='BROWSE')positionCards()});
+window.addEventListener('resize',()=>{
+  if(state==='BROWSE')positionCards();
+  else if(state==='PINNED')alignDartToPaper();
+});
 window.addEventListener('popstate',syncFromLocation);
 createBrowse();
 const first=decodeURIComponent(location.hash.slice(1)),found=MEMBERS.findIndex(m=>m.slug===first);
