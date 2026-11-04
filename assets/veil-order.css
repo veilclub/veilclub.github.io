@@ -159,3 +159,265 @@
 .veil-order-page .order-dart-mount.is-hit .veil-dart-art{animation:order-dart-wobble .42s ease-out}
 @media(max-width:599px){.veil-order-page .order-dart-mount,.veil-order-page .order-dart-flyer{width:112px;height:42px}}
 @media(prefers-reduced-motion:reduce){.veil-order-page .order-dart-mount.is-hit .veil-dart-art{animation:none}}
+
+/* VEIL / THE DOSSIER — visual system v6.
+   Sharp silver/graphite manga stationery, with fluid content areas.
+   Dossier is pinned first; the standalone rate ledger is pushed into view later. */
+.veil-order-page{
+  --veil-paper:#eaebef;
+  --veil-ink:#171a22;
+  --veil-rule:rgba(52,62,79,.29);
+}
+.veil-order-page .order-main{
+  background:radial-gradient(ellipse at 69% 8%,rgba(107,119,138,.21),transparent 43%),
+    linear-gradient(150deg,#0c1019 0%,#08090d 57%,#151a22 100%);
+}
+.veil-order-page .order-folder-face{
+  border:1px solid rgba(205,212,225,.76);
+  background:linear-gradient(146deg,#383d4a 0%,#202633 18%,#0b0e17 58%,#151c29 100%);
+  box-shadow:inset 0 0 0 3px #ffffff0a,inset 0 -33px 45px #03050788;
+}
+.veil-order-page .order-folder-face::before{
+  background:repeating-linear-gradient(150deg,transparent 0 18px,#e6eaf008 19px 20px),
+   radial-gradient(circle,#e4e8f420 0 1px,transparent 1.4px) right top/8px 8px;
+  opacity:.9;
+}
+.veil-order-page .order-folder-head{
+  border-bottom:1px solid rgba(214,220,232,.28);
+  margin-bottom:9px;
+  font-size:8px;
+}
+.veil-order-page .order-folder-bottom{
+  border-top:1px solid rgba(214,220,232,.35);
+  padding-top:11px;
+}
+.veil-order-page .order-wall{
+  isolation:isolate;
+  background:
+    linear-gradient(150deg,rgba(38,42,51,.9),rgba(18,21,29,.94) 70%),
+    repeating-linear-gradient(0deg,transparent 0 39px,rgba(192,200,214,.11) 40px 41px);
+  box-shadow:inset 0 0 90px rgba(0,0,0,.52),0 30px 70px #0006;
+}
+.veil-order-page .order-wall::before{
+  opacity:.28;
+  background:radial-gradient(circle,#cad1dc20 0 1px,transparent 1.4px) 0 0/12px 12px;
+  mask-image:linear-gradient(110deg,transparent 30%,black 100%);
+}
+.veil-order-page .order-wall-grid{
+  position:relative;
+  grid-template-columns:minmax(0,2fr) minmax(0,3fr);
+  gap:clamp(19px,3vw,40px);
+}
+.veil-order-page .order-dossier-wrap{
+  filter:drop-shadow(0 16px 13px #0007);
+  padding-top:32px;
+}
+.veil-order-page .order-dossier-wrap::before{
+  content:"";position:absolute;inset:28px 8px 18px;
+  transform:rotate(3deg) translate3d(-4px,8px,0);
+  background:#8c93a3;border:1px solid #d7dce4;
+  clip-path:polygon(0 2%,6% 0,98% 1%,100% 97%,95% 100%,0 99%);
+  pointer-events:none;
+}
+.veil-order-page .order-dossier{
+  padding:clamp(18px,2.3vw,30px);
+  border:1px solid #eef1f5;
+  background:
+    linear-gradient(135deg,#ffffff44 0%,transparent 22%,#1d243408 74%),
+    linear-gradient(165deg,#f3f3f6 0%,#e5e6ed 100%);
+  clip-path:polygon(0 2%,3% 0,95% 0,100% 4%,100% 97%,97% 100%,0 100%);
+  box-shadow:0 20px 40px #0009;
+  overflow:visible;
+}
+.veil-order-page .order-dossier::before{
+  top:0;left:0;width:100%;height:5px;
+  background:linear-gradient(90deg,#333d4d 0%,#929eaf 51%,#202633 100%);
+}
+.veil-order-page .order-dossier::after{
+  content:"";position:absolute;right:0;bottom:0;width:47%;height:24%;
+  pointer-events:none;opacity:.25;
+  background:radial-gradient(circle,#27354b 0 1px,transparent 1.5px) 0 0/8px 8px;
+  mask-image:linear-gradient(115deg,transparent,#000);
+}
+.veil-order-page .order-dossier-head{
+  padding:7px 0 14px;
+  gap:12px;align-items:center;
+  border-bottom:2px solid #3b4352;
+}
+.veil-order-page .order-dossier-brand{
+  display:flex;flex-direction:column;
+  font:italic 500 clamp(29px,3vw,42px)/.9 Georgia,serif;
+  letter-spacing:-.07em;color:#151b27;
+  transform:skewX(-7deg);
+}
+.veil-order-page .order-dossier-brand small{
+  font:700 8px/2 ui-monospace,monospace;
+  letter-spacing:.22em;transform:skewX(7deg);
+}
+.veil-order-page .order-dossier-archive{font-size:9px;text-align:right;letter-spacing:.08em}
+.veil-order-page .order-dossier-idband{
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+  margin:12px 0 18px;
+  background:linear-gradient(100deg,#19212f,#465365 80%,transparent 81%);
+  clip-path:polygon(0 0,98% 0,100% 100%,0 100%);
+  color:#f1f3f8;
+  padding:8px 12px;
+  font:700 9px/1.5 ui-monospace,monospace;
+  letter-spacing:.1em;
+}
+.veil-order-page .order-dossier-barcode{
+  width:58px;height:17px;flex:none;
+  background:repeating-linear-gradient(90deg,#f1f3fa 0 2px,transparent 2px 4px,#fff 4px 5px,transparent 5px 8px);
+}
+.veil-order-page .order-dossier-name{
+  padding:0 0 10px;margin:8px 0 15px;
+  font-size:clamp(29px,3.5vw,43px);
+  border-bottom:1px solid #7d879a66;
+}
+.veil-order-page .order-dossier-photo{
+  background:#262d38;border:6px solid #f9fafb;
+  box-shadow:3px 9px 15px #0a0e1b56;
+}
+.veil-order-page .order-dossier-fields{gap:6px}
+.veil-order-page .order-dossier-fields>div{padding-bottom:7px}
+.veil-order-page .order-dossier-fields dt{
+  display:inline-block;margin:0 0 6px;padding:3px 9px 3px 6px;
+  color:#e7eaf1;background:#2b3545;
+  clip-path:polygon(0 0,92% 0,100% 100%,0 100%);
+  font-size:8px;
+}
+.veil-order-page .order-dossier-fields dd{color:#1e2634;font-size:12px;line-height:1.55}
+.veil-order-page .order-intro-block{margin-top:23px;border-top:2px solid #424f61}
+.veil-order-page .order-intro-label{
+  display:flex;align-items:center;gap:8px;margin-top:-1px;
+  padding:8px 12px 8px 8px;width:max-content;max-width:100%;
+  background:#242d3c;color:#fafafc;
+  font:700 10px/1.4 ui-monospace,monospace;
+  letter-spacing:.14em;clip-path:polygon(0 0,96% 0,100% 100%,0 100%);
+}
+.veil-order-page .order-intro-label span{opacity:.67;font-size:8px}
+.veil-order-page .order-dossier-intro{
+  margin:0;padding:13px 3px 0;border:0;
+  font-size:13px;line-height:1.86;
+  color:#263040;
+}
+.veil-order-page .order-dossier-tags{padding-top:11px;border-top:1px solid #626f843d}
+.veil-order-page .order-dossier-tags span{background:#d5d9e3;color:#303949;border:0}
+.veil-order-page .order-dossier-stamp{border-color:#7d8b9f;color:#627186;opacity:.4}
+.veil-order-page .order-holo{opacity:.24}
+.veil-order-page .order-rates{
+  visibility:hidden;
+  pointer-events:none;
+  padding:clamp(21px,2.35vw,34px);
+  border:1px solid #dce0e8;
+  background:
+    linear-gradient(152deg,#f6f5f7 0%,#e6e7ee 88%,#dee2e9 100%);
+  box-shadow:7px 13px 28px #0008;
+  opacity:0;
+  transform:translate3d(110%,14px,0) rotate(5deg);
+  will-change:transform,opacity;
+  overflow:visible;
+}
+.veil-order-page .order-rates::before{
+  content:"";position:absolute;pointer-events:none;
+  top:0;right:0;width:38%;height:80px;opacity:.24;
+  background:radial-gradient(circle,#374258 0 1px,transparent 1.5px) 0 0/9px 9px;
+  mask-image:linear-gradient(115deg,transparent,#000);
+}
+.veil-order-page .order-rates::after{
+  content:"";position:absolute;inset:auto 8px -9px 15px;height:12px;
+  background:#b4bac8;transform:rotate(1deg);
+  z-index:-1;opacity:.75;pointer-events:none;
+}
+.veil-order-page .order-rates.is-visible{
+  visibility:visible;
+  pointer-events:auto;
+  opacity:1;
+  animation:veil-order-ledger-push .8s cubic-bezier(.2,.8,.23,1) both;
+}
+@keyframes veil-order-ledger-push{
+  0%{opacity:.75;transform:translate3d(116%,17px,0) rotate(5deg) scale(.985)}
+  55%{opacity:1;transform:translate3d(-13px,1px,0) rotate(-.9deg) scale(1)}
+  78%{opacity:1;transform:translate3d(5px,0,0) rotate(.55deg) scale(1)}
+  100%{opacity:1;transform:translate3d(0,0,0) rotate(.25deg) scale(1)}
+}
+.veil-order-page .order-pin{
+  top:-10px;left:50%;
+  width:46px;height:20px;border:2px solid #454c5d;
+  border-radius:2px;
+  background:linear-gradient(180deg,#d9dde5 0%,#5c6678 28%,#242b39 60%,#b6c0ce 100%);
+  box-shadow:0 4px 4px #0007,inset 0 0 1px #fff;
+}
+.veil-order-page .order-pin::before{
+  content:"";position:absolute;width:15px;height:14px;
+  top:-12px;left:50%;transform:translateX(-50%);
+  border:3px solid #636b7a;border-radius:8px 8px 0 0;
+  border-bottom:0;
+}
+.veil-order-page .order-rates-kicker{
+  display:block;padding:8px 0 12px;border-bottom:3px solid #2b3444;
+  letter-spacing:.16em;color:#4c5b71;font-size:10px;
+}
+.veil-order-page .order-rates h2{
+  font:500 clamp(29px,3vw,41px)/1.2 Georgia,serif;
+  padding:0 0 12px;margin:16px 0 9px;
+  color:#131b29;letter-spacing:.02em;
+}
+.veil-order-page .order-rates-lead{padding:0 0 14px;border-bottom:1px solid #8a96a766}
+.veil-order-page .order-rate-group{border-top:0;padding-top:7px}
+.veil-order-page .order-rate-group h3{
+  margin:15px 0 7px;
+  padding:9px 12px;
+  color:#f3f4f8;background:linear-gradient(98deg,#202938,#566275 93%,transparent 93%);
+  clip-path:polygon(0 0,98% 0,100% 100%,0 100%);
+  font-size:14px;font-weight:650;
+}
+.veil-order-page .order-rate-item{padding:12px 8px;border-top:1px solid #bdc3cd}
+.veil-order-page .order-rate-head{gap:15px}
+.veil-order-page .order-rate-price{
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.02em;color:#1c2534;
+}
+.veil-order-page .order-rate-notes{font-size:12px;line-height:1.75}
+.veil-order-page .order-rate-footer{
+  margin-top:21px;padding:13px;
+  border:1px solid #a2aab8;
+  color:#374155;background:#d5d9e4;
+}
+.veil-order-page .order-wall-grid::after{
+  content:"";position:absolute;z-index:-1;
+  bottom:-13px;left:42%;right:0;height:36px;
+  background:linear-gradient(90deg,transparent,#0b1019b0 24%,transparent);
+  filter:blur(12px);pointer-events:none;
+}
+@media(max-width:899px){
+  .veil-order-page .order-wall-grid{grid-template-columns:minmax(0,44%) minmax(0,56%);gap:16px}
+  .veil-order-page .order-dossier-wrap{padding:27px 3px 15px}
+  .veil-order-page .order-dossier{padding:clamp(15px,2vw,23px)}
+  .veil-order-page .order-dossier-brand{font-size:28px}
+  .veil-order-page .order-dossier-name{font-size:27px}
+  .veil-order-page .order-dossier-main{grid-template-columns:1fr}
+  .veil-order-page .order-dossier-photo{max-width:164px}
+  .veil-order-page .order-rates{padding:19px}
+}
+@media(max-width:599px){
+  .veil-order-page .order-wall-grid{grid-template-columns:minmax(0,1fr);gap:21px}
+  .veil-order-page .order-dossier-wrap{padding:27px 8px 10px}
+  .veil-order-page .order-dossier{padding:22px}
+  .veil-order-page .order-dossier-main{grid-template-columns:38% 1fr}
+  .veil-order-page .order-dossier-photo{max-width:none}
+  .veil-order-page .order-dossier-idband{font-size:8px}
+  .veil-order-page .order-rates{padding:24px 17px}
+  .veil-order-page .order-rates.is-visible{animation-name:veil-order-ledger-push-mobile}
+  @keyframes veil-order-ledger-push-mobile{
+    0%{opacity:.75;transform:translate3d(105%,24px,0) rotate(3deg) scale(.98)}
+    58%{opacity:1;transform:translate3d(-9px,0,0) rotate(-.8deg)}
+    82%{opacity:1;transform:translate3d(3px,0,0) rotate(.4deg)}
+    100%{opacity:1;transform:translate3d(0,0,0) rotate(0)}
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .veil-order-page .order-rates.is-visible{animation:veil-order-ledger-fade .2s ease both}
+  @keyframes veil-order-ledger-fade{from{opacity:0;transform:none}to{opacity:1;transform:none}}
+  .veil-order-page .order-folder{transition:none}
+}
