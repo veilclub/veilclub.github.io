@@ -7,7 +7,7 @@ const $=id=>document.getElementById(id);
 const form=$('queue-form'),message=$('queue-feedback'),status=$('queue-status'),submit=$('queue-submit'),member=$('queue-member');
 const params=new URLSearchParams(location.search),slug=params.get('member');
 if([...member.options].some(o=>o.value===slug))member.value=slug;
-const LABEL={waiting:'等待帶位',seated:'已帶位',ordering:'可繼續點餐',closed:'已結束',cancelled:'已取消'};
+const LABEL={waiting:'等待帶位',seated:'已帶位',ordering:'服務確認中',closed:'已結束',cancelled:'已取消'};
 const TOKEN_STORAGE='veil_admission_ticket_token_v1';
 const api=async(path,body=null)=>{
   const response=await fetch(API+'/rest/v1/'+path,{
