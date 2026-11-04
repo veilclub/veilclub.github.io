@@ -77,10 +77,11 @@ const RATE_GROUPS = [
     state='PINNED';clearTimers();drag=null;const m=member();
     dossier.getAnimations().forEach(a=>a.cancel());rates.getAnimations().forEach(a=>a.cancel());
     wall.hidden=false;browse.hidden=true;cinema.hidden=true;cinema.className='order-cinematic';dartFlyer.hidden=true;
-    previewMember(m);dossier.style.visibility='visible';mount.classList.add('is-visible');
-    if(hit){mount.classList.add('is-hit');dossier.classList.add('is-hit');wall.classList.add('is-hit');mount.querySelector('.order-sparks').classList.add('is-hit');delay(()=>{dossier.classList.remove('is-hit');wall.classList.remove('is-hit');mount.classList.remove('is-hit')},450)}
+    previewMember(m);dossier.style.visibility='visible';dossier.style.opacity='';mount.classList.add('is-visible');
+    if(hit){mount.classList.remove('is-aiming');mount.classList.add('is-hit');dossier.classList.add('is-hit');wall.classList.add('is-hit');mount.querySelector('.order-sparks').classList.add('is-hit');delay(()=>{dossier.classList.remove('is-hit');wall.classList.remove('is-hit');mount.classList.remove('is-hit')},450)}
     rates.classList.add('is-visible');
-    if(direct||hit)wall.scrollIntoView({behavior:'auto',block:'start'});
+    // On deep links only: an instant scroll. During flight the wall is already fixed.
+    if(direct)wall.scrollIntoView({behavior:'instant',block:'start'});
     $('order-rates-title').focus({preventScroll:true});
   }
   function openMember(){if(state!=='BROWSE')return;history.pushState({veilPinned:true},'',pagePath+'#'+member().slug);if(isReduced()){showPinned({direct:true});return}
@@ -91,35 +92,67 @@ const RATE_GROUPS = [
     const token=run;delay(()=>{if(state!=='PULL'||token!==run)return;sheet.addEventListener('pointerdown',skipPause,{once:true});delay(()=>{if(state==='PULL'&&token===run)beginFlight()},900)},820);
   }
   function skipPause(){if(state==='PULL')beginFlight()}
-  function beginFlight(){if(state!=='PULL')return;state='FLIGHT';const token=run;const m=member();
-    sheet.removeEventListener('pointerdown',skipPause);browse.hidden=true;wall.hidden=false;previewMember(m);dossier.style.visibility='hidden';wall.scrollIntoView({behavior:'auto',block:'start'});
-    cinema.classList.add('is-flight');folder.hidden=true;sheet.style.animation='none';sheet.style.transform='translate(-50%,-50%) rotate(1deg)';sheet.style.opacity='1';
+  const FLIGHT_DURATION=610;
+  const DART_DURATION=290;
+  const DART_TIP_X=100*4/108, DART_TIP_Y=27;
+  function beginFlight(){
+    if(state!=='PULL')return;
+    state='FLIGHT';const token=run,m=member();
+    sheet.removeEventListener('pointerdown',skipPause);
+    browse.hidden=true;wall.hidden=false;previewMember(m);
+    dossier.style.visibility='visible';dossier.style.opacity='0';
+    // site.css enables smooth scrolling. Fix the wall's viewport position
+    // synchronously BEFORE computing the flight and dart landing geometry.
+    wall.scrollIntoView({behavior:'instant',block:'start'});
+    cinema.classList.add('is-flight');folder.hidden=true;
+    sheet.style.animation='none';
+    sheet.style.transform='translate(-50%,-50%) rotate(1deg)';
+    sheet.style.opacity='1';
     const from=sheet.getBoundingClientRect(),to=dossier.getBoundingClientRect();
-    const x=to.left+to.width/2-(from.left+from.width/2),y=to.top+to.height/2-(from.top+from.height/2);const scale=to.width/from.width;
-    // No layout properties are animated: composited transforms and opacity only.
-    sheet.style.transform='translate(-50%,-50%) rotate(1deg)';sheet.style.opacity='1';
-    sheet.animate([{transform:'translate(-50%,-50%) rotate(1deg)'},{transform:`translate(-50%,-50%) translate3d(${x}px,${y}px,0) scale(${scale}) rotate(-2deg)`}],{duration:650,fill:'forwards',easing:'cubic-bezier(.2,.7,.3,1)'});
-    cinema.querySelector('.order-cinematic-shade').animate([{opacity:1},{opacity:.2}],{duration:650,fill:'forwards'});
-    const targetX=to.left+to.width*.5,targetY=to.top+25;
-    launchDart(m.accent,targetX,targetY);
-    delay(()=>{if(token!==run||state!=='FLIGHT')return;folder.hidden=false;showPinned({hit:true})},650);
+    const x=to.left+to.width/2-(from.left+from.width/2);
+    const y=to.top+to.height/2-(from.top+from.height/2);
+    const scale=to.width/from.width;
+    sheet.getAnimations().forEach(a=>a.cancel());
+    // The extracted summary sheet is shorter than the full dossier.
+    // Fade between them during approach instead of a sudden vertical jump.
+    sheet.animate([
+      {transform:'translate(-50%,-50%) rotate(1deg)',opacity:1,offset:0},
+      {transform:'translate(-50%,-50%) translate3d('+x*.72+'px,'+y*.72+'px,0) scale('+(1+(scale-1)*.72)+') rotate(-1deg)',opacity:1,offset:.60},
+      {transform:'translate(-50%,-50%) translate3d('+x+'px,'+y+'px,0) scale('+scale+') rotate(-2deg)',opacity:0,offset:1}
+    ],{duration:FLIGHT_DURATION,fill:'forwards',easing:'cubic-bezier(.2,.7,.3,1)'});
+    dossier.animate([{opacity:0,offset:0},{opacity:0,offset:.52},{opacity:1,offset:1}],
+      {duration:FLIGHT_DURATION,fill:'forwards',easing:'ease-out'});
+    cinema.querySelector('.order-cinematic-shade').animate([
+      {opacity:1},{opacity:.2}
+    ],{duration:FLIGHT_DURATION,fill:'forwards'});
+    // The stationary and moving dart use the SAME measured tip anchor.
+    mount.classList.add('is-visible','is-aiming');
+    const anchor=mount.getBoundingClientRect();
+    launchDart(m.accent,anchor.left+DART_TIP_X,anchor.top+DART_TIP_Y);
+    delay(()=>{
+      if(token!==run||state!=='FLIGHT')return;
+      folder.hidden=false;showPinned({hit:true});
+    },FLIGHT_DURATION);
   }
-  function launchDart(accent,x,y){dartFlyer.innerHTML=dartSVG(accent);dartFlyer.hidden=false;dartFlyer.getAnimations().forEach(a=>a.cancel());
-    const sx=innerWidth+110,sy=-75,cx=(sx+x)/2+90,cy=Math.min(sy,y)-150;
-    // The dart tip is at SVG x=4. offset-anchor aligns that tip with the pin site.
-    if(CSS.supports('offset-path','path("M 0 0 L 1 1")')){
-      dartFlyer.style.offsetPath=`path("M ${sx} ${sy} Q ${cx} ${cy} ${x} ${y}")`;
-      dartFlyer.style.offsetAnchor='4px 27px';dartFlyer.style.offsetRotate='auto 180deg';
-      dartFlyer.animate([{offsetDistance:'0%',opacity:0},{offsetDistance:'8%',opacity:1},{offsetDistance:'100%',opacity:1}],{duration:440,delay:210,easing:'cubic-bezier(.22,.64,.4,1)',fill:'forwards'});
-    }else{
-      dartFlyer.style.offsetPath='none';
-      dartFlyer.animate([{transform:`translate3d(${sx}px,${sy}px,0) rotate(157deg)`,opacity:0},{transform:`translate3d(${cx}px,${cy}px,0) rotate(151deg)`,opacity:1,offset:.55},{transform:`translate3d(${x}px,${y}px,0) rotate(145deg)`,opacity:1}],{duration:440,delay:210,fill:'forwards'});
-    }
+  function launchDart(accent,x,y){
+    dartFlyer.innerHTML=dartSVG(accent);dartFlyer.hidden=false;
+    dartFlyer.getAnimations().forEach(a=>a.cancel());
+    const sx=innerWidth+120,sy=Math.min(-70,y-270);
+    const midX=x+(sx-x)*.50,midY=y-Math.min(180,Math.abs(y-sy)*.62);
+    const at=(xx,yy,deg)=>'translate3d('+(xx-DART_TIP_X)+'px,'+(yy-DART_TIP_Y)+'px,0) rotate('+deg+'deg)';
+    dartFlyer.style.offsetPath='none';
+    dartFlyer.animate([
+      {transform:at(sx,sy,-8),opacity:0,offset:0},
+      {transform:at(sx-(sx-x)*.25,sy+(midY-sy)*.62,-16),opacity:1,offset:.25},
+      {transform:at(midX,midY,-19),opacity:1,offset:.56},
+      {transform:at(x,y,-25),opacity:1,offset:1}
+    ],{duration:DART_DURATION,delay:FLIGHT_DURATION-DART_DURATION,
+       easing:'cubic-bezier(.17,.63,.26,1)',fill:'forwards'});
   }
   function restoreBrowse({reverse=false}={}){
     if(state==='BROWSE')return;clearTimers();const old=state;state='FLIGHT';
     cinema.hidden=true;dartFlyer.hidden=true;folder.hidden=false;browse.classList.remove('is-pulling');
-    const finish=()=>{wall.hidden=true;browse.hidden=false;state='BROWSE';stage.focus({preventScroll:true});positionCards();browse.scrollIntoView({behavior:'auto',block:'center'})};
+    const finish=()=>{wall.hidden=true;browse.hidden=false;state='BROWSE';stage.focus({preventScroll:true});positionCards();browse.scrollIntoView({behavior:'instant',block:'center'})};
     if(reverse&&old==='PINNED'&&!isReduced()){
       dossier.animate([{transform:'translateY(0) scale(1)',opacity:1},{transform:'translateY(100px) scale(.78) rotate(-5deg)',opacity:0}],{duration:470,easing:'ease-in',fill:'forwards'});
       rates.animate([{transform:'translateX(0)',opacity:1},{transform:'translateX(45px)',opacity:0}],{duration:420,fill:'forwards'});
