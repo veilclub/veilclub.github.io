@@ -605,3 +605,8 @@
   .veil-order-page .order-folder.is-lifting .order-folder-face{animation:none}
   .veil-order-page .order-folder.is-pinned.is-hit{animation:none}
 }
+
+/* Unfold existing content in place, never replace the portrait or paper. */
+.veil-order-page .order-folder.is-lifting .order-folder-detail{animation:veil-single-detail-reveal .9s ease both}
+@keyframes veil-single-detail-reveal{0%,25%{opacity:.25}100%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.veil-order-page .order-folder.is-lifting .order-folder-detail{animation:none}}
