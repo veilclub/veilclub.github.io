@@ -4,13 +4,11 @@
 .gentlemen-index .roster-heading{margin-bottom:36px}
 .gentlemen-index .roster-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(18px,3vw,32px);row-gap:clamp(36px,5vw,62px);align-items:stretch}
 .gentlemen-index .roster-cards>.roster-card{--edge:#75636b;--tone:#c5a9b8;--panel-a:#1e1420;grid-column:auto!important;display:flex!important;flex-direction:column!important;grid-template-columns:none!important;width:100%;height:100%;min-height:0!important;border:1px solid var(--edge);background:linear-gradient(165deg,var(--panel-a),#090a0e 84%);overflow:hidden;isolation:isolate;transform:none}
-.gentlemen-index .roster-cards>.roster-card:hover{transform:translateY(-5px);border-color:var(--tone);box-shadow:0 17px 55px #0009}
 .gentlemen-index .roster-card--guilan{--edge:#6e617e!important;--tone:#c5b4df!important;--panel-a:#1e192b!important}
 .gentlemen-index .roster-card--canele{--edge:#8c7865!important;--tone:#e6cba9!important;--panel-a:#292127!important}
 .gentlemen-index .roster-card--director{--edge:#5f6075!important;--tone:#c0bed4!important;--panel-a:#191a27!important}
 .gentlemen-index .roster-cards>.roster-card .roster-card__photo{position:relative;display:block!important;flex:none;width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:2/3;overflow:hidden;background:radial-gradient(ellipse at 55% 35%,#4c334b,#100c15 63%,#09090f);border-bottom:1px solid var(--edge)}
-.gentlemen-index .roster-cards>.roster-card .roster-card__photo img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center 28%;filter:saturate(.93) contrast(1.03);transition:transform .55s ease}
-.gentlemen-index .roster-cards>.roster-card:hover .roster-card__photo img{transform:scale(1.018)}
+.gentlemen-index .roster-cards>.roster-card .roster-card__photo img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center 28%;filter:saturate(.93) contrast(1.03);transition:none}
 .gentlemen-index .roster-card__photo:after{z-index:2;opacity:.55;background:linear-gradient(0deg,#090a11bb,transparent 24%),linear-gradient(180deg,#07090c55,transparent 18%);pointer-events:none}
 .gentlemen-index .roster-cards>.roster-card .roster-card__detail{display:flex;flex:1;flex-direction:column;min-height:325px;padding:30px clamp(24px,3vw,36px) 25px!important}
 .gentlemen-index .roster-cards>.roster-card .roster-card__no{display:block;min-height:25px;color:var(--tone);line-height:1.65;font-size:10px;letter-spacing:.13em;overflow-wrap:anywhere}
@@ -72,4 +70,3 @@
  filter:saturate(.97) contrast(1.03)!important;
  transform:none;
 }
-.gentlemen-index .roster-card--director:hover .director-card__photo img{transform:scale(1.015)}

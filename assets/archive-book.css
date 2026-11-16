@@ -30,9 +30,9 @@
 .gentlemen-index .roster-heading h2{font-size:clamp(31px,4vw,51px);color:#f0f2f7}
 .gentlemen-index .roster-heading p{color:#bdc6d2;line-height:1.9}
 .gentlemen-index .roster-cards{gap:clamp(22px,3vw,36px)!important}
-.gentlemen-index .roster-cards>.roster-card{box-shadow:none!important;border:1px solid var(--edge)!important;border-left:3px solid var(--tone)!important;background:linear-gradient(165deg,var(--panel-a),#111622 88%)!important;clip-path:polygon(0 0,96% 0,100% 17px,100% 100%,0 100%);position:relative;transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.gentlemen-index .roster-cards>.roster-card{box-shadow:none!important;border:1px solid var(--edge)!important;border-left:3px solid var(--tone)!important;background:linear-gradient(165deg,var(--panel-a),#111622 88%)!important;clip-path:polygon(0 0,96% 0,100% 17px,100% 100%,0 100%);position:relative;transition:none}
 .gentlemen-index .roster-cards>.roster-card:before{content:"";position:absolute;inset:8px;z-index:3;border:1px solid #e1e8ef0e;pointer-events:none}
-.gentlemen-index .roster-cards>.roster-card:hover{transform:translateY(-4px);border-color:var(--tone)!important}
+.gentlemen-index .roster-cards>.roster-card:hover{transform:none!important;border-color:var(--tone)!important}
 .gentlemen-index .roster-cards>.roster-card .roster-card__detail{min-height:280px!important}
 .gentlemen-index .roster-cards>.roster-card .roster-card__no{color:var(--tone);font-weight:600}
 .gentlemen-index .roster-cards>.roster-card .roster-card__name{align-items:baseline;gap:5px 16px}
@@ -40,8 +40,6 @@
 .gentlemen-index .roster-cards>.roster-card .roster-card__cta{letter-spacing:.13em;color:#eaecf2}
 .gentlemen-index .roster-footnote{border-top:1px solid #8290a455;padding-top:20px;margin-top:47px;color:#b1bac9}
 .gentlemen-index .archive-book__folio{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #8c98aa57;padding:22px 0 28px;color:#aebbd0;font:10px Georgia,serif;letter-spacing:.15em}
-.gentlemen-index.archive-arrived .archive-book__content{animation:archive-book-appear .45s ease-out both}
-@keyframes archive-book-appear{from{opacity:.65}to{opacity:1}}
 @media(max-width:760px){
  .gentlemen-index>header{padding:14px clamp(15px,4vw,24px)!important}
  .gentlemen-index main.archive-world{padding:24px 13px 48px}
@@ -62,4 +60,3 @@
  .gentlemen-index .roster-hero__footer p{letter-spacing:.12em}
  .gentlemen-index .archive-book__folio{letter-spacing:.07em}
 }
-@media(prefers-reduced-motion:reduce){.gentlemen-index.archive-arrived .archive-book__content{animation:none}}
